@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "813429894134",
+    "project_id": "becmovieapplication",
+    "storage_bucket": "becmovieapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813429894134:android:4befc6f0964fda631e75d7",
+        "android_client_info": {
+          "package_name": "com.example.flutter_bec_movie_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813429894134-60vrukqfn6brgjqc1ieuacqfj5in3iau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXmdRyW9AskuFAa8YBfRKi2vHSeOJR1vU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813429894134-60vrukqfn6brgjqc1ieuacqfj5in3iau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
