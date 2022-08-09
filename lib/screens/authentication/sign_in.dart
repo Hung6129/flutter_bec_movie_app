@@ -4,7 +4,6 @@ import '../../service/authenticate.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/constrant.dart';
 
-
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -170,38 +169,38 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
           ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
+          const SizedBox(
+            height: 10,
+          ),
 
           ///sign in with facebook
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 40, right: 40),
-          //   child: Container(
-          //     color: Constrant.p2,
-          //     child: TextButton(
-          //       onPressed: () {
-          //         print("sign in with facebook");
-          //       },
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: const [
-          //           AppText(
-          //             text: "Sign in with Facebook",
-          //             color: Constrant.textWhite,
-          //           ),
-          //           SizedBox(
-          //             width: 10,
-          //           ),
-          //           Icon(
-          //             Icons.facebook,
-          //             color: Colors.white,
-          //           )
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(left: 40, right: 40),
+            child: Container(
+              color: Constrant.p2,
+              child: TextButton(
+                onPressed: () {
+                  // Authentication().signInWithFacebook();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppText(
+                      text: "Sign in with Facebook",
+                      color: Constrant.textWhite,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      Icons.facebook,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

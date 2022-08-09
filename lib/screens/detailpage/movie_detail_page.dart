@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -496,14 +497,12 @@ class MovieDetailScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 MovieCast cast = movieDetail.castList[index];
                                 return GestureDetector(
-                                  onTap: () => print(cast.name),
-                                  //  Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         MovieDetailScreen(movie: movie),
-                                  //   ),
-                                  // ),
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CastDetailPage(),
+                                    ),
+                                  ),
                                   child: Card(
                                       elevation: 1.5,
                                       child: Padding(

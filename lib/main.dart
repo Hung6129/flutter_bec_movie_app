@@ -4,6 +4,7 @@ import 'package:flutter_bec_movie_app/service/authenticate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
+import 'screens/detailpage/cast_detail_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,14 +16,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter BecMovie App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: MultiBlocProvider(
+      home:
+          // CastDetailPage()
+          MultiBlocProvider(
         providers: [
           BlocProvider<MovieBlocBloc>(
             create: (_) => MovieBlocBloc()..add(MovieEventStarted(0, '')),

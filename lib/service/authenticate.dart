@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../main_screens.dart';
 import '../screens/authentication/sign_in.dart';
-import '../screens/homepage/homepage.dart';
 
 class Authentication {
   handleAuthentication() {
@@ -35,7 +34,19 @@ class Authentication {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  signOut() {
-    FirebaseAuth.instance.signOut();
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
+
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
 }

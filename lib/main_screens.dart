@@ -47,7 +47,6 @@ class MainScreens extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.profile_circled),
           title: ("Profile"),
-
           activeColorPrimary: Constrant.p7,
           inactiveColorPrimary: Constrant.p7.withOpacity(0.2),
         ),
