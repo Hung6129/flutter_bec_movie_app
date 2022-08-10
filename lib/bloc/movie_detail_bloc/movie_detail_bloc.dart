@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../model/movie_detail_model.dart';
+import '../../model/movie_model.dart';
 import '../../service/data_service.dart';
 import 'movie_detail_event.dart';
 
@@ -14,8 +15,9 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         emit(MovieDetailLoading());
         try {
           final movieDetail = await DataService().fetchDetailMovie(event.id);
-
-          emit(MovieDetailLoaded(movieDetail));
+          final recommendationDetail =
+              await DataService().getRecommendationList(event.id);
+          emit(MovieDetailLoaded(movieDetail, recommendationDetail));
         } on Exception catch (e) {
           emit(MovieDetailError(e.toString()));
         }

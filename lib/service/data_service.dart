@@ -12,7 +12,8 @@ class DataService {
     try {
       final res = await _dio.get(Constrant.baseUrl +
           Constrant.movieUrlTrendingWeeks +
-          Constrant.apiKey);
+          Constrant.apiKey +
+          Constrant.langUrl);
       var movies = res.data['results'] as List;
       List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
       return movieList;
@@ -41,7 +42,8 @@ class DataService {
       final res = await _dio.get(Constrant.baseUrl +
           Constrant.detailUrl +
           id.toString() +
-          Constrant.detailApiKeyUrl);
+          Constrant.detailApiKeyUrl +
+          Constrant.langUrl);
       MovieDetail movieDetail = MovieDetail.fromJson(res.data);
       movieDetail.trailerId = await getYoutubeId(id);
 
@@ -83,6 +85,19 @@ class DataService {
     } catch (error, stacktrace) {
       throw Exception(
           'Exception accoured: $error with stacktrace: $stacktrace');
+    }
+  }
+
+  Future<List<Movie>> getRecommendationList(int movieId) async {
+    try {
+      final res = await _dio.get(
+          "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=f6b0b868e75dbed8c0907797342365dc");
+      var movies = res.data['results'] as List;
+      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
     }
   }
 }

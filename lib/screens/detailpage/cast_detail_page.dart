@@ -9,25 +9,10 @@ class CastDetailPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.red,
-                    )),
-                Positioned(
-                    right: 0,
-                    child: Container(
-                      height: 500,
-                      width: 300,
-                      color: Colors.blueAccent,
-                    )),
-              ],
-            )
+            Container(
+              color: Colors.amber,
+              height: 100,
+            ),
           ],
         ),
       ),

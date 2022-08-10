@@ -177,6 +177,7 @@ class MovieDetailScreen extends StatelessWidget {
             ],
           );
         } else if (state is MovieDetailLoaded) {
+          List<Movie> movies = state.recommendation;
           MovieDetail movieDetail = state.detail;
           return CustomScrollView(
             slivers: [
@@ -571,6 +572,41 @@ class MovieDetailScreen extends StatelessWidget {
                             ),
                           )
                         ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      height: 250,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: movies.length,
+                        itemBuilder: (context, index) {
+                          Movie movie = movies[index];
+                          return GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MovieDetailScreen(movie: movie),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CachedNetworkImage(
+                                imageUrl: Constrant.imagesUrl +
+                                    movies[index].posterPath!,
+                                placeholder: (ctx, url) => Shimmer.fromColors(
+                                  baseColor: (Colors.grey[300])!,
+                                  highlightColor: (Colors.grey[100])!,
+                                  child: Container(
+                                    color: Colors.white,
+                                    // width: 150,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../model/movie_model.dart';
@@ -21,8 +22,9 @@ class HomePage extends StatefulWidget {
 
 /// Set texteditcontroller
 final TextEditingController _txtController = TextEditingController();
-String _chosenValue = 'On Tv';
-String _chosenValue1 = 'Today';
+
+bool statusTrending = false;
+bool statusPopular = false;
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -116,49 +118,28 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     width: 20,
                   ),
-                  // Container(
-                  //   padding: const EdgeInsets.only(left: 8),
-                  //   decoration: BoxDecoration(
-                  //       color: Constrant.p9,
-                  //       borderRadius: BorderRadius.circular(20)),
-                  //   child: DropdownButton<String>(
-                  //     underline: Container(height: 0),
-                  //     dropdownColor: Constrant.p9,
-                  //     focusColor: Constrant.p9,
-                  //     value: _chosenValue,
-                  //     // elevation: 5,
-                  //     style: const TextStyle(color: Constrant.p9),
-                  //     iconEnabledColor: Constrant.p3,
-                  //     items: <String>[
-                  //       'On Tv',
-                  //       'In Theaters',
-                  //     ].map<DropdownMenuItem<String>>((String value) {
-                  //       return DropdownMenuItem<String>(
-                  //         value: value,
-                  //         child: AppText(
-                  //           text: value,
-                  //           color: Constrant.p3,
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (String? value) {
-                  //       setState(() {
-                  //         _chosenValue = value!;
-                  //       });
-                  //     },
-                  //   ),
-                  // )
-                  // AnimatedToggle(
-                  //   values: const ['On Tv', 'In Theaters'],
-                  //   onToggleCallback: (value) {
-                  //     setState(() {
-                  //       print(value);
-                  //     });
-                  //   },
-                  //   buttonColor: const Color(0xFF0A3157),
-                  //   backgroundColor: const Color(0xFFB5C1CC),
-                  //   textColor: const Color(0xFFFFFFFF),
-                  // ),
+                  FlutterSwitch(
+                    padding: 8,
+                    activeColor: Constrant.p3,
+                    inactiveColor: Constrant.p6,
+                    activeText: "TVs",
+                    inactiveText: "Theaters",
+                    activeTextColor: Constrant.p6,
+                    inactiveTextColor: Constrant.p3,
+                    width: _maxWidth / (_maxWidth / 120),
+                    height: _maxHeight / (_maxHeight / 40),
+                    valueFontSize: _maxHeight / (_maxHeight / 18),
+                    toggleSize: _maxHeight / (_maxHeight / 22),
+                    value: statusPopular,
+                    borderRadius: _maxHeight / (_maxHeight / 20),
+                    // padding: _maxHeight / (_maxHeight / 10),
+                    showOnOff: true,
+                    onToggle: (val) {
+                      setState(() {
+                        statusPopular = val;
+                      });
+                    },
+                  ),
                 ],
               ),
               const SizedBox(
@@ -268,39 +249,28 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     width: 20,
                   ),
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     color: Constrant.p9,
-                  //     borderRadius: BorderRadius.circular(20),
-                  //   ),
-                  //   padding: const EdgeInsets.only(left: 8),
-                  //   child: DropdownButton<String>(
-                  //     underline: Container(height: 0),
-                  //     dropdownColor: Constrant.p9,
-                  //     focusColor: Constrant.p9,
-                  //     value: _chosenValue1,
-                  //     // elevation: 5,
-                  //     style: const TextStyle(color: Constrant.p9),
-                  //     iconEnabledColor: Constrant.p3,
-                  //     items: <String>[
-                  //       'This Week',
-                  //       'Today',
-                  //     ].map<DropdownMenuItem<String>>((String value) {
-                  //       return DropdownMenuItem<String>(
-                  //         value: value,
-                  //         child: AppText(
-                  //           text: value,
-                  //           color: Constrant.p3,
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (String? value) {
-                  //       setState(() {
-                  //         _chosenValue1 = value!;
-                  //       });
-                  //     },
-                  //   ),
-                  // )
+                  FlutterSwitch(
+                    padding: 8,
+                    activeColor: Constrant.p3,
+                    inactiveColor: Constrant.p6,
+                    activeText: "Weeks",
+                    inactiveText: "Days",
+                    activeTextColor: Constrant.p6,
+                    inactiveTextColor: Constrant.p3,
+                    width: _maxWidth / (_maxWidth / 100),
+                    height: _maxHeight / (_maxHeight / 40),
+                    valueFontSize: _maxHeight / (_maxHeight / 18),
+                    toggleSize: _maxHeight / (_maxHeight / 22),
+                    value: statusTrending,
+                    borderRadius: _maxHeight / (_maxHeight / 20),
+                    // padding: _maxHeight / (_maxHeight / 10),
+                    showOnOff: true,
+                    onToggle: (val) {
+                      setState(() {
+                        statusTrending = val;
+                      });
+                    },
+                  ),
                 ],
               ),
               const SizedBox(

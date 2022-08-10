@@ -23,6 +23,7 @@ class Constrant {
 
   static const String baseUrl = 'https://api.themoviedb.org/3';
   static const String imagesUrl = 'https://image.tmdb.org/t/p/original';
+  static const String langUrl = '&language=en-US&page=1';
 
   // detail movie
   static const String detailUrl = '/movie/';
@@ -33,4 +34,8 @@ class Constrant {
   static const String movieUrlTrendingWeeks = '/trending/movie/week?api_key=';
   // popular movie
   static const String movieUrlPopularWeeks = '/movie/popular?api_key=';
+  // get latest
+  static const String latestTrailerUrl = '/movie/latest?api_key=';
+  // get upcoming
+  static const String upComingTrailerUrl = '/movie/upcoming?api_key=';
 }

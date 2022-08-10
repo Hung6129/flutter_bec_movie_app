@@ -9,7 +9,8 @@ class MovieDetailLoading extends MovieDetailState {}
 
 class MovieDetailLoaded extends MovieDetailState {
   final MovieDetail detail;
-  MovieDetailLoaded(this.detail);
+  final List<Movie> recommendation;
+  MovieDetailLoaded(this.detail, this.recommendation);
 
   @override
   List<Object> get props => [detail];
