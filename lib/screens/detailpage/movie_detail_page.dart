@@ -464,12 +464,15 @@ class MovieDetailScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: maxHeight / (maxHeight / 20)),
                           ),
-                          Text(
-                            movieDetail.overview!,
-                            // overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Constrant.textBlack,
-                                fontSize: maxHeight / (maxHeight / 15)),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              movieDetail.overview!,
+                              // overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Constrant.textBlack,
+                                  fontSize: maxHeight / (maxHeight / 15)),
+                            ),
                           ),
                         ],
                       ),
@@ -505,19 +508,21 @@ class MovieDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Card(
+                                      color: Constrant.p4,
                                       elevation: 1.5,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: SizedBox(
                                           height: maxHeight / (maxHeight / 200),
-                                          width: maxWidth / (maxWidth / 120),
+                                          width: maxWidth / (maxWidth / 150),
                                           child: Column(
                                             children: [
                                               CachedNetworkImage(
                                                 height: maxHeight /
-                                                    (maxHeight / 150),
+                                                    (maxHeight / 180),
                                                 width:
-                                                    maxWidth / (maxWidth / 120),
+                                                    maxWidth / (maxWidth / 160),
+                                                fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://image.tmdb.org/t/p/original/${cast.profilePath}",
                                                 placeholder: (ctx, url) =>
@@ -541,28 +546,39 @@ class MovieDetailScreen extends StatelessWidget {
                                                   );
                                                 },
                                               ),
-                                              Text(
-                                                cast.name!,
-                                                textAlign: TextAlign.center,
-                                                // overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  color: Constrant.p3,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: maxHeight /
-                                                      (maxHeight / 15),
+                                              Container(
+                                                padding: EdgeInsets.all(5),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      cast.name!,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        color: Constrant.p3,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: maxHeight /
+                                                            (maxHeight / 12),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      cast.character!,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 2,
+                                                      style: TextStyle(
+                                                        color: Constrant.p2,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: maxHeight /
+                                                            (maxHeight / 9),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              Text(
-                                                cast.character!,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                                style: TextStyle(
-                                                  color: Constrant.p2,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: maxHeight /
-                                                      (maxHeight / 12),
-                                                ),
-                                              ),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -574,41 +590,104 @@ class MovieDetailScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: double.maxFinite,
-                      height: 250,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: movies.length,
-                        itemBuilder: (context, index) {
-                          Movie movie = movies[index];
-                          return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    MovieDetailScreen(movie: movie),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CachedNetworkImage(
-                                imageUrl: Constrant.imagesUrl +
-                                    movies[index].posterPath!,
-                                placeholder: (ctx, url) => Shimmer.fromColors(
-                                  baseColor: (Colors.grey[300])!,
-                                  highlightColor: (Colors.grey[100])!,
-                                  child: Container(
-                                    color: Colors.white,
-                                    // width: 150,
+
+                    /// Recommendation list
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Recommended for you",
+                            // overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Constrant.p3,
+                                fontWeight: FontWeight.bold,
+                                fontSize: maxHeight / (maxHeight / 20)),
+                          ),
+                          SizedBox(
+                            width: double.maxFinite,
+                            height: maxHeight / (maxHeight / 250),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: movies.length,
+                              itemBuilder: (context, index) {
+                                MovieCast cast = movieDetail.castList[index];
+                                return GestureDetector(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          MovieDetailScreen(movie: movie),
+                                    ),
                                   ),
-                                ),
-                              ),
+                                  child: Card(
+                                      color: Constrant.p6,
+                                      elevation: 1.5,
+                                      child: SizedBox(
+                                        height: maxHeight / (maxHeight / 200),
+                                        width: maxWidth / (maxWidth / 150),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5),
+                                              child: CachedNetworkImage(
+                                                height: maxHeight /
+                                                    (maxHeight / 200),
+                                                width:
+                                                    maxWidth / (maxWidth / 150),
+                                                fit: BoxFit.cover,
+                                                imageUrl:
+                                                    "https://image.tmdb.org/t/p/original/${movies[index].posterPath}",
+                                                placeholder: (ctx, url) =>
+                                                    Shimmer.fromColors(
+                                                  baseColor:
+                                                      (Colors.grey[300])!,
+                                                  highlightColor:
+                                                      (Colors.grey[100])!,
+                                                  child: Container(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) {
+                                                  return Container(
+                                                    width: maxHeight /
+                                                        (maxHeight / 120),
+                                                    color: Constrant.p6,
+                                                    child: Image.asset(
+                                                        "assets/not_found_images.png"),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                movies[index].title!,
+                                                textAlign: TextAlign.center,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  color: Constrant.p3,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: maxHeight /
+                                                      (maxHeight / 12),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          )
+                        ],
                       ),
                     ),
+
                     SizedBox(
                       height: maxHeight / (maxHeight / 60),
                     ),
