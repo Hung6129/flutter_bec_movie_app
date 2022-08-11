@@ -8,6 +8,20 @@ import '../widgets/constrant.dart';
 class DataService {
   final Dio _dio = Dio();
 
+  Future<List<MovieCast>> fetchTrendingPeople() async {
+    try {
+      final res = await _dio.get(
+          "https://api.themoviedb.org/3/person/popular?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US&page=1");
+      var people = res.data['results'] as List;
+      List<MovieCast> peopleList =
+          people.map((e) => MovieCast.fromJson(e)).toList();
+      return peopleList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
   Future<List<Movie>> fetchTrendingMovie() async {
     try {
       final res = await _dio.get(Constrant.baseUrl +
@@ -94,6 +108,7 @@ class DataService {
           "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=f6b0b868e75dbed8c0907797342365dc");
       var movies = res.data['results'] as List;
       List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+
       return movieList;
     } catch (error, stacktrace) {
       throw Exception(

@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shimmer/shimmer.dart';
@@ -11,6 +12,7 @@ import '../../model/movie_model.dart';
 import '../../service/authenticate.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/constrant.dart';
+import '../detailpage/cast_detail_page.dart';
 import '../detailpage/movie_detail_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -168,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     );
                   } else if (state is MovieBlocLoaded) {
-                    var movies = state.movieList;
+                    var movies = state.popularList;
 
                     return CarouselSlider.builder(
                       options: CarouselOptions(
@@ -300,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   } else if (state is MovieBlocLoaded) {
-                    var movies = state.popularList;
+                    var movies = state.trendingList;
                     return SizedBox(
                       width: double.maxFinite,
                       height: 250,
@@ -332,6 +334,141 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const AppText(text: "Something went wrong");
+                  }
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+
+              /// people
+
+              const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: AppText(
+                  text: "Popular People",
+                  color: Constrant.p3,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(
+                width: 50,
+              ),
+
+              BlocBuilder<MovieBlocBloc, MovieBlocState>(
+                builder: (context, state) {
+                  if (state is MovieBlocLoading) {
+                    return Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      height: 220,
+                      width: double.maxFinite,
+                      child: ListView.builder(
+                        itemCount: 5,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Shimmer.fromColors(
+                            baseColor: (Colors.grey[300])!,
+                            highlightColor: (Colors.grey[300])!,
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 20, top: 10),
+                              color: Colors.white,
+                              width: 150,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else if (state is MovieBlocLoaded) {
+                    List<MovieCast> people = state.peopleList;
+                    return SizedBox(
+                      width: double.maxFinite,
+                      height: 250,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: people.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CastDetailPage(),
+                              ),
+                            ),
+                            child: Card(
+                                color: Constrant.p4,
+                                elevation: 1.5,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    height: _maxHeight / (_maxHeight / 200),
+                                    width: _maxWidth / (_maxWidth / 150),
+                                    child: Column(
+                                      children: [
+                                        CachedNetworkImage(
+                                          height:
+                                              _maxHeight / (_maxHeight / 180),
+                                          width: _maxWidth / (_maxWidth / 160),
+                                          fit: BoxFit.cover,
+                                          imageUrl:
+                                              "https://image.tmdb.org/t/p/original/${people[index].profilePath}",
+                                          placeholder: (ctx, url) =>
+                                              Shimmer.fromColors(
+                                            baseColor: (Colors.grey[300])!,
+                                            highlightColor: (Colors.grey[100])!,
+                                            child: Container(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) {
+                                            return Container(
+                                              width: _maxHeight /
+                                                  (_maxHeight / 120),
+                                              color: Constrant.p6,
+                                              child: Image.asset(
+                                                  "assets/not_found_images.png"),
+                                            );
+                                          },
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                people[index].name!,
+                                                textAlign: TextAlign.center,
+                                                // overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  color: Constrant.p3,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: _maxHeight /
+                                                      (_maxHeight / 12),
+                                                ),
+                                              ),
+                                              Text(
+                                                people[index]
+                                                    .knownForDepartment!,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                  color: Constrant.p2,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: _maxHeight /
+                                                      (_maxHeight / 9),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )),
                           );
                         },
                       ),

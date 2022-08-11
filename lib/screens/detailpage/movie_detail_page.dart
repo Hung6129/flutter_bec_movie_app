@@ -231,13 +231,13 @@ class MovieDetailScreen extends StatelessWidget {
                         height: maxHeight / (maxHeight / 250),
                       ),
                     ),
-                    // errorWidget: (context, url, error) => Container(
-                    //   decoration: BoxDecoration(
-                    //     image: DecorationImage(
-                    //       image: AssetImage('assets/images/img_not_found.jpg'),
-                    //     ),
-                    //   ),
-                    // ),
+                    errorWidget: (context, url, error) => Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/not_found_images.png'),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -277,13 +277,19 @@ class MovieDetailScreen extends StatelessWidget {
                                 height: maxHeight / (maxHeight / 250),
                               ),
                             ),
-                            // errorWidget: (context, url, error) => Container(
-                            //   decoration: BoxDecoration(
-                            //     image: DecorationImage(
-                            //       image: AssetImage('assets/images/img_not_found.jpg'),
-                            //     ),
-                            //   ),
-                            // ),
+                            errorWidget: (context, url, error) => Container(
+                              width: maxWidth / (maxWidth / 120),
+                              height: maxHeight / (maxHeight / 180),
+                              decoration: const BoxDecoration(
+                                color: Constrant.p4,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                    'assets/not_found_images.png',
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: maxWidth / (maxWidth / 10),
@@ -605,85 +611,93 @@ class MovieDetailScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: maxHeight / (maxHeight / 20)),
                           ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            height: maxHeight / (maxHeight / 250),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: movies.length,
-                              itemBuilder: (context, index) {
-                                MovieCast cast = movieDetail.castList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MovieDetailScreen(movie: movie),
-                                    ),
-                                  ),
-                                  child: Card(
-                                      color: Constrant.p6,
-                                      elevation: 1.5,
-                                      child: SizedBox(
-                                        height: maxHeight / (maxHeight / 200),
-                                        width: maxWidth / (maxWidth / 150),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5),
-                                              child: CachedNetworkImage(
-                                                height: maxHeight /
-                                                    (maxHeight / 200),
-                                                width:
-                                                    maxWidth / (maxWidth / 150),
-                                                fit: BoxFit.cover,
-                                                imageUrl:
-                                                    "https://image.tmdb.org/t/p/original/${movies[index].posterPath}",
-                                                placeholder: (ctx, url) =>
-                                                    Shimmer.fromColors(
-                                                  baseColor:
-                                                      (Colors.grey[300])!,
-                                                  highlightColor:
-                                                      (Colors.grey[100])!,
-                                                  child: Container(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) {
-                                                  return Container(
-                                                    width: maxHeight /
-                                                        (maxHeight / 120),
-                                                    color: Constrant.p6,
-                                                    child: Image.asset(
-                                                        "assets/not_found_images.png"),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(5),
-                                              child: Text(
-                                                movies[index].title!,
-                                                textAlign: TextAlign.center,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  color: Constrant.p3,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: maxHeight /
-                                                      (maxHeight / 12),
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                          movies.isEmpty
+                              ? const Text(
+                                  "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.")
+                              : SizedBox(
+                                  width: double.maxFinite,
+                                  height: maxHeight / (maxHeight / 250),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: movies.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MovieDetailScreen(
+                                                    movie: movies[index]),
+                                          ),
                                         ),
-                                      )),
-                                );
-                              },
-                            ),
-                          )
+                                        child: Card(
+                                            color: Constrant.p6,
+                                            elevation: 1.5,
+                                            child: SizedBox(
+                                              height:
+                                                  maxHeight / (maxHeight / 200),
+                                              width:
+                                                  maxWidth / (maxWidth / 150),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    child: CachedNetworkImage(
+                                                      height: maxHeight /
+                                                          (maxHeight / 200),
+                                                      width: maxWidth /
+                                                          (maxWidth / 150),
+                                                      fit: BoxFit.cover,
+                                                      imageUrl:
+                                                          "https://image.tmdb.org/t/p/original/${movies[index].posterPath}",
+                                                      placeholder: (ctx, url) =>
+                                                          Shimmer.fromColors(
+                                                        baseColor:
+                                                            (Colors.grey[300])!,
+                                                        highlightColor:
+                                                            (Colors.grey[100])!,
+                                                        child: Container(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                          url, error) {
+                                                        return Container(
+                                                          width: maxHeight /
+                                                              (maxHeight / 120),
+                                                          color: Constrant.p6,
+                                                          child: Image.asset(
+                                                              "assets/not_found_images.png"),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    child: Text(
+                                                      movies[index].title!,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        color: Constrant.p3,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: maxHeight /
+                                                            (maxHeight / 12),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                      );
+                                    },
+                                  ),
+                                )
                         ],
                       ),
                     ),

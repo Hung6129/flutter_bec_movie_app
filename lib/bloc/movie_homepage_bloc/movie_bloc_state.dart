@@ -8,18 +8,17 @@ class MovieBlocInitial extends MovieBlocState {}
 class MovieBlocLoading extends MovieBlocState {}
 
 class MovieBlocLoaded extends MovieBlocState {
-  final List<Movie> movieList;
+  final List<Movie> trendingList;
   final List<Movie> popularList;
+  final List<MovieCast> peopleList;
 
   MovieBlocLoaded(
-    this.movieList,
+    this.trendingList,
     this.popularList,
+    this.peopleList,
   );
 
-  List<Object> get props => [
-        movieList,
-        popularList,
-      ];
+  List<Object> get props => [trendingList, popularList, peopleList];
 }
 
 class MovieBlocError extends MovieBlocState {}
