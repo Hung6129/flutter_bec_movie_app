@@ -177,8 +177,13 @@ class MovieDetailScreen extends StatelessWidget {
             ],
           );
         } else if (state is MovieDetailLoaded) {
+          ///recommended
           List<Movie> movies = state.recommendation;
+
+          /// movie detail
           MovieDetail movieDetail = state.detail;
+
+          ///
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -507,12 +512,15 @@ class MovieDetailScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 MovieCast cast = movieDetail.castList[index];
                                 return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CastDetailPage(),
-                                    ),
-                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CastDetailPage(cast: cast),
+                                      ),
+                                    );
+                                  },
                                   child: Card(
                                       color: Constrant.p4,
                                       elevation: 1.5,

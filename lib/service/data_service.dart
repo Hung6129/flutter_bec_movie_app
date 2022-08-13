@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_bec_movie_app/model/cast_model.dart';
 import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
 
 import '../model/movie_cast.dart';
@@ -66,6 +67,18 @@ class DataService {
       movieDetail.castList = await getCastList(id);
 
       return movieDetail;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  Future<CastModel> fetchCastDetail(int castId) async {
+    try {
+      final res = await _dio.get(
+          "https://api.themoviedb.org/3/person/$castId?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US");
+      CastModel castDetail = CastModel.fromJson(res.data);
+      return castDetail;
     } catch (error, stacktrace) {
       throw Exception(
           "Exception accoured: $error with stacktrace: $stacktrace");

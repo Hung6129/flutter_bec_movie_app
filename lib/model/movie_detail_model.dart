@@ -1,4 +1,3 @@
-
 import 'movie_cast.dart';
 
 class MovieDetail {

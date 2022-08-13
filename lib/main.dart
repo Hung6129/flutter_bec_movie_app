@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/bloc/cast_detail/cast_detail_bloc_bloc.dart';
 import 'package:flutter_bec_movie_app/service/authenticate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<MovieBlocBloc>(
             create: (_) => MovieBlocBloc()..add(MovieEventStarted(0, '')),
+          ),
+          BlocProvider<CastDetailBlocBloc>(
+            create: (_) => CastDetailBlocBloc()..add(CastDetailEventStated(0)),
           ),
         ],
         child: Authentication().handleAuthentication(),

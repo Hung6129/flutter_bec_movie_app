@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               Center(
                 child: Image.asset(
                   "assets/iHun.png",
-                  height: 150,
-                  width: 200,
+                  height: _maxHeight / (_maxHeight / 150),
+                  width: _maxWidth / (_maxWidth / 200),
                 ),
               ),
               Padding(
@@ -54,13 +54,13 @@ class _HomePageState extends State<HomePage> {
                       text:
                           "Hello! ${FirebaseAuth.instance.currentUser!.displayName!}",
                       color: Constrant.p3,
-                      size: 20,
+                      size: 15,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
-                      child: const Icon(Icons.logout, size: 20),
+                      child: const Icon(Icons.logout, size: 15),
                       onTap: () => Authentication().signOut(),
                     )
                   ],
@@ -69,14 +69,21 @@ class _HomePageState extends State<HomePage> {
 
               /// Search bar
               Container(
-                padding: const EdgeInsets.only(
-                    top: 20, bottom: 20, left: 30, right: 30),
+                padding: EdgeInsets.only(
+                    top: _maxHeight / (_maxHeight / 10),
+                    bottom: _maxHeight / (_maxHeight / 10),
+                    left: _maxWidth / (_maxWidth / 40),
+                    right: _maxWidth / (_maxWidth / 40)),
                 color: Constrant.p6,
                 child: TextField(
+                  style: TextStyle(fontSize: 15), // <-- SEE HERE
                   autofocus: false,
                   controller: _txtController,
                   cursorColor: Constrant.p3,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: _maxHeight / (_maxHeight / 10),
+                        horizontal: _maxWidth / (_maxWidth / 10)),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(20),
@@ -128,9 +135,9 @@ class _HomePageState extends State<HomePage> {
                     inactiveText: "Theaters",
                     activeTextColor: Constrant.p6,
                     inactiveTextColor: Constrant.p3,
-                    width: _maxWidth / (_maxWidth / 120),
-                    height: _maxHeight / (_maxHeight / 40),
-                    valueFontSize: _maxHeight / (_maxHeight / 18),
+                    width: _maxWidth / (_maxWidth / 105),
+                    height: _maxHeight / (_maxHeight / 35),
+                    valueFontSize: _maxHeight / (_maxHeight / 15),
                     toggleSize: _maxHeight / (_maxHeight / 22),
                     value: statusPopular,
                     borderRadius: _maxHeight / (_maxHeight / 20),
@@ -259,9 +266,9 @@ class _HomePageState extends State<HomePage> {
                     inactiveText: "Days",
                     activeTextColor: Constrant.p6,
                     inactiveTextColor: Constrant.p3,
-                    width: _maxWidth / (_maxWidth / 100),
-                    height: _maxHeight / (_maxHeight / 40),
-                    valueFontSize: _maxHeight / (_maxHeight / 18),
+                    width: _maxWidth / (_maxWidth / 90),
+                    height: _maxHeight / (_maxHeight / 35),
+                    valueFontSize: _maxHeight / (_maxHeight / 15),
                     toggleSize: _maxHeight / (_maxHeight / 22),
                     value: statusTrending,
                     borderRadius: _maxHeight / (_maxHeight / 20),
@@ -397,7 +404,8 @@ class _HomePageState extends State<HomePage> {
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CastDetailPage(),
+                                builder: (context) =>
+                                    CastDetailPage(cast: people[index]),
                               ),
                             ),
                             child: Card(
