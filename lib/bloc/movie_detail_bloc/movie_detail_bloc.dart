@@ -18,8 +18,8 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
           final recommendationDetail =
               await DataService().getRecommendationList(event.id);
           emit(MovieDetailLoaded(movieDetail, recommendationDetail));
-        } on Exception catch (e) {
-          emit(MovieDetailError(e.toString()));
+        } catch (e) {
+          emit(MovieDetailError());
         }
       },
     );

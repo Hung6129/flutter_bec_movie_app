@@ -14,9 +14,9 @@ class CastDetailBlocBloc
       emit(CastDetailBlocLoading());
       try {
         final castDetail = await DataService().fetchCastDetail(event.id);
-
+        print(event.id);
         emit(CastDetailBlocLoaded(castDetail));
-      } on Exception catch (e) {
+      } catch (e) {
         emit(CastDetailBlocError());
       }
     });

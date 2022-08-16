@@ -6,7 +6,6 @@ import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../widgets/app_text.dart';
 import '../../widgets/constrant.dart';
 
 class CastDetailPage extends StatelessWidget {
@@ -20,8 +19,8 @@ class CastDetailPage extends StatelessWidget {
     return BlocBuilder<CastDetailBlocBloc, CastDetailBlocState>(
       builder: (context, state) {
         if (state is CastDetailBlocLoading) {
-          return Container(
-            color: Colors.red,
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
         if (state is CastDetailBlocLoaded) {
@@ -151,8 +150,8 @@ class CastDetailPage extends StatelessWidget {
             ),
           );
         } else {
-          return Container(
-            color: Colors.blue,
+          return Center(
+            child: Text("Something went wrong"),
           );
         }
       },

@@ -344,7 +344,7 @@ class MovieDetailScreen extends StatelessWidget {
                                         color: Constrant.p3),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: "${movieDetail.runtime}m",
+                                        text: "${movieDetail.runtime} min",
                                         style: TextStyle(
                                             fontSize:
                                                 maxHeight / (maxHeight / 15),
@@ -513,6 +513,7 @@ class MovieDetailScreen extends StatelessWidget {
                                 MovieCast cast = movieDetail.castList[index];
                                 return GestureDetector(
                                   onTap: () {
+                                    print(cast.id);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -719,9 +720,9 @@ class MovieDetailScreen extends StatelessWidget {
             ],
           );
         } else if (state is MovieDetailError) {
-          return Center(
+          return const Center(
             child: AppText(
-              text: state.error,
+              text: "Somethings went wrong!!",
               color: Colors.black,
             ),
           );

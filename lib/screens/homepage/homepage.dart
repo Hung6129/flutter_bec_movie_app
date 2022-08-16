@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     right: _maxWidth / (_maxWidth / 40)),
                 color: Constrant.p6,
                 child: TextField(
-                  style: TextStyle(fontSize: 15), // <-- SEE HERE
+                  style: const TextStyle(fontSize: 15),
                   autofocus: false,
                   controller: _txtController,
                   cursorColor: Constrant.p3,
@@ -154,6 +154,8 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 15,
               ),
+
+              ////
               BlocBuilder<MovieBlocBloc, MovieBlocState>(
                 builder: (context, state) {
                   if (state is MovieBlocLoading) {
@@ -178,7 +180,6 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (state is MovieBlocLoaded) {
                     var movies = state.popularList;
-
                     return CarouselSlider.builder(
                       options: CarouselOptions(
                         autoPlay: true,
@@ -355,7 +356,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               /// people
-
               const Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: AppText(
@@ -392,7 +392,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   } else if (state is MovieBlocLoaded) {
-                    List<MovieCast> people = state.peopleList;
+                    var people = state.peopleList;
                     return SizedBox(
                       width: double.maxFinite,
                       height: 250,
@@ -401,13 +401,16 @@ class _HomePageState extends State<HomePage> {
                         itemCount: people.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    CastDetailPage(cast: people[index]),
-                              ),
-                            ),
+                            onTap: () {
+                              print("405" + people[index].id.toString());
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CastDetailPage(cast: people[index]),
+                                ),
+                              );
+                            },
                             child: Card(
                                 color: Constrant.p4,
                                 elevation: 1.5,

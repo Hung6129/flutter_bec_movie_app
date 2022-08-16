@@ -11,15 +11,8 @@ class MovieDetailLoaded extends MovieDetailState {
   final MovieDetail detail;
   final List<Movie> recommendation;
   MovieDetailLoaded(this.detail, this.recommendation);
-
   @override
-  List<Object> get props => [detail];
+  List<Object> get props => [detail, recommendation];
 }
 
-class MovieDetailError extends MovieDetailState {
-  late String error;
-  MovieDetailError(this.error);
-
-  @override
-  List<Object> get props => [error];
-}
+class MovieDetailError extends MovieDetailState {}
