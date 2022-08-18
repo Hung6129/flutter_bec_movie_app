@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/model/movie_cast.dart';
+import 'package:flutter_bec_movie_app/model/movie_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:flutter_bec_movie_app/bloc/cast_detail/cast_detail_bloc_bloc.dart';
-import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
 
 import '../../model/cast_model.dart';
 import '../../widgets/constrant.dart';
+import 'movie_detail_page.dart';
 
 class CastDetailPage extends StatelessWidget {
   MovieCast movieCre;
@@ -21,7 +21,7 @@ class CastDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// build body
-    Widget _buildBody(CastModel dataCast) {
+    Widget _buildBody(CastModel dataCast, List<Movie> creditMovie) {
       double maxHeight = MediaQuery.of(context).size.height;
       double maxWidth = MediaQuery.of(context).size.width;
       return SingleChildScrollView(
@@ -217,79 +217,84 @@ class CastDetailPage extends StatelessWidget {
                   ),
                 ),
 
-                /// Recommendation list
+                /// Credit list
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Recommended for you",
+                        "Know for",
                         // overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Constrant.p3,
                             fontWeight: FontWeight.bold,
                             fontSize: maxHeight / (maxHeight / 20)),
                       ),
-                      // movies.isEmpty
-                      //     ? const Text(
-                      //         "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.")
-                      //     :
-                      SizedBox(
-                        width: double.maxFinite,
-                        height: maxHeight / (maxHeight / 250),
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 8,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         MovieDetailScreen(movie: movies[index]),
-                                //   ),
-                                // );
-                              },
-                              child: Card(
-                                  color: Constrant.p6,
-                                  elevation: 1.5,
-                                  child: SizedBox(
-                                    height: maxHeight / (maxHeight / 200),
-                                    width: maxWidth / (maxWidth / 150),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: CachedNetworkImage(
-                                        height: maxHeight / (maxHeight / 200),
-                                        width: maxWidth / (maxWidth / 150),
-                                        fit: BoxFit.cover,
-                                        imageUrl:
-                                            "https://image.tmdb.org/t/p/original//2162lAT2MP36MyJd2sttmj5du5T.jpg",
-                                        placeholder: (ctx, url) =>
-                                            Shimmer.fromColors(
-                                          baseColor: (Colors.grey[300])!,
-                                          highlightColor: (Colors.grey[100])!,
-                                          child: Container(
-                                            color: Colors.white,
+                      creditMovie.isEmpty
+                          ? const Text(
+                              "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.")
+                          : SizedBox(
+                              width: double.maxFinite,
+                              height: maxHeight / (maxHeight / 250),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: creditMovie.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MovieDetailScreen(
+                                            movie: creditMovie[index],
                                           ),
                                         ),
-                                        errorWidget: (context, url, error) {
-                                          return Container(
-                                            width:
-                                                maxHeight / (maxHeight / 120),
-                                            color: Constrant.p6,
-                                            child: Image.asset(
-                                                "assets/not_found_images.png"),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  )),
-                            );
-                          },
-                        ),
-                      )
+                                      );
+                                    },
+                                    child: Card(
+                                        color: Constrant.p6,
+                                        elevation: 1.5,
+                                        child: SizedBox(
+                                          height: maxHeight / (maxHeight / 200),
+                                          width: maxWidth / (maxWidth / 150),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: CachedNetworkImage(
+                                              height:
+                                                  maxHeight / (maxHeight / 200),
+                                              width:
+                                                  maxWidth / (maxWidth / 150),
+                                              fit: BoxFit.cover,
+                                              imageUrl:
+                                                  "https://image.tmdb.org/t/p/original/${creditMovie[index].posterPath}",
+                                              placeholder: (ctx, url) =>
+                                                  Shimmer.fromColors(
+                                                baseColor: (Colors.grey[300])!,
+                                                highlightColor:
+                                                    (Colors.grey[100])!,
+                                                child: Container(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return Container(
+                                                  width: maxHeight /
+                                                      (maxHeight / 120),
+                                                  color: Constrant.p6,
+                                                  child: Image.asset(
+                                                      "assets/not_found_images.png"),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        )),
+                                  );
+                                },
+                              ),
+                            )
                     ],
                   ),
                 ),
@@ -297,7 +302,7 @@ class CastDetailPage extends StatelessWidget {
             ),
             SizedBox(
               height: maxHeight / (maxWidth / 30),
-            )
+            ),
           ],
         ),
       );
@@ -333,7 +338,8 @@ class CastDetailPage extends StatelessWidget {
                 }
                 if (state is CastDetailBlocLoaded) {
                   var data = state.castModel;
-                  return _buildBody(data);
+                  List<Movie> creditData = state.castCreditsMovie;
+                  return _buildBody(data, creditData);
                 } else {
                   return Center(
                     child: Text("Somthing went wrong!!"),

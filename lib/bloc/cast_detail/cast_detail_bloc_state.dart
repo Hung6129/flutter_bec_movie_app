@@ -13,11 +13,11 @@ class CastDetailBlocLoading extends CastDetailBlocState {}
 
 class CastDetailBlocLoaded extends CastDetailBlocState {
   final CastModel castModel;
-
-  CastDetailBlocLoaded(this.castModel);
+  final List<Movie> castCreditsMovie;
+  CastDetailBlocLoaded(this.castModel, this.castCreditsMovie);
 
   @override
-  List<Object> get props => [castModel];
+  List<Object> get props => [castModel, castCreditsMovie];
 }
 
 class CastDetailBlocError extends CastDetailBlocState {}

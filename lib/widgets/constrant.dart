@@ -31,7 +31,7 @@ class Constrant {
       '?api_key=f6b0b868e75dbed8c0907797342365dc';
 
   // trending movie
-  static const String movieUrlTrendingWeeks = '/trending/movie/week?api_key=';
+  static const String movieUrlTrendingWeeks = '/trending/movie/day?api_key=';
   // popular movie
   static const String movieUrlPopularWeeks = '/movie/popular?api_key=';
   // get latest

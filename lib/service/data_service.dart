@@ -85,6 +85,20 @@ class DataService {
     }
   }
 
+  Future<List<Movie>> fetchCastCreditMovie(int id) async {
+    try {
+      final res = await _dio.get(
+          "https://api.themoviedb.org/3/person/$id/movie_credits?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US");
+      var creditMovie = res.data['cast'] as List;
+      List<Movie> creditsList =
+          creditMovie.map((e) => Movie.fromJson(e)).toList();
+      return creditsList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
   Future<String> getYoutubeId(int id) async {
     try {
       final response = await _dio.get(
