@@ -6,7 +6,6 @@ class MovieCast {
   String? originalName;
   double? popularity;
   String? profilePath;
-
   String? character;
 
   MovieCast({

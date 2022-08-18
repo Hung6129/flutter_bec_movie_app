@@ -30,9 +30,6 @@ class MyApp extends StatelessWidget {
           BlocProvider<MovieBlocBloc>(
             create: (_) => MovieBlocBloc()..add(MovieEventStarted(0, '')),
           ),
-          BlocProvider<CastDetailBlocBloc>(
-            create: (_) => CastDetailBlocBloc()..add(CastDetailEventStated(0)),
-          ),
         ],
         child: Authentication().handleAuthentication(),
       ),

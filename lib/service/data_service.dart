@@ -103,10 +103,15 @@ class DataService {
           '${Constrant.baseUrl}/movie/$movieId/credits?api_key=${Constrant.apiKey}');
       var list = response.data['cast'] as List;
       List<MovieCast> castList = list
-          .map((c) => MovieCast(
+          .map(
+            (c) => MovieCast(
               name: c['name'],
               profilePath: c['profile_path'],
-              character: c['character']))
+              character: c['character'],
+              id: c['id'],
+              gender: c['gender'],
+            ),
+          )
           .toList();
       return castList;
     } catch (error, stacktrace) {

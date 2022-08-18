@@ -402,12 +402,11 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              print("405" + people[index].id.toString());
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      CastDetailPage(cast: people[index]),
+                                      CastDetailPage(movieCre: people[index]),
                                 ),
                               );
                             },

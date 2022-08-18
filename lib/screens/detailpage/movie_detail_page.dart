@@ -183,7 +183,6 @@ class MovieDetailScreen extends StatelessWidget {
           /// movie detail
           MovieDetail movieDetail = state.detail;
 
-          ///
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -513,12 +512,11 @@ class MovieDetailScreen extends StatelessWidget {
                                 MovieCast cast = movieDetail.castList[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    print(cast.id);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            CastDetailPage(cast: cast),
+                                            CastDetailPage(movieCre: cast),
                                       ),
                                     );
                                   },
