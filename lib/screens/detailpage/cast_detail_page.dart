@@ -20,10 +20,11 @@ class CastDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double maxHeight = MediaQuery.of(context).size.height;
+    double maxWidth = MediaQuery.of(context).size.width;
+
     /// build body
     Widget _buildBody(CastModel dataCast, List<Movie> creditMovie) {
-      double maxHeight = MediaQuery.of(context).size.height;
-      double maxWidth = MediaQuery.of(context).size.width;
       return SingleChildScrollView(
         child: Column(
           children: [
@@ -308,6 +309,109 @@ class CastDetailPage extends StatelessWidget {
       );
     }
 
+    /// build loding body
+    Widget _buildLoadingBody() {
+      return Column(
+        children: [
+          /// Title
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Shimmer.fromColors(
+              baseColor: (Colors.grey[300])!,
+              highlightColor: (Colors.grey[100])!,
+              child: Container(
+                color: Colors.white,
+                height: maxHeight / (maxHeight / 50),
+              ),
+            ),
+          ),
+
+          /// Poster and play trailer
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                /// Poster
+                Shimmer.fromColors(
+                  baseColor: (Colors.grey[300])!,
+                  highlightColor: (Colors.grey[100])!,
+                  child: Container(
+                    color: Colors.white,
+                    height: maxHeight / (maxHeight / 250),
+                  ),
+                ),
+                SizedBox(
+                  width: maxWidth / (maxWidth / 10),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Shimmer.fromColors(
+                        baseColor: (Colors.grey[300])!,
+                        highlightColor: (Colors.grey[100])!,
+                        child: Container(
+                          color: Colors.white,
+                          height: maxHeight / (maxHeight / 50),
+                        ),
+                      ),
+                      SizedBox(
+                        height: maxHeight / (maxHeight / 10),
+                      ),
+                      Shimmer.fromColors(
+                        baseColor: (Colors.grey[300])!,
+                        highlightColor: (Colors.grey[100])!,
+                        child: Container(
+                          color: Colors.white,
+                          height: maxHeight / (maxHeight / 50),
+                        ),
+                      ),
+                      SizedBox(
+                        height: maxHeight / (maxHeight / 5),
+                      ),
+                      Shimmer.fromColors(
+                        baseColor: (Colors.grey[300])!,
+                        highlightColor: (Colors.grey[100])!,
+                        child: Container(
+                          color: Colors.white,
+                          height: maxHeight / (maxHeight / 50),
+                        ),
+                      ),
+                      SizedBox(
+                        height: maxHeight / (maxHeight / 10),
+                      ),
+                      Row(
+                        children: [
+                          Shimmer.fromColors(
+                            baseColor: (Colors.grey[300])!,
+                            highlightColor: (Colors.grey[100])!,
+                            child: Container(
+                              color: Colors.white,
+                              height: maxHeight / (maxHeight / 40),
+                              width: maxWidth / (maxWidth / 90),
+                            ),
+                          ),
+                          Shimmer.fromColors(
+                            baseColor: (Colors.grey[300])!,
+                            highlightColor: (Colors.grey[100])!,
+                            child: Container(
+                              color: Colors.white,
+                              height: maxHeight / (maxHeight / 40),
+                              width: maxWidth / (maxWidth / 90),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
     /// build appbar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
@@ -332,9 +436,7 @@ class CastDetailPage extends StatelessWidget {
             body: BlocBuilder<CastDetailBlocBloc, CastDetailBlocState>(
               builder: (context, state) {
                 if (state is CastDetailBlocLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return _buildLoadingBody();
                 }
                 if (state is CastDetailBlocLoaded) {
                   var data = state.castModel;

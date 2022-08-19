@@ -15,7 +15,6 @@ class CastDetailBlocBloc
       emit(CastDetailBlocLoading());
       try {
         final castDetail = await DataService().fetchCastDetail(event.id);
-        print(event.id);
         final castCreditMovieList =
             await DataService().fetchCastCreditMovie(event.id);
         emit(CastDetailBlocLoaded(castDetail, castCreditMovieList));

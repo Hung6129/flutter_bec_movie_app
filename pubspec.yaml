@@ -52,6 +52,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   google_sign_in:
+  flutter_typeahead: ^4.0.0
 
 dev_dependencies:
   flutter_test:

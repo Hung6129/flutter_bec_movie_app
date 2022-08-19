@@ -10,11 +10,11 @@ class MovieDetail {
   String? overview;
   String? releaseDate;
   String? runtime;
-  String? voteAverage;
-  String? voteCount;
+  double? voteAverage;
+  int? voteCount;
   String? poster_path;
   String? tagline;
-  String? popularity;
+  double? popularity;
   late String trailerId;
   late List<MovieCast> castList;
 
@@ -47,10 +47,10 @@ class MovieDetail {
     runtime = json['runtime'].toString();
 
     title = json['title'];
-    voteAverage = json['vote_average'].toString();
-    voteCount = json['vote_count'].toString();
+    voteAverage = json['vote_average'];
+    voteCount = json['vote_count'];
     poster_path = json['poster_path'].toString();
     tagline = json['tagline'].toString();
-    popularity = json['popularity'].toString();
+    popularity = json['popularity'];
   }
 }

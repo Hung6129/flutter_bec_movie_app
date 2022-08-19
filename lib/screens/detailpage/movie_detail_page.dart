@@ -182,7 +182,9 @@ class MovieDetailScreen extends StatelessWidget {
 
           /// movie detail
           MovieDetail movieDetail = state.detail;
-
+          double x = movieDetail.voteAverage!;
+          double num = x / 0.1;
+          int finalNum = num.round();
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -400,6 +402,8 @@ class MovieDetailScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    /// vote
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -412,7 +416,7 @@ class MovieDetailScreen extends StatelessWidget {
                               width: maxWidth / (maxWidth / 40),
                             ),
                             Text(
-                              movieDetail.voteCount!,
+                              movieDetail.voteCount.toString(),
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Constrant.p2,
@@ -429,7 +433,7 @@ class MovieDetailScreen extends StatelessWidget {
                               width: maxWidth / (maxWidth / 40),
                             ),
                             Text(
-                              movieDetail.voteAverage!,
+                              finalNum.toString() + "%",
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Constrant.p2,
@@ -446,7 +450,7 @@ class MovieDetailScreen extends StatelessWidget {
                               width: maxWidth / (maxWidth / 40),
                             ),
                             Text(
-                              movieDetail.popularity!,
+                              movieDetail.popularity.toString(),
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Constrant.p2,
