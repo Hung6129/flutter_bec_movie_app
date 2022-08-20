@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/screens/drawer/drawer_page.dart';
+import 'package:flutter_bec_movie_app/screens/homepage/homepage.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../main_screens.dart';
 import '../screens/authentication/sign_in.dart';
 
 class Authentication {
@@ -12,7 +13,7 @@ class Authentication {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext ctx, snapshot) {
         if (snapshot.hasData) {
-          return const MainScreens();
+          return const DrawerPage();
         } else {
           return const SignInPage();
         }

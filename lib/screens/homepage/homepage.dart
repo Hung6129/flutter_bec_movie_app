@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/model/movie_cast.dart';
+import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../model/movie_model.dart';
@@ -22,61 +26,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-/// Set texteditcontroller
-final TextEditingController _txtController = TextEditingController();
-
-bool statusTrending = false;
-bool statusPopular = false;
-
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double _maxHeight = MediaQuery.of(context).size.height;
     double _maxWidth = MediaQuery.of(context).size.width;
-
-    /// search bar
-    Widget _buildSearchBar() {
-      return Container(
-        padding: EdgeInsets.only(
-            top: _maxHeight / (_maxHeight / 10),
-            bottom: _maxHeight / (_maxHeight / 10),
-            left: _maxWidth / (_maxWidth / 40),
-            right: _maxWidth / (_maxWidth / 40)),
-        color: Constrant.p6,
-        child: TextField(
-          style: const TextStyle(fontSize: 15),
-          autofocus: false,
-          controller: _txtController,
-          cursorColor: Constrant.p3,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-                vertical: _maxHeight / (_maxHeight / 10),
-                horizontal: _maxWidth / (_maxWidth / 10)),
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-              borderSide: BorderSide(color: Constrant.p7),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-              borderSide: BorderSide(color: Constrant.textBlack),
-            ),
-            suffixIcon: GestureDetector(
-              onTap: () => print(_txtController.text),
-              child: const Icon(
-                CupertinoIcons.search,
-                color: Constrant.textBlack,
-              ),
-            ),
-            labelText: 'Search for a movie, tv show,...',
-            labelStyle: const TextStyle(color: Constrant.textBlack),
-          ),
-        ),
-      );
-    }
 
     /// build body
     Widget _buildBoody() {
@@ -84,81 +38,15 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Image.asset(
-                "assets/iHun.png",
-                height: _maxHeight / (_maxHeight / 150),
-                width: _maxWidth / (_maxWidth / 200),
-              ),
+            SizedBox(
+              height: _maxHeight / (_maxHeight / 10),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, bottom: 10),
-              child: Row(
-                children: [
-                  AppText(
-                    text:
-                        "Hello! ${FirebaseAuth.instance.currentUser!.displayName!}",
-                    color: Constrant.p3,
-                    size: 15,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    child: const Icon(Icons.logout, size: 15),
-                    onTap: () => Authentication().signOut(),
-                  )
-                ],
-              ),
+            const AppText(
+              text: "What's Popular",
+              color: Constrant.p3,
+              size: 20,
             ),
 
-            /// Search bar
-            _buildSearchBar(),
-            const SizedBox(
-              height: 10,
-            ),
-
-            /// popular
-            Row(
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                const AppText(
-                  text: "What's Popular",
-                  color: Constrant.p3,
-                  size: 20,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                FlutterSwitch(
-                  padding: 8,
-                  activeColor: Constrant.p3,
-                  inactiveColor: Constrant.p6,
-                  activeText: "TVs",
-                  inactiveText: "Theaters",
-                  activeTextColor: Constrant.p6,
-                  inactiveTextColor: Constrant.p3,
-                  width: _maxWidth / (_maxWidth / 105),
-                  height: _maxHeight / (_maxHeight / 35),
-                  valueFontSize: _maxHeight / (_maxHeight / 15),
-                  toggleSize: _maxHeight / (_maxHeight / 22),
-                  value: statusPopular,
-                  borderRadius: _maxHeight / (_maxHeight / 20),
-                  // padding: _maxHeight / (_maxHeight / 10),
-                  showOnOff: true,
-                  onToggle: (val) {
-                    setState(() {
-                      statusPopular = val;
-                    });
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
                 if (state is MovieBlocLoading) {
@@ -245,48 +133,13 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 20,
             ),
-
-            /// trending
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                const AppText(
-                  text: "Trending",
-                  color: Constrant.p3,
-                  size: 20,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                FlutterSwitch(
-                  padding: 8,
-                  activeColor: Constrant.p3,
-                  inactiveColor: Constrant.p6,
-                  activeText: "Weeks",
-                  inactiveText: "Days",
-                  activeTextColor: Constrant.p6,
-                  inactiveTextColor: Constrant.p3,
-                  width: _maxWidth / (_maxWidth / 90),
-                  height: _maxHeight / (_maxHeight / 35),
-                  valueFontSize: _maxHeight / (_maxHeight / 15),
-                  toggleSize: _maxHeight / (_maxHeight / 22),
-                  value: statusTrending,
-                  borderRadius: _maxHeight / (_maxHeight / 20),
-                  // padding: _maxHeight / (_maxHeight / 10),
-                  showOnOff: true,
-                  onToggle: (val) {
-                    setState(() {
-                      statusTrending = val;
-                    });
-                  },
-                ),
-              ],
+            SizedBox(
+              height: _maxHeight / (_maxHeight / 10),
             ),
-            const SizedBox(
-              height: 15,
+            const AppText(
+              text: "Trending",
+              color: Constrant.p3,
+              size: 20,
             ),
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
@@ -353,18 +206,16 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            const SizedBox(
-              height: 20,
+
+            SizedBox(
+              height: _maxHeight / (_maxHeight / 10),
             ),
 
             /// people
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: AppText(
-                text: "Popular People",
-                color: Constrant.p3,
-                size: 20,
-              ),
+            AppText(
+              text: "Popular People",
+              color: Constrant.p3,
+              size: 20,
             ),
             const SizedBox(
               width: 50,
@@ -488,16 +339,47 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            const SizedBox(
-              height: 60,
+            SizedBox(
+              height: _maxHeight / (_maxHeight / 50),
             ),
           ],
         ),
       );
     }
 
+    /// build app bar
+    PreferredSizeWidget _buildAppBar() {
+      return AppBar(
+        backgroundColor: Constrant.p3,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchPage(),
+                ),
+              );
+            },
+            icon: Platform.isAndroid
+                ? Icon(Icons.search)
+                : Icon(CupertinoIcons.search),
+          ),
+        ],
+        leading: IconButton(
+          onPressed: () {
+            ZoomDrawer.of(context)!.toggle();
+          },
+          icon: Platform.isAndroid
+              ? Icon(Icons.menu)
+              : Icon(CupertinoIcons.list_bullet),
+        ),
+      );
+    }
+
     return SafeArea(
       child: Scaffold(
+        appBar: _buildAppBar(),
         body: _buildBoody(),
       ),
     );
