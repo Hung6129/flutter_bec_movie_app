@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
+import 'package:flutter_bec_movie_app/screens/homepage/homepage.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -43,23 +45,6 @@ class MovieDetailScreen extends StatelessWidget {
               SliverAppBar(
                 automaticallyImplyLeading: false,
                 toolbarHeight: maxHeight / (maxHeight / 50),
-                // bottom: PreferredSize(
-                //   preferredSize: Size.fromHeight(
-                //     20,
-                //   ),
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //       color: Colors.white,
-                //       borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(20),
-                //         topRight: Radius.circular(20),
-                //       ),
-                //     ),
-                //     padding: EdgeInsets.only(top: 5, bottom: 10),
-
-                //     width: double.maxFinite,
-                //   ),
-                // ),
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 250),
                 flexibleSpace: FlexibleSpaceBar(
@@ -188,6 +173,22 @@ class MovieDetailScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               SliverAppBar(
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      print("Adding to favorite list");
+                    },
+                    child: Platform.isIOS
+                        ? Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Icon(CupertinoIcons.heart_fill),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Icon(Icons.favorite),
+                          ),
+                  ),
+                ],
                 automaticallyImplyLeading: false,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 backgroundColor: Constrant.p3,
@@ -199,28 +200,11 @@ class MovieDetailScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: Platform.isIOS
-                          ? Icon(Icons.arrow_back_ios)
+                          ? Icon(CupertinoIcons.arrow_left)
                           : Icon(Icons.arrow_back),
                     ),
                   ],
                 ),
-                // bottom: PreferredSize(
-                //   preferredSize: Size.fromHeight(
-                //     20,
-                //   ),
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //       color: Colors.white,
-                //       borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(20),
-                //         topRight: Radius.circular(20),
-                //       ),
-                //     ),
-                //     padding: EdgeInsets.only(top: 5, bottom: 10),
-
-                //     width: double.maxFinite,
-                //   ),
-                // ),
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 250),
                 flexibleSpace: FlexibleSpaceBar(
@@ -713,6 +697,24 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
                     ),
 
+                    // SizedBox(
+                    //   height: maxHeight / (maxHeight / 10),
+                    // ),
+                    // FloatingActionButton(
+                    //   backgroundColor: Constrant.p3,
+                    //   child: const Icon(
+                    //     Icons.home_filled,
+                    //     color: Constrant.p6,
+                    //   ),
+                    //   onPressed: (() {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => HomePage(),
+                    //       ),
+                    //     );
+                    //   }),
+                    // ),
                     SizedBox(
                       height: maxHeight / (maxHeight / 60),
                     ),

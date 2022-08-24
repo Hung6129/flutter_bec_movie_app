@@ -45,7 +45,6 @@ dependencies:
   get: ^4.6.5
   equatable: ^2.0.3
   url_launcher: ^6.1.5
-  flutter_switch: ^0.3.2
 
   # flutter_facebook_auth: ^4.4.0+1
 

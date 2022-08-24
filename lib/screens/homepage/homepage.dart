@@ -2,18 +2,14 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../model/movie_model.dart';
-import '../../service/authenticate.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/constrant.dart';
 import '../detailpage/cast_detail_page.dart';
@@ -38,13 +34,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: _maxHeight / (_maxHeight / 10),
-            ),
-            const AppText(
-              text: "What's Popular",
-              color: Constrant.p3,
-              size: 20,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const AppText(
+                text: "What's Popular",
+                color: Constrant.p3,
+                size: 20,
+              ),
             ),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
@@ -136,10 +132,13 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: _maxHeight / (_maxHeight / 10),
             ),
-            const AppText(
-              text: "Trending",
-              color: Constrant.p3,
-              size: 20,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppText(
+                text: "Trending",
+                color: Constrant.p3,
+                size: 20,
+              ),
             ),
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
@@ -212,13 +211,13 @@ class _HomePageState extends State<HomePage> {
             ),
 
             /// people
-            AppText(
-              text: "Popular People",
-              color: Constrant.p3,
-              size: 20,
-            ),
-            const SizedBox(
-              width: 50,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppText(
+                text: "Popular People",
+                color: Constrant.p3,
+                size: 20,
+              ),
             ),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
@@ -304,7 +303,8 @@ class _HomePageState extends State<HomePage> {
                                             Text(
                                               people[index].name!,
                                               textAlign: TextAlign.center,
-                                              // overflow: TextOverflow.ellipsis,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
                                               style: TextStyle(
                                                 color: Constrant.p3,
                                                 fontWeight: FontWeight.bold,
@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> {
         ],
         leading: IconButton(
           onPressed: () {
-            ZoomDrawer.of(context)!.toggle();
+            ZoomDrawer.of(context)!.open();
           },
           icon: Platform.isAndroid
               ? Icon(Icons.menu)
