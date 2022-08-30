@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
 import 'package:flutter_bec_movie_app/screens/homepage/homepage.dart';
 
@@ -162,14 +164,15 @@ class MovieDetailScreen extends StatelessWidget {
             ],
           );
         } else if (state is MovieDetailLoaded) {
-          ///recommended
-          List<Movie> movies = state.recommendation;
-
           /// movie detail
           MovieDetail movieDetail = state.detail;
           double x = movieDetail.voteAverage!;
           double num = x / 0.1;
           int finalNum = num.round();
+
+          ///recommended
+          List<Movie> movies = state.recommendation;
+
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -296,7 +299,7 @@ class MovieDetailScreen extends StatelessWidget {
                                       fontSize: maxHeight / (maxHeight / 18)),
                                 ),
                                 SizedBox(
-                                  height: maxHeight / (maxHeight / 20),
+                                  height: maxHeight / (maxHeight / 10),
                                 ),
                                 RichText(
                                   text: TextSpan(
@@ -317,9 +320,6 @@ class MovieDetailScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: maxHeight / (maxHeight / 5),
-                                ),
                                 RichText(
                                   text: TextSpan(
                                     text: 'Run Time: ',
@@ -339,43 +339,34 @@ class MovieDetailScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: maxHeight / (maxHeight / 10),
-                                ),
                                 Row(
                                   children: [
-                                    TextButton(
+                                    MaterialButton(
+                                      shape: const CircleBorder(),
+                                      color: Constrant.p6,
                                       onPressed: () async {
                                         final youtubeUrl =
                                             'https://www.youtube.com/embed/${movieDetail.trailerId}';
-                                        if (await canLaunch(youtubeUrl)) {
-                                          await launch(youtubeUrl);
+                                        if (await canLaunchUrl(
+                                            Uri.parse(youtubeUrl))) {
+                                          await launchUrl(
+                                              Uri.parse(youtubeUrl));
                                         }
                                       },
-                                      child: Container(
+                                      child: const Icon(
+                                        Icons.play_arrow,
+                                        size: 20,
                                         color: Constrant.p3,
-                                        height: maxHeight / (maxHeight / 40),
-                                        width: maxWidth / (maxWidth / 90),
-                                        child: Center(
-                                            child: AppText(
-                                          text: "Play Trailer",
-                                          color: Constrant.textWhite,
-                                          size: maxHeight / (maxHeight / 15),
-                                        )),
                                       ),
                                     ),
-                                    TextButton(
+                                    MaterialButton(
+                                      shape: const CircleBorder(),
+                                      color: Constrant.p6,
                                       onPressed: () {},
-                                      child: Container(
-                                        color: Constrant.p6,
-                                        height: maxHeight / (maxHeight / 40),
-                                        width: maxWidth / (maxWidth / 90),
-                                        child: Center(
-                                            child: AppText(
-                                          text: "Rate It !!!",
-                                          color: Constrant.p3,
-                                          size: maxHeight / (maxHeight / 15),
-                                        )),
+                                      child: const Icon(
+                                        Icons.favorite_border,
+                                        size: 20,
+                                        color: Constrant.p3,
                                       ),
                                     )
                                   ],
@@ -697,24 +688,6 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // SizedBox(
-                    //   height: maxHeight / (maxHeight / 10),
-                    // ),
-                    // FloatingActionButton(
-                    //   backgroundColor: Constrant.p3,
-                    //   child: const Icon(
-                    //     Icons.home_filled,
-                    //     color: Constrant.p6,
-                    //   ),
-                    //   onPressed: (() {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => HomePage(),
-                    //       ),
-                    //     );
-                    //   }),
-                    // ),
                     SizedBox(
                       height: maxHeight / (maxHeight / 60),
                     ),
@@ -731,10 +704,11 @@ class MovieDetailScreen extends StatelessWidget {
             ),
           );
         } else {
-          return Container(
-            color: Colors.red,
-            height: 100,
-            width: 100,
+          return Center(
+            child: AppText(
+              text: "Somethings went wrong!!",
+              color: Colors.black,
+            ),
           );
         }
       },

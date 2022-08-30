@@ -52,6 +52,7 @@ dependencies:
   firebase_auth:
   google_sign_in:
   flutter_zoom_drawer: ^3.0.3
+  cloud_firestore: ^3.4.5
 
 dev_dependencies:
   flutter_test:

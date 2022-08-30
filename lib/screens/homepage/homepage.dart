@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
+import 'package:flutter_bec_movie_app/widgets/text_title.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shimmer/shimmer.dart';
@@ -34,14 +35,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const AppText(
-                text: "What's Popular",
-                color: Constrant.p3,
-                size: 20,
-              ),
-            ),
+            TextTitle(textTitle: "What Popular Now"),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
@@ -126,20 +120,11 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            const SizedBox(
-              height: 20,
-            ),
+
             SizedBox(
               height: _maxHeight / (_maxHeight / 10),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AppText(
-                text: "Trending",
-                color: Constrant.p3,
-                size: 20,
-              ),
-            ),
+            TextTitle(textTitle: "Trending Now"),
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
                 if (state is MovieBlocLoading) {
@@ -211,14 +196,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             /// people
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AppText(
-                text: "Popular People",
-                color: Constrant.p3,
-                size: 20,
-              ),
-            ),
+            TextTitle(textTitle: "Popular People"),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
