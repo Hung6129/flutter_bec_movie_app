@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/service/authenticate.dart';
 import 'package:flutter_bec_movie_app/widgets/app_text.dart';
 
 import 'package:flutter_bec_movie_app/widgets/constrant.dart';
@@ -19,9 +17,9 @@ class MenuItems {
 class MenuPage extends StatelessWidget {
   final DrawerThings currentItem;
   final ValueChanged<DrawerThings> onSelectedItem;
-  final String _currentUserName =
-      FirebaseAuth.instance.currentUser!.displayName!;
-  final String _currentUserImage = FirebaseAuth.instance.currentUser!.photoURL!;
+  // final String _currentUserName =
+  //     FirebaseAuth.instance.currentUser!.displayName!;
+  // final String _currentUserImage = FirebaseAuth.instance.currentUser!.photoURL!;
   MenuPage({
     Key? key,
     required this.currentItem,
@@ -47,39 +45,39 @@ class MenuPage extends StatelessWidget {
         backgroundColor: Constrant.p4,
         body: SafeArea(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ListTile(
-              minLeadingWidth: 20,
-              selectedColor: Constrant.p6,
-              selectedTileColor: Constrant.p6,
-              // tileColor: Constrant.p3,
-              leading: Image.network(
-                _currentUserImage,
-                width: 35,
-                height: 35,
-              ),
-              title: AppText(
-                text: _currentUserName,
-                size: 15,
-              ),
-              onTap: () {},
-            ),
-            SizedBox(
-              height: 10,
-            ),
+            // ListTile(
+            //   minLeadingWidth: 20,
+            //   selectedColor: Constrant.p6,
+            //   selectedTileColor: Constrant.p6,
+            //   // tileColor: Constrant.p3,
+            //   leading: Image.network(
+            //     _currentUserImage,
+            //     width: 35,
+            //     height: 35,
+            //   ),
+            //   title: AppText(
+            //     text: _currentUserName,
+            //     size: 15,
+            //   ),
+            //   onTap: () {},
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             ...MenuItems.listItems.map(_buildMenuItem).toList(),
-            Divider(
-              thickness: 1,
-              indent: 5,
-              color: Constrant.p3,
-            ),
-            ListTile(
-              minLeadingWidth: 20,
-              leading: Icon(Icons.logout),
-              title: Text("Sign Out"),
-              onTap: () async {
-                await Authentication().signOut();
-              },
-            ),
+            // Divider(
+            //   thickness: 1,
+            //   indent: 5,
+            //   color: Constrant.p3,
+            // ),
+            // ListTile(
+            //   minLeadingWidth: 20,
+            //   leading: Icon(Icons.logout),
+            //   title: Text("Sign Out"),
+            //   onTap: () async {
+            //     await Authentication().signOut();
+            //   },
+            // ),
           ]),
         ));
   }
