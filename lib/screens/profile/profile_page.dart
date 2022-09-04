@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 
 import '../../widgets/app_text.dart';
-import '../../widgets/constrant.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -9,14 +9,14 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Constrant.p1,
+        backgroundColor: Palettes.p1,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Constrant.p2,
+          backgroundColor: Palettes.p2,
           title: const AppText(
             text: "Favorite List",
             size: 24,
-            color: Constrant.p3,
+            color: Palettes.p3,
           ),
         ),
         body: Container(

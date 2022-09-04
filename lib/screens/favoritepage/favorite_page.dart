@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 import '../../widgets/app_text.dart';
-import '../../widgets/constrant.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -22,10 +23,10 @@ class FavoritePage extends StatelessWidget {
         title: AppText(
           text: title,
           size: _maxHeight / (_maxHeight / 18),
-          color: Constrant.p6,
+          color: Palettes.p6,
         ),
         centerTitle: true,
-        backgroundColor: Constrant.p3,
+        backgroundColor: Palettes.p3,
         // actions: [
         //   IconButton(
         //     onPressed: () {
@@ -65,7 +66,7 @@ class FavoritePage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             margin: const EdgeInsets.only(bottom: 16.0),
             decoration: BoxDecoration(
-              color: Constrant.p6,
+              color: Palettes.p6,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Row(
@@ -74,8 +75,8 @@ class FavoritePage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: Constrant.imagesUrl +
-                          "/8rImnE8aUT3LUS2WGXaBSnx6ip1.jpg",
+                      imageUrl:
+                          Urls.imagesUrl + "/8rImnE8aUT3LUS2WGXaBSnx6ip1.jpg",
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -140,7 +141,7 @@ class FavoritePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Constrant.textWhite,
+        backgroundColor: Palettes.textWhite,
         appBar: _buildAppBar("Your Favorite Movie"),
         body: SingleChildScrollView(
           child: Column(

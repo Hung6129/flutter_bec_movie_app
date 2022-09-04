@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:shimmer/shimmer.dart';
-
-import 'constrant.dart';
 
 class CustomCard extends StatelessWidget {
   final String profileUrl;
@@ -21,7 +20,7 @@ class CustomCard extends StatelessWidget {
     double _maxHeight = MediaQuery.of(context).size.height;
     double _maxWidth = MediaQuery.of(context).size.width;
     return Card(
-      color: Constrant.p4,
+      color: Palettes.p4,
       elevation: 1.5,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,7 +44,7 @@ class CustomCard extends StatelessWidget {
                 errorWidget: (context, url, error) {
                   return Container(
                     width: _maxHeight / (_maxHeight / 120),
-                    color: Constrant.p6,
+                    color: Palettes.p6,
                     child: Image.asset("assets/not_found_images.png"),
                   );
                 },
@@ -60,7 +59,7 @@ class CustomCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
-                        color: Constrant.p3,
+                        color: Palettes.p3,
                         fontWeight: FontWeight.bold,
                         fontSize: _maxHeight / (_maxHeight / 12),
                       ),
@@ -70,7 +69,7 @@ class CustomCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
-                        color: Constrant.p2,
+                        color: Palettes.p2,
                         fontWeight: FontWeight.bold,
                         fontSize: _maxHeight / (_maxHeight / 9),
                       ),

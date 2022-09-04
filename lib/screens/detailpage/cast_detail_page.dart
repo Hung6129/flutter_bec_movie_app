@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:flutter_bec_movie_app/model/movie_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,6 @@ import 'package:shimmer/shimmer.dart';
 import 'package:flutter_bec_movie_app/bloc/cast_detail/cast_detail_bloc_bloc.dart';
 
 import '../../model/cast_model.dart';
-import '../../widgets/constrant.dart';
 import 'movie_detail_page.dart';
 
 class CastDetailPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class CastDetailPage extends StatelessWidget {
                       width: maxWidth / (maxWidth / 120),
                       height: maxHeight / (maxHeight / 180),
                       decoration: const BoxDecoration(
-                        color: Constrant.p4,
+                        color: Palettes.p4,
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
@@ -72,7 +72,7 @@ class CastDetailPage extends StatelessWidget {
                           dataCast.name!,
                           // overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: Constrant.p2,
+                              color: Palettes.p2,
                               fontSize: maxHeight / (maxHeight / 20)),
                         ),
                         RichText(
@@ -81,14 +81,14 @@ class CastDetailPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: maxHeight / (maxHeight / 14),
                                 fontWeight: FontWeight.bold,
-                                color: Constrant.p3),
+                                color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
                                 text: dataCast.placeOfBirth,
                                 style: TextStyle(
                                     fontSize: maxHeight / (maxHeight / 14),
                                     fontWeight: FontWeight.bold,
-                                    color: Constrant.textBlack),
+                                    color: Palettes.textBlack),
                               ),
                             ],
                           ),
@@ -102,14 +102,14 @@ class CastDetailPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: maxHeight / (maxHeight / 14),
                                 fontWeight: FontWeight.bold,
-                                color: Constrant.p3),
+                                color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
                                 text: dataCast.gender == 1 ? "Female" : "Male",
                                 style: TextStyle(
                                     fontSize: maxHeight / (maxHeight / 14),
                                     fontWeight: FontWeight.bold,
-                                    color: Constrant.textBlack),
+                                    color: Palettes.textBlack),
                               ),
                             ],
                           ),
@@ -123,14 +123,14 @@ class CastDetailPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: maxHeight / (maxHeight / 14),
                                 fontWeight: FontWeight.bold,
-                                color: Constrant.p3),
+                                color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
                                 text: dataCast.birthday,
                                 style: TextStyle(
                                     fontSize: maxHeight / (maxHeight / 14),
                                     fontWeight: FontWeight.bold,
-                                    color: Constrant.textBlack),
+                                    color: Palettes.textBlack),
                               ),
                             ],
                           ),
@@ -146,7 +146,7 @@ class CastDetailPage extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: maxHeight / (maxHeight / 14),
                                       fontWeight: FontWeight.bold,
-                                      color: Constrant.p3),
+                                      color: Palettes.p3),
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: dataCast.deathday,
@@ -154,7 +154,7 @@ class CastDetailPage extends StatelessWidget {
                                           fontSize:
                                               maxHeight / (maxHeight / 14),
                                           fontWeight: FontWeight.bold,
-                                          color: Constrant.textBlack),
+                                          color: Palettes.textBlack),
                                     ),
                                   ],
                                 ),
@@ -170,14 +170,14 @@ class CastDetailPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: maxHeight / (maxHeight / 14),
                                 fontWeight: FontWeight.bold,
-                                color: Constrant.p3),
+                                color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
                                 text: dataCast.knownForDepartment,
                                 style: TextStyle(
                                     fontSize: maxHeight / (maxHeight / 14),
                                     fontWeight: FontWeight.bold,
-                                    color: Constrant.textBlack),
+                                    color: Palettes.textBlack),
                               ),
                             ],
                           ),
@@ -200,7 +200,7 @@ class CastDetailPage extends StatelessWidget {
                         "Biography",
                         // overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Constrant.p3,
+                            color: Palettes.p3,
                             fontWeight: FontWeight.bold,
                             fontSize: maxHeight / (maxHeight / 20)),
                       ),
@@ -210,7 +210,7 @@ class CastDetailPage extends StatelessWidget {
                           dataCast.biography!,
                           // overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: Constrant.textBlack,
+                              color: Palettes.textBlack,
                               fontSize: maxHeight / (maxHeight / 15)),
                         ),
                       ),
@@ -228,7 +228,7 @@ class CastDetailPage extends StatelessWidget {
                         "Know for",
                         // overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Constrant.p3,
+                            color: Palettes.p3,
                             fontWeight: FontWeight.bold,
                             fontSize: maxHeight / (maxHeight / 20)),
                       ),
@@ -255,7 +255,7 @@ class CastDetailPage extends StatelessWidget {
                                       );
                                     },
                                     child: Card(
-                                        color: Constrant.p6,
+                                        color: Palettes.p6,
                                         elevation: 1.5,
                                         child: SizedBox(
                                           height: maxHeight / (maxHeight / 200),
@@ -284,7 +284,7 @@ class CastDetailPage extends StatelessWidget {
                                                 return Container(
                                                   width: maxHeight /
                                                       (maxHeight / 120),
-                                                  color: Constrant.p6,
+                                                  color: Palettes.p6,
                                                   child: Image.asset(
                                                       "assets/not_found_images.png"),
                                                 );
@@ -415,7 +415,7 @@ class CastDetailPage extends StatelessWidget {
     /// build appbar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
-        backgroundColor: Constrant.p3,
+        backgroundColor: Palettes.p3,
         actions: [
           Icon(
             Icons.star,

@@ -9,7 +9,14 @@ abstract class SearchState extends Equatable {
 
 class SearchInitial extends SearchState {}
 
-class SearchHasData extends SearchState {}
+class SearchHasData extends SearchState {
+  final List<Movie> listResults;
+
+  SearchHasData(this.listResults);
+
+  @override
+  List<Object> get props => [listResults];
+}
 
 class SearchNoData extends SearchState {}
 

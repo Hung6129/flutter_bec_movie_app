@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/widgets/app_text.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-
-import '../../widgets/constrant.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -30,10 +30,10 @@ class SearchPage extends StatelessWidget {
         centerTitle: true,
         title: AppText(
           text: "Search Movie",
-          color: Constrant.p6,
+          color: Palettes.p6,
           size: _maxHeight / (_maxHeight / 18),
         ),
-        backgroundColor: Constrant.p3,
+        backgroundColor: Palettes.p3,
       );
     }
 
@@ -50,18 +50,18 @@ class SearchPage extends StatelessWidget {
             hintText: 'Search movies',
             prefixIcon: const Icon(
               Icons.search,
-              color: Constrant.p3,
+              color: Palettes.p3,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(color: Constrant.p3),
+              borderSide: const BorderSide(color: Palettes.p3),
             ),
           ),
           textInputAction: TextInputAction.search,
-          cursorColor: Constrant.p3,
+          cursorColor: Palettes.p3,
         ),
       );
     }
@@ -79,7 +79,7 @@ class SearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             margin: const EdgeInsets.only(bottom: 16.0),
             decoration: BoxDecoration(
-              color: Constrant.p6,
+              color: Palettes.p6,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Row(
@@ -88,8 +88,8 @@ class SearchPage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: Constrant.imagesUrl +
-                          "/8rImnE8aUT3LUS2WGXaBSnx6ip1.jpg",
+                      imageUrl:
+                          Urls.imagesUrl + "/8rImnE8aUT3LUS2WGXaBSnx6ip1.jpg",
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),

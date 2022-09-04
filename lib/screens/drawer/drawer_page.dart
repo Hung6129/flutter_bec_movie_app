@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/screens/drawer/menu_page.dart';
 import 'package:flutter_bec_movie_app/screens/favoritepage/favorite_page.dart';
 import 'package:flutter_bec_movie_app/screens/homepage/homepage.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
-import 'package:flutter_bec_movie_app/widgets/constrant.dart';
 import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -37,7 +37,7 @@ class _DrawerPageState extends State<DrawerPage> {
       borderRadius: 24.0,
       mainScreenTapClose: true,
       showShadow: true,
-      menuBackgroundColor: Constrant.p4,
+      menuBackgroundColor: Palettes.p4,
       angle: -12.0,
       slideWidth: MediaQuery.of(context).size.width * .65,
       openCurve: Curves.fastOutSlowIn,

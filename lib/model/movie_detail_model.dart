@@ -1,4 +1,5 @@
 import 'movie_cast.dart';
+import 'movie_model.dart';
 
 class MovieDetail {
   String? id;
@@ -16,7 +17,8 @@ class MovieDetail {
   String? tagline;
   double? popularity;
   late String trailerId;
-  late List<MovieCast> castList;
+  late List<MovieCast> topBillCastedList;
+  late List<Movie> recommendedList;
 
   MovieDetail({
     this.backdropPath,

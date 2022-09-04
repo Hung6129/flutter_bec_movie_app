@@ -1,18 +1,18 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
-import 'package:flutter_bec_movie_app/widgets/text_title.dart';
+import 'package:flutter_bec_movie_app/widgets/heading_w_sub.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../model/movie_model.dart';
 import '../../widgets/app_text.dart';
-import '../../widgets/constrant.dart';
 import '../detailpage/cast_detail_page.dart';
 import '../detailpage/movie_detail_page.dart';
 
@@ -35,7 +35,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextTitle(textTitle: "What Popular Now"),
+            SubHeading(
+              textTitle: "Now Playing",
+              onSeeMoreTapped: () {},
+            ),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   );
                 } else if (state is MovieBlocLoaded) {
-                  var movies = state.popularList;
+                  var movies = state.nowPlayingList;
                   return CarouselSlider.builder(
                     options: CarouselOptions(
                       autoPlay: true,
@@ -81,8 +84,8 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             CachedNetworkImage(
-                              imageUrl: Constrant.imagesUrl +
-                                  movies[index].backdropPath!,
+                              imageUrl:
+                                  Urls.imagesUrl + movies[index].backdropPath!,
                               placeholder: (ctx, url) => Shimmer.fromColors(
                                 baseColor: (Colors.grey[300])!,
                                 highlightColor: (Colors.grey[100])!,
@@ -96,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                               left: 0.0,
                               right: 0.0,
                               child: Container(
-                                color: Constrant.p3,
+                                color: Palettes.p3,
                                 child: Center(
                                   child: Text(
                                     movies[index].title!,
@@ -124,7 +127,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: _maxHeight / (_maxHeight / 10),
             ),
-            TextTitle(textTitle: "Trending Now"),
+
+            SubHeading(
+              textTitle: "Popular Now",
+              onSeeMoreTapped: () {},
+            ),
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
                 if (state is MovieBlocLoading) {
@@ -149,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 } else if (state is MovieBlocLoaded) {
-                  var movies = state.trendingList;
+                  var movies = state.popularList;
                   return SizedBox(
                     width: double.maxFinite,
                     height: 250,
@@ -169,8 +176,8 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CachedNetworkImage(
-                              imageUrl: Constrant.imagesUrl +
-                                  movies[index].posterPath!,
+                              imageUrl:
+                                  Urls.imagesUrl + movies[index].posterPath!,
                               placeholder: (ctx, url) => Shimmer.fromColors(
                                 baseColor: (Colors.grey[300])!,
                                 highlightColor: (Colors.grey[100])!,
@@ -196,7 +203,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             /// people
-            TextTitle(textTitle: "Popular People"),
+            SubHeading(
+              textTitle: "Trending People",
+              onSeeMoreTapped: () {},
+            ),
 
             BlocBuilder<MovieBlocBloc, MovieBlocState>(
               builder: (context, state) {
@@ -241,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                           child: Card(
-                              color: Constrant.p4,
+                              color: Palettes.p4,
                               elevation: 1.5,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -268,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                                           return Container(
                                             width:
                                                 _maxHeight / (_maxHeight / 120),
-                                            color: Constrant.p6,
+                                            color: Palettes.p6,
                                             child: Image.asset(
                                                 "assets/not_found_images.png"),
                                           );
@@ -284,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
-                                                color: Constrant.p3,
+                                                color: Palettes.p3,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: _maxHeight /
                                                     (_maxHeight / 12),
@@ -295,7 +305,7 @@ class _HomePageState extends State<HomePage> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 2,
                                               style: TextStyle(
-                                                color: Constrant.p2,
+                                                color: Palettes.p2,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: _maxHeight /
                                                     (_maxHeight / 9),
@@ -328,7 +338,7 @@ class _HomePageState extends State<HomePage> {
     /// build app bar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
-        backgroundColor: Constrant.p3,
+        backgroundColor: Palettes.p3,
         actions: [
           IconButton(
             onPressed: () {

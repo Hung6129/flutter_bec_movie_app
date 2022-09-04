@@ -1,18 +1,30 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/model/cast_model.dart';
 import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
 
 import '../model/movie_cast.dart';
 import '../model/movie_model.dart';
-import '../widgets/constrant.dart';
 
 class DataService {
   final Dio _dio = Dio();
 
-  Future<List<MovieCast>> fetchTrendingPeople() async {
+  /// get a list of result from user searching query
+  Future<List<Movie>> fetchingListResult(String query) async {
     try {
-      final res = await _dio.get(
-          "https://api.themoviedb.org/3/person/popular?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US&page=1");
+      final res = await _dio.get(Urls.searchMovies(query));
+      var result = res.data['results'] as List;
+      List<Movie> resultList = result.map((e) => Movie.fromJson(e)).toList();
+      return resultList;
+    } catch (e, st) {
+      throw Exception("Exception accoured: $e with stacktrace:  $st");
+    }
+  }
+
+  /// get popular people list
+  Future<List<MovieCast>> fetchPopularCast() async {
+    try {
+      final res = await _dio.get(Urls.popularCast);
       var people = res.data['results'] as List;
       List<MovieCast> peopleList =
           people.map((e) => MovieCast.fromJson(e)).toList();
@@ -23,12 +35,10 @@ class DataService {
     }
   }
 
-  Future<List<Movie>> fetchTrendingMovie() async {
+  /// get list top rated movie
+  Future<List<Movie>> fetchTopRatedMovie() async {
     try {
-      final res = await _dio.get(Constrant.baseUrl +
-          Constrant.movieUrlTrendingWeeks +
-          Constrant.apiKey +
-          Constrant.langUrl);
+      final res = await _dio.get(Urls.topRatedMovies);
       var movies = res.data['results'] as List;
       List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
       return movieList;
@@ -38,11 +48,23 @@ class DataService {
     }
   }
 
+  /// get list top rated movie
+  Future<List<Movie>> fetchNowPlayingMovie() async {
+    try {
+      final res = await _dio.get(Urls.nowPlayingMovies);
+      var movies = res.data['results'] as List;
+      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  /// fetching list of popular movie
   Future<List<Movie>> fetchPopularMovie() async {
     try {
-      final res = await _dio.get(Constrant.baseUrl +
-          Constrant.movieUrlPopularWeeks +
-          Constrant.apiKey);
+      final res = await _dio.get(Urls.popularMovies);
       var movies = res.data['results'] as List;
       List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
       return movieList;
@@ -52,31 +74,11 @@ class DataService {
     }
   }
 
-  Future<MovieDetail> fetchDetailMovie(int id) async {
-    try {
-      final res = await _dio.get(Constrant.baseUrl +
-          Constrant.detailUrl +
-          id.toString() +
-          Constrant.detailApiKeyUrl +
-          Constrant.langUrl);
-      MovieDetail movieDetail = MovieDetail.fromJson(res.data);
-      movieDetail.trailerId = await getYoutubeId(id);
-
-      // movieDetail.movieImage = await getMovieImage(id);
-
-      movieDetail.castList = await getCastList(id);
-
-      return movieDetail;
-    } catch (error, stacktrace) {
-      throw Exception(
-          "Exception accoured: $error with stacktrace: $stacktrace");
-    }
-  }
-
+////////////// Cast
+  /// using castId from cast list to get cast detail
   Future<CastModel> fetchCastDetail(int castId) async {
     try {
-      final res = await _dio.get(
-          "https://api.themoviedb.org/3/person/$castId?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US");
+      final res = await _dio.get(Urls.castDetail(castId));
       CastModel castDetail = CastModel.fromJson(res.data);
       return castDetail;
     } catch (error, stacktrace) {
@@ -85,10 +87,10 @@ class DataService {
     }
   }
 
-  Future<List<Movie>> fetchCastCreditMovie(int id) async {
+  /// get cast credit movie using castId
+  Future<List<Movie>> fetchCastCreditMovie(int castId) async {
     try {
-      final res = await _dio.get(
-          "https://api.themoviedb.org/3/person/$id/movie_credits?api_key=f6b0b868e75dbed8c0907797342365dc&language=en-US");
+      final res = await _dio.get(Urls.castMovieCredits(castId));
       var creditMovie = res.data['cast'] as List;
       List<Movie> creditsList =
           creditMovie.map((e) => Movie.fromJson(e)).toList();
@@ -99,22 +101,44 @@ class DataService {
     }
   }
 
-  Future<String> getYoutubeId(int id) async {
+////////////// Detail Movie
+  /// get movie detail by movie id
+  Future<MovieDetail> fetchDetailMovie(int movieId) async {
     try {
-      final response = await _dio.get(
-          'https://api.themoviedb.org/3/movie/$id/videos?api_key=f6b0b868e75dbed8c0907797342365dc');
-      var youtubeId = response.data['results'][0]['key'];
-      return youtubeId;
+      final res = await _dio.get(Urls.movieDetail(movieId));
+      MovieDetail movieDetail = MovieDetail.fromJson(res.data);
+      movieDetail.trailerId = await getYoutubeId(movieId);
+
+      // movieDetail.movieImage = await getMovieImage(id);
+
+      movieDetail.topBillCastedList = await getTopCastedList(movieId);
+      movieDetail.recommendedList = await getRecommendationList(movieId);
+
+      return movieDetail;
     } catch (error, stacktrace) {
       throw Exception(
-          'Exception accoured: $error with stacktrace: $stacktrace');
+          "Exception accoured: $error with stacktrace: $stacktrace");
     }
   }
 
-  Future<List<MovieCast>> getCastList(int movieId) async {
+  /// get a recommended list from movieId to show in the detail movie
+  Future<List<Movie>> getRecommendationList(int movieId) async {
     try {
-      final response = await _dio.get(
-          '${Constrant.baseUrl}/movie/$movieId/credits?api_key=${Constrant.apiKey}');
+      final res = await _dio.get(Urls.movieRecommendations(movieId));
+      var movies = res.data['results'] as List;
+      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  /// get movie cast credit list by movieId
+  Future<List<MovieCast>> getTopCastedList(int movieId) async {
+    try {
+      final response = await _dio.get(Urls.movieCredits(movieId));
       var list = response.data['cast'] as List;
       List<MovieCast> castList = list
           .map(
@@ -123,7 +147,6 @@ class DataService {
               profilePath: c['profile_path'],
               character: c['character'],
               id: c['id'],
-              gender: c['gender'],
             ),
           )
           .toList();
@@ -134,17 +157,15 @@ class DataService {
     }
   }
 
-  Future<List<Movie>> getRecommendationList(int movieId) async {
+  /// getting youtubeId by using movieId
+  Future<String> getYoutubeId(int movieId) async {
     try {
-      final res = await _dio.get(
-          "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=f6b0b868e75dbed8c0907797342365dc");
-      var movies = res.data['results'] as List;
-      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
-
-      return movieList;
+      final response = await _dio.get(Urls.movieTrailer(movieId));
+      var youtubeId = response.data['results'][0]['key'];
+      return youtubeId;
     } catch (error, stacktrace) {
       throw Exception(
-          "Exception accoured: $error with stacktrace: $stacktrace");
+          'Exception accoured: $error with stacktrace: $stacktrace');
     }
   }
 }

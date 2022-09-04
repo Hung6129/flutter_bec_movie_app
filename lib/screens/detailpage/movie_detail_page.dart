@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -12,7 +13,6 @@ import '../../model/movie_cast.dart';
 import '../../model/movie_detail_model.dart';
 import '../../model/movie_model.dart';
 import '../../widgets/app_text.dart';
-import '../../widgets/constrant.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie movie;
@@ -190,7 +190,7 @@ class MovieDetailScreen extends StatelessWidget {
                 ],
                 automaticallyImplyLeading: false,
                 toolbarHeight: maxHeight / (maxHeight / 50),
-                backgroundColor: Constrant.p3,
+                backgroundColor: Palettes.p3,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -241,7 +241,7 @@ class MovieDetailScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: Constrant.p3,
+                            color: Palettes.p3,
                             fontSize: maxHeight / (maxHeight / 25)),
                       ),
                     ),
@@ -270,7 +270,7 @@ class MovieDetailScreen extends StatelessWidget {
                               width: maxWidth / (maxWidth / 120),
                               height: maxHeight / (maxHeight / 180),
                               decoration: const BoxDecoration(
-                                color: Constrant.p4,
+                                color: Palettes.p4,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: AssetImage(
@@ -291,7 +291,7 @@ class MovieDetailScreen extends StatelessWidget {
                                   movieDetail.tagline!,
                                   // overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Constrant.p2,
+                                      color: Palettes.p2,
                                       fontSize: maxHeight / (maxHeight / 18)),
                                 ),
                                 SizedBox(
@@ -303,7 +303,7 @@ class MovieDetailScreen extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: maxHeight / (maxHeight / 15),
                                         fontWeight: FontWeight.bold,
-                                        color: Constrant.p3),
+                                        color: Palettes.p3),
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: movieDetail.releaseDate,
@@ -311,7 +311,7 @@ class MovieDetailScreen extends StatelessWidget {
                                             fontSize:
                                                 maxHeight / (maxHeight / 15),
                                             fontWeight: FontWeight.bold,
-                                            color: Constrant.textBlack),
+                                            color: Palettes.textBlack),
                                       ),
                                     ],
                                   ),
@@ -322,7 +322,7 @@ class MovieDetailScreen extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: maxHeight / (maxHeight / 15),
                                         fontWeight: FontWeight.bold,
-                                        color: Constrant.p3),
+                                        color: Palettes.p3),
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: "${movieDetail.runtime} min",
@@ -330,7 +330,7 @@ class MovieDetailScreen extends StatelessWidget {
                                             fontSize:
                                                 maxHeight / (maxHeight / 15),
                                             fontWeight: FontWeight.bold,
-                                            color: Constrant.textBlack),
+                                            color: Palettes.textBlack),
                                       ),
                                     ],
                                   ),
@@ -339,7 +339,7 @@ class MovieDetailScreen extends StatelessWidget {
                                   children: [
                                     MaterialButton(
                                       shape: const CircleBorder(),
-                                      color: Constrant.p6,
+                                      color: Palettes.p6,
                                       onPressed: () async {
                                         final youtubeUrl =
                                             'https://www.youtube.com/embed/${movieDetail.trailerId}';
@@ -352,17 +352,17 @@ class MovieDetailScreen extends StatelessWidget {
                                       child: const Icon(
                                         Icons.play_arrow,
                                         size: 20,
-                                        color: Constrant.p3,
+                                        color: Palettes.p3,
                                       ),
                                     ),
                                     MaterialButton(
                                       shape: const CircleBorder(),
-                                      color: Constrant.p6,
+                                      color: Palettes.p6,
                                       onPressed: () {},
                                       child: const Icon(
                                         Icons.favorite_border,
                                         size: 20,
-                                        color: Constrant.p3,
+                                        color: Palettes.p3,
                                       ),
                                     )
                                   ],
@@ -390,7 +390,7 @@ class MovieDetailScreen extends StatelessWidget {
                               movieDetail.voteCount.toString(),
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  color: Constrant.p2,
+                                  color: Palettes.p2,
                                   fontSize: maxHeight / (maxHeight / 18)),
                             ),
                           ],
@@ -407,7 +407,7 @@ class MovieDetailScreen extends StatelessWidget {
                               finalNum.toString() + "%",
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  color: Constrant.p2,
+                                  color: Palettes.p2,
                                   fontSize: maxHeight / (maxHeight / 18)),
                             ),
                           ],
@@ -424,7 +424,7 @@ class MovieDetailScreen extends StatelessWidget {
                               movieDetail.popularity.toString(),
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  color: Constrant.p2,
+                                  color: Palettes.p2,
                                   fontSize: maxHeight / (maxHeight / 18)),
                             ),
                           ],
@@ -445,7 +445,7 @@ class MovieDetailScreen extends StatelessWidget {
                             "Overview",
                             // overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Constrant.p3,
+                                color: Palettes.p3,
                                 fontWeight: FontWeight.bold,
                                 fontSize: maxHeight / (maxHeight / 20)),
                           ),
@@ -455,7 +455,7 @@ class MovieDetailScreen extends StatelessWidget {
                               movieDetail.overview!,
                               // overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  color: Constrant.textBlack,
+                                  color: Palettes.textBlack,
                                   fontSize: maxHeight / (maxHeight / 15)),
                             ),
                           ),
@@ -473,7 +473,7 @@ class MovieDetailScreen extends StatelessWidget {
                             "Top Billed Cast",
                             // overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Constrant.p3,
+                                color: Palettes.p3,
                                 fontWeight: FontWeight.bold,
                                 fontSize: maxHeight / (maxHeight / 20)),
                           ),
@@ -482,9 +482,10 @@ class MovieDetailScreen extends StatelessWidget {
                             height: maxHeight / (maxHeight / 250),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: movieDetail.castList.length,
+                              itemCount: movieDetail.topBillCastedList.length,
                               itemBuilder: (context, index) {
-                                MovieCast cast = movieDetail.castList[index];
+                                MovieCast cast =
+                                    movieDetail.topBillCastedList[index];
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.push(
@@ -496,7 +497,7 @@ class MovieDetailScreen extends StatelessWidget {
                                     );
                                   },
                                   child: Card(
-                                      color: Constrant.p4,
+                                      color: Palettes.p4,
                                       elevation: 1.5,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -528,7 +529,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                   return Container(
                                                     width: maxHeight /
                                                         (maxHeight / 120),
-                                                    color: Constrant.p6,
+                                                    color: Palettes.p6,
                                                     child: Image.asset(
                                                         "assets/not_found_images.png"),
                                                   );
@@ -544,7 +545,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                           TextAlign.center,
                                                       // overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        color: Constrant.p3,
+                                                        color: Palettes.p3,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: maxHeight /
@@ -557,7 +558,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                           TextOverflow.ellipsis,
                                                       maxLines: 2,
                                                       style: TextStyle(
-                                                        color: Constrant.p2,
+                                                        color: Palettes.p2,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: maxHeight /
@@ -589,7 +590,7 @@ class MovieDetailScreen extends StatelessWidget {
                             "Recommended for you",
                             // overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Constrant.p3,
+                                color: Palettes.p3,
                                 fontWeight: FontWeight.bold,
                                 fontSize: maxHeight / (maxHeight / 20)),
                           ),
@@ -613,7 +614,7 @@ class MovieDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         child: Card(
-                                            color: Constrant.p6,
+                                            color: Palettes.p6,
                                             elevation: 1.5,
                                             child: SizedBox(
                                               height:
@@ -648,7 +649,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                         return Container(
                                                           width: maxHeight /
                                                               (maxHeight / 120),
-                                                          color: Constrant.p6,
+                                                          color: Palettes.p6,
                                                           child: Image.asset(
                                                               "assets/not_found_images.png"),
                                                         );
@@ -665,7 +666,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        color: Constrant.p3,
+                                                        color: Palettes.p3,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: maxHeight /

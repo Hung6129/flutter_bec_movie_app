@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/widgets/app_text.dart';
-
-import 'package:flutter_bec_movie_app/widgets/constrant.dart';
 import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
 
 class MenuItems {
@@ -30,11 +29,11 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget _buildMenuItem(DrawerThings item) => ListTile(
           minLeadingWidth: 20,
-          selectedColor: Constrant.p6,
-          selectedTileColor: Constrant.p6,
+          selectedColor: Palettes.p6,
+          selectedTileColor: Palettes.p6,
           selected: currentItem == item,
-          // tileColor: Constrant.p3,
-          leading: Icon(item.IconData, color: Constrant.p3),
+          // tileColor: Palettes.p3,
+          leading: Icon(item.IconData, color: Palettes.p3),
           title: AppText(text: item.String),
           onTap: () {
             onSelectedItem(item);
@@ -42,14 +41,14 @@ class MenuPage extends StatelessWidget {
         );
 
     return Scaffold(
-        backgroundColor: Constrant.p4,
+        backgroundColor: Palettes.p4,
         body: SafeArea(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             // ListTile(
             //   minLeadingWidth: 20,
-            //   selectedColor: Constrant.p6,
-            //   selectedTileColor: Constrant.p6,
-            //   // tileColor: Constrant.p3,
+            //   selectedColor: Palettes.p6,
+            //   selectedTileColor: Palettes.p6,
+            //   // tileColor: Palettes.p3,
             //   leading: Image.network(
             //     _currentUserImage,
             //     width: 35,
@@ -68,7 +67,7 @@ class MenuPage extends StatelessWidget {
             // Divider(
             //   thickness: 1,
             //   indent: 5,
-            //   color: Constrant.p3,
+            //   color: Palettes.p3,
             // ),
             // ListTile(
             //   minLeadingWidth: 20,
