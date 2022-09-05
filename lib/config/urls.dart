@@ -4,10 +4,19 @@ class Urls {
   static const String imagesUrl = 'https://image.tmdb.org/t/p/original';
   static const String langUrl = '&language=en-US&page=1';
 
+  /// Image
+  static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+  static String imageUrl(String path) => '$baseImageUrl$path';
+  static String movieImages(int id) =>
+      '$baseUrl/movie/$id/images?$apiKey&language=en-US&include_image_language=en,null';
+  static String tvImages(int id) =>
+      '$baseUrl/tv/$id/images?$apiKey&language=en-US&include_image_language=en,null';
+
   /// Youtube trailer
   static String movieTrailer(int id) => '$baseUrl/movie/$id/videos?$apiKey';
 
   /// Movies
+  static const String upCommingMovies = '$baseUrl/movie/upcoming?$apiKey';
   static const String nowPlayingMovies = '$baseUrl/movie/now_playing?$apiKey';
   static const String popularMovies = '$baseUrl/movie/popular?$apiKey';
   static const String topRatedMovies = '$baseUrl/movie/top_rated?$apiKey';

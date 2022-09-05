@@ -10,19 +10,23 @@ part 'movie_bloc_state.dart';
 
 class MovieBlocBloc extends Bloc<MovieBlocEvent, MovieBlocState> {
   List<Movie> nowPlayingList = [];
-  List<Movie> popularList = [];
+  List<Movie> topRatedList = [];
+  // List<Movie> upCommingList = [];
   List<MovieCast> peopleList = [];
 
   MovieBlocBloc() : super(MovieBlocInitial()) {
     on<MovieEventStarted>((event, emit) async {
       emit(MovieBlocLoading());
-      popularList = await DataService().fetchPopularMovie();
+      // popularList = await DataService().fetchPopularMovie();
+      topRatedList = await DataService().fetchTopRatedMovie();
       nowPlayingList = await DataService().fetchNowPlayingMovie();
       peopleList = await DataService().fetchPopularCast();
-      if (popularList.isEmpty || popularList.isEmpty || peopleList.isEmpty) {
+      if (nowPlayingList.isEmpty || peopleList.isEmpty) {
         emit(MovieBlocError());
       } else {
-        emit(MovieBlocLoaded(nowPlayingList, popularList, peopleList));
+        emit(MovieBlocLoaded(nowPlayingList, peopleList, topRatedList
+            // popularList, peopleList
+            ));
       }
     });
   }

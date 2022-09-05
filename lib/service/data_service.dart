@@ -49,6 +49,19 @@ class DataService {
   }
 
   /// get list top rated movie
+  Future<List<Movie>> fetchUpCommingMovie() async {
+    try {
+      final res = await _dio.get(Urls.upCommingMovies);
+      var movies = res.data['results'] as List;
+      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  /// get list top rated movie
   Future<List<Movie>> fetchNowPlayingMovie() async {
     try {
       final res = await _dio.get(Urls.nowPlayingMovies);

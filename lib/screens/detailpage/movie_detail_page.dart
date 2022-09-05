@@ -1,14 +1,14 @@
-import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
+import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import '../../bloc/movie_detail_bloc/movie_detail_event.dart';
+import '../../config/urls.dart';
 import '../../model/movie_cast.dart';
 import '../../model/movie_detail_model.dart';
 import '../../model/movie_model.dart';
@@ -170,47 +170,24 @@ class MovieDetailScreen extends StatelessWidget {
           List<Movie> movies = state.recommendation;
 
           return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      print("Adding to favorite list");
-                    },
-                    child: Platform.isIOS
-                        ? Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Icon(CupertinoIcons.heart_fill),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Icon(Icons.favorite),
-                          ),
-                  ),
-                ],
-                automaticallyImplyLeading: false,
+                automaticallyImplyLeading: true,
+                stretch: true,
+                stretchTriggerOffset: 150,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 backgroundColor: Palettes.p3,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Platform.isIOS
-                          ? Icon(CupertinoIcons.arrow_left)
-                          : Icon(Icons.arrow_back),
-                    ),
-                  ],
-                ),
                 pinned: true,
-                expandedHeight: maxHeight / (maxHeight / 250),
+                expandedHeight: maxHeight / (maxHeight / 300),
                 flexibleSpace: FlexibleSpaceBar(
+                  stretchModes: [
+                    StretchMode.zoomBackground,
+                    StretchMode.fadeTitle,
+                    StretchMode.blurBackground,
+                  ],
                   background: CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/original/${movieDetail.backdropPath}',
-                    width: double.infinity,
+                    imageUrl: Urls.imagesUrl + movieDetail.backdropPath!,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
                       baseColor: (Colors.grey[300])!,
@@ -235,20 +212,16 @@ class MovieDetailScreen extends StatelessWidget {
                   children: [
                     /// Title
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        movieDetail.originalTitle!,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Palettes.p3,
-                            fontSize: maxHeight / (maxHeight / 25)),
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(4),
+                        child: Text(
+                          movieDetail.originalTitle!,
+                          textAlign: TextAlign.center,
+                          style: Palettes.movieTitle,
+                        )),
 
                     /// Poster and play trailer
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(4),
                       child: Row(
                         children: [
                           /// Poster
@@ -287,13 +260,9 @@ class MovieDetailScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  movieDetail.tagline!,
-                                  // overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Palettes.p2,
-                                      fontSize: maxHeight / (maxHeight / 18)),
-                                ),
+                                Text(movieDetail.tagline!,
+                                    // overflow: TextOverflow.ellipsis,
+                                    style: Palettes.bodyText),
                                 SizedBox(
                                   height: maxHeight / (maxHeight / 10),
                                 ),
@@ -301,18 +270,14 @@ class MovieDetailScreen extends StatelessWidget {
                                   text: TextSpan(
                                     text: 'Release Date: ',
                                     style: TextStyle(
-                                        fontSize: maxHeight / (maxHeight / 15),
-                                        fontWeight: FontWeight.bold,
-                                        color: Palettes.p3),
+                                      fontSize: maxHeight / (maxHeight / 15),
+                                      fontWeight: FontWeight.bold,
+                                      color: Palettes.p3,
+                                    ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: movieDetail.releaseDate,
-                                        style: TextStyle(
-                                            fontSize:
-                                                maxHeight / (maxHeight / 15),
-                                            fontWeight: FontWeight.bold,
-                                            color: Palettes.textBlack),
-                                      ),
+                                          text: movieDetail.releaseDate,
+                                          style: Palettes.bodyText),
                                     ],
                                   ),
                                 ),
@@ -325,13 +290,9 @@ class MovieDetailScreen extends StatelessWidget {
                                         color: Palettes.p3),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: "${movieDetail.runtime} min",
-                                        style: TextStyle(
-                                            fontSize:
-                                                maxHeight / (maxHeight / 15),
-                                            fontWeight: FontWeight.bold,
-                                            color: Palettes.textBlack),
-                                      ),
+                                          text:
+                                              "${movieDetail.runtime} minutes",
+                                          style: Palettes.bodyText),
                                     ],
                                   ),
                                 ),
@@ -444,19 +405,14 @@ class MovieDetailScreen extends StatelessWidget {
                           Text(
                             "Overview",
                             // overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Palettes.p3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: maxHeight / (maxHeight / 20)),
+                            style: Palettes.movieTitle,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               movieDetail.overview!,
                               // overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Palettes.textBlack,
-                                  fontSize: maxHeight / (maxHeight / 15)),
+                              style: Palettes.bodyText,
                             ),
                           ),
                         ],
@@ -470,112 +426,13 @@ class MovieDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Top Billed Cast",
+                            "Top billed cast",
                             // overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Palettes.p3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: maxHeight / (maxHeight / 20)),
+                            style: Palettes.movieTitle,
                           ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            height: maxHeight / (maxHeight / 250),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: movieDetail.topBillCastedList.length,
-                              itemBuilder: (context, index) {
-                                MovieCast cast =
-                                    movieDetail.topBillCastedList[index];
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CastDetailPage(movieCre: cast),
-                                      ),
-                                    );
-                                  },
-                                  child: Card(
-                                      color: Palettes.p4,
-                                      elevation: 1.5,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: SizedBox(
-                                          height: maxHeight / (maxHeight / 200),
-                                          width: maxWidth / (maxWidth / 150),
-                                          child: Column(
-                                            children: [
-                                              CachedNetworkImage(
-                                                height: maxHeight /
-                                                    (maxHeight / 180),
-                                                width:
-                                                    maxWidth / (maxWidth / 160),
-                                                fit: BoxFit.cover,
-                                                imageUrl:
-                                                    "https://image.tmdb.org/t/p/original/${cast.profilePath}",
-                                                placeholder: (ctx, url) =>
-                                                    Shimmer.fromColors(
-                                                  baseColor:
-                                                      (Colors.grey[300])!,
-                                                  highlightColor:
-                                                      (Colors.grey[100])!,
-                                                  child: Container(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) {
-                                                  return Container(
-                                                    width: maxHeight /
-                                                        (maxHeight / 120),
-                                                    color: Palettes.p6,
-                                                    child: Image.asset(
-                                                        "assets/not_found_images.png"),
-                                                  );
-                                                },
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.all(5),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      cast.name!,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color: Palettes.p3,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: maxHeight /
-                                                            (maxHeight / 12),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      cast.character!,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2,
-                                                      style: TextStyle(
-                                                        color: Palettes.p2,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: maxHeight /
-                                                            (maxHeight / 9),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                );
-                              },
-                            ),
-                          )
+                          HorizontalCastList(
+                              topBillCasted: true,
+                              peopleList: movieDetail.topBillCastedList)
                         ],
                       ),
                     ),
@@ -589,14 +446,13 @@ class MovieDetailScreen extends StatelessWidget {
                           Text(
                             "Recommended for you",
                             // overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Palettes.p3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: maxHeight / (maxHeight / 20)),
+                            style: Palettes.movieTitle,
                           ),
                           movies.isEmpty
-                              ? const Text(
-                                  "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.")
+                              ? Text(
+                                  "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
+                                  style: Palettes.bodyText,
+                                )
                               : SizedBox(
                                   width: double.maxFinite,
                                   height: maxHeight / (maxHeight / 250),

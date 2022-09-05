@@ -22,7 +22,6 @@ class FavoritePage extends StatelessWidget {
       return AppBar(
         title: AppText(
           text: title,
-          size: _maxHeight / (_maxHeight / 18),
           color: Palettes.p6,
         ),
         centerTitle: true,

@@ -2,9 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Palettes {
+  static TextStyle kBody = GoogleFonts.poppins(
+      fontSize: 19,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+      color: p3);
   static TextStyle kHeading6 = GoogleFonts.poppins(
       fontSize: 19,
       fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+      color: p3);
+  static TextStyle bodyText = GoogleFonts.poppins(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.15,
+      color: textBlack);
+  static TextStyle movieTitle = GoogleFonts.poppins(
+      fontSize: 22,
+      fontWeight: FontWeight.w400,
       letterSpacing: 0.15,
       color: p3);
 

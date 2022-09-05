@@ -15,7 +15,6 @@ class ProfilePage extends StatelessWidget {
           backgroundColor: Palettes.p2,
           title: const AppText(
             text: "Favorite List",
-            size: 24,
             color: Palettes.p3,
           ),
         ),

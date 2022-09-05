@@ -8,9 +8,14 @@ import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/widgets/app_text.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     double _maxHeight = MediaQuery.of(context).size.height;
@@ -20,9 +25,7 @@ class SearchPage extends StatelessWidget {
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
         leading: IconButton(
-          onPressed: () {
-            ZoomDrawer.of(context)!.open();
-          },
+          onPressed: () => ZoomDrawer.of(context)!.open(),
           icon: Platform.isAndroid
               ? Icon(Icons.menu)
               : Icon(CupertinoIcons.list_bullet),
@@ -31,7 +34,6 @@ class SearchPage extends StatelessWidget {
         title: AppText(
           text: "Search Movie",
           color: Palettes.p6,
-          size: _maxHeight / (_maxHeight / 18),
         ),
         backgroundColor: Palettes.p3,
       );
