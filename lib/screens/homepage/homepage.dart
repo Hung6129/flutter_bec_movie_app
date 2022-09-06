@@ -1,23 +1,16 @@
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
 import 'package:flutter_bec_movie_app/widgets/heading_w_sub.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_list_shimmer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:shimmer/shimmer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
-import '../../model/movie_model.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/horizontal_list_items.dart';
-import '../detailpage/cast_detail_page.dart';
-import '../detailpage/movie_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -309,7 +302,12 @@ class _HomePageState extends State<HomePage> {
     /// build app bar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
-        backgroundColor: Palettes.p3,
+        backgroundColor: Palettes.p3.withOpacity(0.9),
+        title: Text(
+          'BecMovie',
+          style: Palettes.kHeading7,
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {

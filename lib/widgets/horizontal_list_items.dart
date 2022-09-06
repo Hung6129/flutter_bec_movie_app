@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../config/palettes.dart';
 import '../config/urls.dart';
 import '../model/movie_model.dart';
 import '../screens/detailpage/movie_detail_page.dart';
@@ -35,7 +36,9 @@ class HorizontalItems extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: 120.0,
                   fit: BoxFit.cover,
-                  imageUrl: Urls.imageUrl(movie.posterPath!),
+                  // imageUrl: Urls.imageUrl(movie.posterPath!),
+                  imageUrl:
+                      "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
                   placeholder: (context, url) => Shimmer.fromColors(
                     child: Container(
                       height: 170.0,
@@ -48,7 +51,25 @@ class HorizontalItems extends StatelessWidget {
                     baseColor: (Colors.grey[300])!,
                     highlightColor: (Colors.grey[100])!,
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  errorWidget: (context, url, error) => Container(
+                    color: Palettes.p3,
+                    height: 170.0,
+                    width: 120.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          color: Palettes.textWhite,
+                        ),
+                        Text(
+                          "No data",
+                          style: Palettes.bodyText,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

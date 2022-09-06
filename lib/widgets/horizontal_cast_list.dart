@@ -54,7 +54,7 @@ class HorizontalCastList extends StatelessWidget {
                             width: 120.0,
                             fit: BoxFit.cover,
                             imageUrl:
-                                Urls.imageUrl(peopleList[index].profilePath!),
+                                "https://image.tmdb.org/t/p/w500/${peopleList[index].profilePath}",
                             placeholder: (context, url) => Shimmer.fromColors(
                               child: Container(
                                 height: 170.0,
@@ -67,8 +67,25 @@ class HorizontalCastList extends StatelessWidget {
                               baseColor: (Colors.grey[300])!,
                               highlightColor: (Colors.grey[100])!,
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            errorWidget: (context, url, error) => Container(
+                              color: Palettes.p6,
+                              height: 170.0,
+                              width: 120.0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.error,
+                                    color: Palettes.p3,
+                                  ),
+                                  Text(
+                                    "No data",
+                                    style: Palettes.bodyText,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                         topBillCasted == false
@@ -90,23 +107,22 @@ class HorizontalCastList extends StatelessWidget {
                                 padding: EdgeInsets.all(2),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      peopleList[index].name!,
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        color: Palettes.p3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            _maxHeight / (_maxHeight / 12),
-                                      ),
-                                    ),
-                                    Text(peopleList[index].character!,
+                                    Text(peopleList[index].name!,
                                         textAlign: TextAlign.center,
                                         overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
+                                        maxLines: 1,
                                         style: Palettes.bodyText),
+                                    Text(
+                                      peopleList[index].character!,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: Palettes.p3,
+                                        fontSize:
+                                            _maxHeight / (_maxHeight / 10),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )

@@ -47,12 +47,12 @@ class _DrawerPageState extends State<DrawerPage> {
 
   Widget _getMenuPage() {
     switch (current) {
+      case MenuItems.home:
+        return HomePage();
       case MenuItems.fav:
         return FavoritePage();
       case MenuItems.search:
         return SearchPage();
-      case MenuItems.home:
-        return HomePage();
     }
     return HomePage();
   }

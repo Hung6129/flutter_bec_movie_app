@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/screens/detailpage/cast_detail_page.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
+import 'package:flutter_bec_movie_app/widgets/horizontal_list_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import '../../bloc/movie_detail_bloc/movie_detail_event.dart';
 import '../../config/urls.dart';
-import '../../model/movie_cast.dart';
 import '../../model/movie_detail_model.dart';
 import '../../model/movie_model.dart';
 import '../../widgets/app_text.dart';
@@ -41,7 +40,8 @@ class MovieDetailScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               SliverAppBar(
-                automaticallyImplyLeading: false,
+                leading: Icon(Icons.home),
+                // automaticallyImplyLeading: false,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 250),
@@ -261,7 +261,6 @@ class MovieDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(movieDetail.tagline!,
-                                    // overflow: TextOverflow.ellipsis,
                                     style: Palettes.bodyText),
                                 SizedBox(
                                   height: maxHeight / (maxHeight / 10),
@@ -344,16 +343,11 @@ class MovieDetailScreen extends StatelessWidget {
                           children: <Widget>[
                             Image.asset(
                               "assets/vote_count_icon.png",
-                              height: maxHeight / (maxHeight / 40),
-                              width: maxWidth / (maxWidth / 40),
+                              height: maxHeight / (maxHeight / 35),
+                              width: maxWidth / (maxWidth / 35),
                             ),
-                            Text(
-                              movieDetail.voteCount.toString(),
-                              // overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Palettes.p2,
-                                  fontSize: maxHeight / (maxHeight / 18)),
-                            ),
+                            Text(movieDetail.voteCount.toString(),
+                                style: Palettes.kHeading6),
                           ],
                         ),
                         Column(
@@ -361,16 +355,11 @@ class MovieDetailScreen extends StatelessWidget {
                           children: <Widget>[
                             Image.asset(
                               "assets/user_score_icon.png",
-                              height: maxHeight / (maxHeight / 40),
-                              width: maxWidth / (maxWidth / 40),
+                              height: maxHeight / (maxHeight / 35),
+                              width: maxWidth / (maxWidth / 35),
                             ),
-                            Text(
-                              finalNum.toString() + "%",
-                              // overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Palettes.p2,
-                                  fontSize: maxHeight / (maxHeight / 18)),
-                            ),
+                            Text(finalNum.toString() + "%",
+                                style: Palettes.kHeading6),
                           ],
                         ),
                         Column(
@@ -378,16 +367,11 @@ class MovieDetailScreen extends StatelessWidget {
                           children: <Widget>[
                             Image.asset(
                               "assets/popularity_icon.png",
-                              height: maxHeight / (maxHeight / 40),
-                              width: maxWidth / (maxWidth / 40),
+                              height: maxHeight / (maxHeight / 35),
+                              width: maxWidth / (maxWidth / 35),
                             ),
-                            Text(
-                              movieDetail.popularity.toString(),
-                              // overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Palettes.p2,
-                                  fontSize: maxHeight / (maxHeight / 18)),
-                            ),
+                            Text(movieDetail.popularity.toString(),
+                                style: Palettes.kHeading6),
                           ],
                         )
                       ],
@@ -445,7 +429,6 @@ class MovieDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Recommended for you",
-                            // overflow: TextOverflow.ellipsis,
                             style: Palettes.movieTitle,
                           ),
                           movies.isEmpty
@@ -453,96 +436,14 @@ class MovieDetailScreen extends StatelessWidget {
                                   "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
                                   style: Palettes.bodyText,
                                 )
-                              : SizedBox(
-                                  width: double.maxFinite,
-                                  height: maxHeight / (maxHeight / 250),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: movies.length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                MovieDetailScreen(
-                                                    movie: movies[index]),
-                                          ),
-                                        ),
-                                        child: Card(
-                                            color: Palettes.p6,
-                                            elevation: 1.5,
-                                            child: SizedBox(
-                                              height:
-                                                  maxHeight / (maxHeight / 200),
-                                              width:
-                                                  maxWidth / (maxWidth / 150),
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(5),
-                                                    child: CachedNetworkImage(
-                                                      height: maxHeight /
-                                                          (maxHeight / 200),
-                                                      width: maxWidth /
-                                                          (maxWidth / 150),
-                                                      fit: BoxFit.cover,
-                                                      imageUrl:
-                                                          "https://image.tmdb.org/t/p/original/${movies[index].posterPath}",
-                                                      placeholder: (ctx, url) =>
-                                                          Shimmer.fromColors(
-                                                        baseColor:
-                                                            (Colors.grey[300])!,
-                                                        highlightColor:
-                                                            (Colors.grey[100])!,
-                                                        child: Container(
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      errorWidget: (context,
-                                                          url, error) {
-                                                        return Container(
-                                                          width: maxHeight /
-                                                              (maxHeight / 120),
-                                                          color: Palettes.p6,
-                                                          child: Image.asset(
-                                                              "assets/not_found_images.png"),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    padding: EdgeInsets.all(5),
-                                                    child: Text(
-                                                      movies[index].title!,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color: Palettes.p3,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: maxHeight /
-                                                            (maxHeight / 12),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )),
-                                      );
-                                    },
-                                  ),
+                              : HorizontalItems(
+                                  movies: movies,
                                 )
                         ],
                       ),
                     ),
-
                     SizedBox(
-                      height: maxHeight / (maxHeight / 60),
+                      height: maxHeight / (maxHeight / 50),
                     ),
                   ],
                 ),
@@ -553,7 +454,7 @@ class MovieDetailScreen extends StatelessWidget {
           return const Center(
             child: AppText(
               text: "Somethings went wrong!!",
-              color: Colors.black,
+              color: Colors.red,
             ),
           );
         } else {

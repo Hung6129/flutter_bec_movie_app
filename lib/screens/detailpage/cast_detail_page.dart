@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:flutter_bec_movie_app/model/movie_model.dart';
+import 'package:flutter_bec_movie_app/widgets/horizontal_list_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:flutter_bec_movie_app/bloc/cast_detail/cast_detail_bloc_bloc.dart';
 
+import '../../config/urls.dart';
 import '../../model/cast_model.dart';
 import 'movie_detail_page.dart';
 
@@ -68,28 +70,23 @@ class CastDetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          dataCast.name!,
-                          // overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Palettes.p2,
-                              fontSize: maxHeight / (maxHeight / 20)),
+                        Text(dataCast.name!,
+                            // overflow: TextOverflow.ellipsis,
+                            style: Palettes.movieTitle),
+                        SizedBox(
+                          height: maxHeight / (maxHeight / 15),
                         ),
                         RichText(
                           text: TextSpan(
                             text: 'Place of Birth: ',
                             style: TextStyle(
-                                fontSize: maxHeight / (maxHeight / 14),
+                                fontSize: maxHeight / (maxHeight / 12),
                                 fontWeight: FontWeight.bold,
                                 color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
-                                text: dataCast.placeOfBirth,
-                                style: TextStyle(
-                                    fontSize: maxHeight / (maxHeight / 14),
-                                    fontWeight: FontWeight.bold,
-                                    color: Palettes.textBlack),
-                              ),
+                                  text: dataCast.placeOfBirth,
+                                  style: Palettes.bodyText),
                             ],
                           ),
                         ),
@@ -100,17 +97,14 @@ class CastDetailPage extends StatelessWidget {
                           text: TextSpan(
                             text: 'Gender: ',
                             style: TextStyle(
-                                fontSize: maxHeight / (maxHeight / 14),
+                                fontSize: maxHeight / (maxHeight / 12),
                                 fontWeight: FontWeight.bold,
                                 color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
-                                text: dataCast.gender == 1 ? "Female" : "Male",
-                                style: TextStyle(
-                                    fontSize: maxHeight / (maxHeight / 14),
-                                    fontWeight: FontWeight.bold,
-                                    color: Palettes.textBlack),
-                              ),
+                                  text:
+                                      dataCast.gender == 1 ? "Female" : "Male",
+                                  style: Palettes.bodyText),
                             ],
                           ),
                         ),
@@ -121,17 +115,13 @@ class CastDetailPage extends StatelessWidget {
                           text: TextSpan(
                             text: 'Birthday: ',
                             style: TextStyle(
-                                fontSize: maxHeight / (maxHeight / 14),
+                                fontSize: maxHeight / (maxHeight / 12),
                                 fontWeight: FontWeight.bold,
                                 color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
-                                text: dataCast.birthday,
-                                style: TextStyle(
-                                    fontSize: maxHeight / (maxHeight / 14),
-                                    fontWeight: FontWeight.bold,
-                                    color: Palettes.textBlack),
-                              ),
+                                  text: dataCast.birthday,
+                                  style: Palettes.bodyText),
                             ],
                           ),
                         ),
@@ -144,18 +134,13 @@ class CastDetailPage extends StatelessWidget {
                                 text: TextSpan(
                                   text: 'Deathday: ',
                                   style: TextStyle(
-                                      fontSize: maxHeight / (maxHeight / 14),
+                                      fontSize: maxHeight / (maxHeight / 12),
                                       fontWeight: FontWeight.bold,
                                       color: Palettes.p3),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: dataCast.deathday,
-                                      style: TextStyle(
-                                          fontSize:
-                                              maxHeight / (maxHeight / 14),
-                                          fontWeight: FontWeight.bold,
-                                          color: Palettes.textBlack),
-                                    ),
+                                        text: dataCast.deathday,
+                                        style: Palettes.bodyText),
                                   ],
                                 ),
                               ),
@@ -168,17 +153,13 @@ class CastDetailPage extends StatelessWidget {
                           text: TextSpan(
                             text: 'Known For: ',
                             style: TextStyle(
-                                fontSize: maxHeight / (maxHeight / 14),
+                                fontSize: maxHeight / (maxHeight / 12),
                                 fontWeight: FontWeight.bold,
                                 color: Palettes.p3),
                             children: <TextSpan>[
                               TextSpan(
-                                text: dataCast.knownForDepartment,
-                                style: TextStyle(
-                                    fontSize: maxHeight / (maxHeight / 14),
-                                    fontWeight: FontWeight.bold,
-                                    color: Palettes.textBlack),
-                              ),
+                                  text: dataCast.knownForDepartment,
+                                  style: Palettes.bodyText),
                             ],
                           ),
                         ),
@@ -196,23 +177,14 @@ class CastDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Biography",
-                        // overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Palettes.p3,
-                            fontWeight: FontWeight.bold,
-                            fontSize: maxHeight / (maxHeight / 20)),
-                      ),
+                      Text("Biography",
+                          // overflow: TextOverflow.ellipsis,
+                          style: Palettes.movieTitle),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          dataCast.biography!,
-                          // overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Palettes.textBlack,
-                              fontSize: maxHeight / (maxHeight / 15)),
-                        ),
+                        child: Text(dataCast.biography!,
+                            // overflow: TextOverflow.ellipsis,
+                            style: Palettes.bodyText),
                       ),
                     ],
                   ),
@@ -224,77 +196,16 @@ class CastDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Know for",
-                        // overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Palettes.p3,
-                            fontWeight: FontWeight.bold,
-                            fontSize: maxHeight / (maxHeight / 20)),
-                      ),
+                      Text("Know for",
+                          // overflow: TextOverflow.ellipsis,
+                          style: Palettes.movieTitle),
                       creditMovie.isEmpty
-                          ? const Text(
-                              "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.")
-                          : SizedBox(
-                              width: double.maxFinite,
-                              height: maxHeight / (maxHeight / 250),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: creditMovie.length,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MovieDetailScreen(
-                                            movie: creditMovie[index],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Card(
-                                        color: Palettes.p6,
-                                        elevation: 1.5,
-                                        child: SizedBox(
-                                          height: maxHeight / (maxHeight / 200),
-                                          width: maxWidth / (maxWidth / 150),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: CachedNetworkImage(
-                                              height:
-                                                  maxHeight / (maxHeight / 200),
-                                              width:
-                                                  maxWidth / (maxWidth / 150),
-                                              fit: BoxFit.cover,
-                                              imageUrl:
-                                                  "https://image.tmdb.org/t/p/original/${creditMovie[index].posterPath}",
-                                              placeholder: (ctx, url) =>
-                                                  Shimmer.fromColors(
-                                                baseColor: (Colors.grey[300])!,
-                                                highlightColor:
-                                                    (Colors.grey[100])!,
-                                                child: Container(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) {
-                                                return Container(
-                                                  width: maxHeight /
-                                                      (maxHeight / 120),
-                                                  color: Palettes.p6,
-                                                  child: Image.asset(
-                                                      "assets/not_found_images.png"),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        )),
-                                  );
-                                },
-                              ),
+                          ? Text(
+                              "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
+                              style: Palettes.bodyText,
+                            )
+                          : HorizontalItems(
+                              movies: creditMovie,
                             )
                     ],
                   ),
@@ -416,13 +327,6 @@ class CastDetailPage extends StatelessWidget {
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
         backgroundColor: Palettes.p3,
-        actions: [
-          Icon(
-            Icons.star,
-            color: Colors.yellow,
-            size: 30,
-          )
-        ],
       );
     }
 
