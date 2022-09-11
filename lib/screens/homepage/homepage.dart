@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bec_movie_app/widgets/horizontal_list_shimmer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
+import '../../config/urls.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/horizontal_list_items.dart';
 

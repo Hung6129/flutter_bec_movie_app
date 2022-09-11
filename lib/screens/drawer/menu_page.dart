@@ -6,13 +6,13 @@ import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
 class MenuItems {
   static const home = DrawerThings("Home Page", Icons.home_filled);
   // static const movies = DrawerThings("Movies", Icons.movie_sharp);
-  static const tvs = DrawerThings("TV's", Icons.tv_sharp);
+  static const tvs = DrawerThings("TV Shows", Icons.tv_sharp);
   static const search = DrawerThings("Search Page", Icons.search);
   static const fav = DrawerThings("Favorite List", Icons.favorite);
   static const watlis = DrawerThings("Watch List", Icons.watch_later);
   // static final siout = DrawerThings("Sign Out", Icons.logout);
 
-  static final listItems = <DrawerThings>[home, search, fav, watlis];
+  static final listItems = <DrawerThings>[home, tvs, search, fav, watlis];
 }
 
 class MenuPage extends StatelessWidget {

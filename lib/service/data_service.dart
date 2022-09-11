@@ -53,6 +53,74 @@ class DataService {
     }
   }
 
+  /// get movie detail by movie id
+  Future<MovieDetail> fetchTVShowMovie(int movieId) async {
+    try {
+      final res = await _dio.get(Urls.movieDetail(movieId));
+      MovieDetail movieDetail = MovieDetail.fromJson(res.data);
+      movieDetail.trailerId = await getYoutubeId(movieId);
+
+      // movieDetail.movieImage = await getMovieImage(id);
+
+      movieDetail.topBillCastedList = await getTopCastedList(movieId);
+      movieDetail.recommendedList = await getRecommendationList(movieId);
+
+      return movieDetail;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  /// get a recommended list from movieId to show in the detail movie
+  Future<List<Movie>> getRecommendationTVShowList(int movieId) async {
+    try {
+      final res = await _dio.get(Urls.movieRecommendations(movieId));
+      var movies = res.data['results'] as List;
+      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+  /// get movie cast credit list by movieId
+  Future<List<MovieCast>> getTopCastedTVShowList(int movieId) async {
+    try {
+      final response = await _dio.get(Urls.movieCredits(movieId));
+      var list = response.data['cast'] as List;
+      List<MovieCast> castList = list
+          .map(
+            (c) => MovieCast(
+              name: c['name'],
+              profilePath: c['profile_path'],
+              character: c['character'],
+              id: c['id'],
+            ),
+          )
+          .toList();
+      return castList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
+  }
+
+  /// getting youtubeId by using movieId
+  Future<List<dynamic>> getYoutubeTVShowId(int movieId) async {
+    try {
+      final response = await _dio.get(Urls.movieTrailer(movieId));
+      List youtubeId = response.data['results']['key'] as List;
+      print(youtubeId);
+      return youtubeId;
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
+  }
+
 /////////// Movies
   /// get list top rated movie
   Future<List<Movie>> fetchTopRatedMovie() async {

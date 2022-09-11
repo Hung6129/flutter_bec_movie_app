@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             create: (_) => TvShowBloc()..add(TVShowEventStarted()),
           ),
         ],
-        child: TVShows(),
+        child: DrawerPage(),
       ),
     );
   }

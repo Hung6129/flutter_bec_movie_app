@@ -8,6 +8,8 @@ import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
+import '../tvs/tv_shows.dart';
+
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
 
@@ -54,7 +56,7 @@ class _DrawerPageState extends State<DrawerPage> {
       case MenuItems.search:
         return SearchPage();
       case MenuItems.tvs:
-        return SearchPage();
+        return TVShows();
     }
     return HomePage();
   }
