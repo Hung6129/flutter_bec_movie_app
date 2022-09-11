@@ -1,25 +1,24 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/bloc/tv_shows_bloc/tv_show_bloc.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
 import 'package:flutter_bec_movie_app/widgets/heading_w_sub.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_list_shimmer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/horizontal_list_items.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class TVShows extends StatefulWidget {
+  const TVShows({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TVShows> createState() => _TVShowsState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TVShowsState extends State<TVShows> {
   @override
   Widget build(BuildContext context) {
     double _maxHeight = MediaQuery.of(context).size.height;
@@ -32,17 +31,17 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SubHeading(
-              textTitle: "Now Playing",
+              textTitle: "Airing Today",
               onSeeMoreTapped: () {},
             ),
 
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            BlocBuilder<TvShowBloc, TvShowState>(
               builder: (context, state) {
-                if (state is MovieBlocLoading) {
+                if (state is TvShowLoading) {
                   return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var movies = state.nowPlayingList;
-                  return HorizontalItems(list: movies);
+                } else if (state is TvShowLoaded) {
+                  var tvShow = state.listAiringToday;
+                  return HorizontalItems(list: tvShow);
                 } else {
                   return const AppText(text: "Something went wrong");
                 }
@@ -53,40 +52,40 @@ class _HomePageState extends State<HomePage> {
               height: _maxHeight / (_maxHeight / 10),
             ),
 
-            SubHeading(
-              textTitle: "Popular People",
-              onSeeMoreTapped: () {},
-            ),
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
-              builder: (context, state) {
-                if (state is MovieBlocLoading) {
-                  return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var cast = state.peopleList;
-                  return HorizontalCastList(
-                    peopleList: cast,
-                    topBillCasted: false,
-                  );
-                } else {
-                  return const AppText(text: "Something went wrong");
-                }
-              },
-            ),
-            SizedBox(
-              height: _maxHeight / (_maxHeight / 10),
-            ),
+            // SubHeading(
+            //   textTitle: "Popular People",
+            //   onSeeMoreTapped: () {},
+            // ),
+            // BlocBuilder<TvShowBloc, TvShowState>(
+            //   builder: (context, state) {
+            //     if (state is MovieBlocLoading) {
+            //       return ShimmerListHorizontal();
+            //     } else if (state is MovieBlocLoaded) {
+            //       var cast = state.peopleList;
+            //       return HorizontalCastList(
+            //         peopleList: cast,
+            //         topBillCasted: false,
+            //       );
+            //     } else {
+            //       return const AppText(text: "Something went wrong");
+            //     }
+            //   },
+            // ),
+            // SizedBox(
+            //   height: _maxHeight / (_maxHeight / 10),
+            // ),
 
             SubHeading(
               textTitle: "Top Rated",
               onSeeMoreTapped: () {},
             ),
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            BlocBuilder<TvShowBloc, TvShowState>(
               builder: (context, state) {
-                if (state is MovieBlocLoading) {
+                if (state is TvShowLoading) {
                   return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var movies = state.topRated;
-                  return HorizontalItems(list: movies);
+                } else if (state is TvShowLoaded) {
+                  var tvShow = state.listTopRated;
+                  return HorizontalItems(list: tvShow);
                 } else {
                   return const AppText(text: "Something went wrong");
                 }
@@ -95,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: _maxHeight / (_maxHeight / 50),
             ),
-            // BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            // BlocBuilder<TvShowBloc, MovieBlocState>(
             //   builder: (context, state) {
             //     if (state is MovieBlocLoading) {
             //       return Container(
@@ -170,7 +169,7 @@ class _HomePageState extends State<HomePage> {
       return AppBar(
         backgroundColor: Palettes.p3.withOpacity(0.9),
         title: Text(
-          'BecMovie',
+          'TV Shows',
           style: Palettes.kHeading7,
         ),
         centerTitle: true,

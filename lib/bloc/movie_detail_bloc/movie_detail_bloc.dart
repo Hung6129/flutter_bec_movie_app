@@ -16,10 +16,21 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         try {
           final movieDetail = await DataService().fetchDetailMovie(event.id);
           final recommendationDetail =
-              await DataService().getRecommendationList(event.id);
-          emit(MovieDetailLoaded(movieDetail, recommendationDetail));
+              await DataService().getRecommendationList(
+            event.id,
+          );
+          emit(
+            MovieDetailLoaded(
+              movieDetail,
+              recommendationDetail,
+            ),
+          );
         } catch (e) {
-          emit(MovieDetailError());
+          emit(
+            MovieDetailError(
+              e.toString(),
+            ),
+          );
         }
       },
     );

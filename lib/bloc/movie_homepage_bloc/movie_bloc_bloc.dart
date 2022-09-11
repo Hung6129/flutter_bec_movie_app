@@ -15,19 +15,21 @@ class MovieBlocBloc extends Bloc<MovieBlocEvent, MovieBlocState> {
   List<MovieCast> peopleList = [];
 
   MovieBlocBloc() : super(MovieBlocInitial()) {
-    on<MovieEventStarted>((event, emit) async {
-      emit(MovieBlocLoading());
-      // popularList = await DataService().fetchPopularMovie();
-      topRatedList = await DataService().fetchTopRatedMovie();
-      nowPlayingList = await DataService().fetchNowPlayingMovie();
-      peopleList = await DataService().fetchPopularCast();
-      if (nowPlayingList.isEmpty || peopleList.isEmpty) {
-        emit(MovieBlocError());
-      } else {
-        emit(MovieBlocLoaded(nowPlayingList, peopleList, topRatedList
-            // popularList, peopleList
-            ));
-      }
-    });
+    on<MovieEventStarted>(
+      (event, emit) async {
+        emit(MovieBlocLoading());
+        // popularList = await DataService().fetchPopularMovie();
+        topRatedList = await DataService().fetchTopRatedMovie();
+        nowPlayingList = await DataService().fetchNowPlayingMovie();
+        peopleList = await DataService().fetchPopularCast();
+        if (nowPlayingList.isEmpty || peopleList.isEmpty) {
+          emit(MovieBlocError());
+        } else {
+          emit(MovieBlocLoaded(nowPlayingList, peopleList, topRatedList
+              // popularList, peopleList
+              ));
+        }
+      },
+    );
   }
 }

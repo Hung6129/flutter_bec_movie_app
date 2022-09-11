@@ -53,6 +53,8 @@ class _DrawerPageState extends State<DrawerPage> {
         return FavoritePage();
       case MenuItems.search:
         return SearchPage();
+      case MenuItems.tvs:
+        return SearchPage();
     }
     return HomePage();
   }

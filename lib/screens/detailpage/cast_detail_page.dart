@@ -205,7 +205,7 @@ class CastDetailPage extends StatelessWidget {
                               style: Palettes.bodyText,
                             )
                           : HorizontalItems(
-                              movies: creditMovie,
+                              list: creditMovie,
                             )
                     ],
                   ),
@@ -326,6 +326,7 @@ class CastDetailPage extends StatelessWidget {
     /// build appbar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
+        
         backgroundColor: Palettes.p3,
       );
     }

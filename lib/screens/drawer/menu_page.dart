@@ -5,6 +5,8 @@ import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
 
 class MenuItems {
   static const home = DrawerThings("Home Page", Icons.home_filled);
+  // static const movies = DrawerThings("Movies", Icons.movie_sharp);
+  static const tvs = DrawerThings("TV's", Icons.tv_sharp);
   static const search = DrawerThings("Search Page", Icons.search);
   static const fav = DrawerThings("Favorite List", Icons.favorite);
   static const watlis = DrawerThings("Watch List", Icons.watch_later);
@@ -41,9 +43,11 @@ class MenuPage extends StatelessWidget {
         );
 
     return Scaffold(
-        backgroundColor: Palettes.p4,
-        body: SafeArea(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      backgroundColor: Palettes.p4,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             // ListTile(
             //   minLeadingWidth: 20,
             //   selectedColor: Palettes.p6,
@@ -77,7 +81,9 @@ class MenuPage extends StatelessWidget {
             //     await Authentication().signOut();
             //   },
             // ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

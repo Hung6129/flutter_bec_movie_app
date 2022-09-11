@@ -15,4 +15,8 @@ class MovieDetailLoaded extends MovieDetailState {
   List<Object> get props => [detail, recommendation];
 }
 
-class MovieDetailError extends MovieDetailState {}
+class MovieDetailError extends MovieDetailState {
+  final String error;
+
+  MovieDetailError(this.error);
+}

@@ -17,6 +17,7 @@ class Urls {
 
   /// Movies
   static const String upCommingMovies = '$baseUrl/movie/upcoming?$apiKey';
+  // static const String trendingMovies = '$baseUrl/movie/upcoming?$apiKey';
   static const String nowPlayingMovies = '$baseUrl/movie/now_playing?$apiKey';
   static const String popularMovies = '$baseUrl/movie/popular?$apiKey';
   static const String topRatedMovies = '$baseUrl/movie/top_rated?$apiKey';

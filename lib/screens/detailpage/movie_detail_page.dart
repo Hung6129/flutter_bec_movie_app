@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/view/erorr_page.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
 import 'package:flutter_bec_movie_app/widgets/horizontal_list_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,6 @@ import '../../bloc/movie_detail_bloc/movie_detail_event.dart';
 import '../../config/urls.dart';
 import '../../model/movie_detail_model.dart';
 import '../../model/movie_model.dart';
-import '../../widgets/app_text.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie movie;
@@ -21,7 +21,10 @@ class MovieDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => MovieDetailBloc()..add(MovieDetailEventStated(movie.id!)),
+      create: (_) => MovieDetailBloc()
+        ..add(
+          MovieDetailEventStated(movie.id!),
+        ),
       child: WillPopScope(
         child: Scaffold(
           body: _buildDetailBody(context),
@@ -437,7 +440,7 @@ class MovieDetailScreen extends StatelessWidget {
                                   style: Palettes.bodyText,
                                 )
                               : HorizontalItems(
-                                  movies: movies,
+                                  list: movies,
                                 )
                         ],
                       ),
@@ -451,19 +454,9 @@ class MovieDetailScreen extends StatelessWidget {
             ],
           );
         } else if (state is MovieDetailError) {
-          return const Center(
-            child: AppText(
-              text: "Somethings went wrong!!",
-              color: Colors.red,
-            ),
-          );
+          return ErrorPage(errorText: state.error);
         } else {
-          return Center(
-            child: AppText(
-              text: "Somethings went wrong!!",
-              color: Colors.black,
-            ),
-          );
+          return Container();
         }
       },
     );

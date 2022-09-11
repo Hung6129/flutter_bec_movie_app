@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/model/cast_model.dart';
 import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
+import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
 
 import '../model/movie_cast.dart';
 import '../model/movie_model.dart';
@@ -9,6 +10,7 @@ import '../model/movie_model.dart';
 class DataService {
   final Dio _dio = Dio();
 
+/////////// Search
   /// get a list of result from user searching query
   Future<List<Movie>> fetchingListResult(String query) async {
     try {
@@ -21,20 +23,37 @@ class DataService {
     }
   }
 
-  /// get popular people list
-  Future<List<MovieCast>> fetchPopularCast() async {
+////////// TV shows
+
+  /// get list now playing movie
+  Future<List<TVShowModel>> fetchTopRatedTVShow() async {
     try {
-      final res = await _dio.get(Urls.popularCast);
-      var people = res.data['results'] as List;
-      List<MovieCast> peopleList =
-          people.map((e) => MovieCast.fromJson(e)).toList();
-      return peopleList;
+      final res = await _dio.get(Urls.onTheAirTvs);
+      var tvShows = res.data['results'] as List;
+      List<TVShowModel> tvShowList =
+          tvShows.map((e) => TVShowModel.fromJson(e)).toList();
+      return tvShowList;
     } catch (error, stacktrace) {
       throw Exception(
           "Exception accoured: $error with stacktrace: $stacktrace");
     }
   }
 
+  /// get list top rated movie
+  Future<List<TVShowModel>> fetchAirPlayingTVShow() async {
+    try {
+      final res = await _dio.get(Urls.topRatedTvs);
+      var tvShow = res.data['results'] as List;
+      List<TVShowModel> tvShowlList =
+          tvShow.map((e) => TVShowModel.fromJson(e)).toList();
+      return tvShowlList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
+/////////// Movies
   /// get list top rated movie
   Future<List<Movie>> fetchTopRatedMovie() async {
     try {
@@ -48,20 +67,7 @@ class DataService {
     }
   }
 
-  /// get list top rated movie
-  Future<List<Movie>> fetchUpCommingMovie() async {
-    try {
-      final res = await _dio.get(Urls.upCommingMovies);
-      var movies = res.data['results'] as List;
-      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
-      return movieList;
-    } catch (error, stacktrace) {
-      throw Exception(
-          "Exception accoured: $error with stacktrace: $stacktrace");
-    }
-  }
-
-  /// get list top rated movie
+  /// get list now playing movie
   Future<List<Movie>> fetchNowPlayingMovie() async {
     try {
       final res = await _dio.get(Urls.nowPlayingMovies);
@@ -88,6 +94,20 @@ class DataService {
   }
 
 ////////////// Cast
+  /// get popular people list
+  Future<List<MovieCast>> fetchPopularCast() async {
+    try {
+      final res = await _dio.get(Urls.popularCast);
+      var people = res.data['results'] as List;
+      List<MovieCast> peopleList =
+          people.map((e) => MovieCast.fromJson(e)).toList();
+      return peopleList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          "Exception accoured: $error with stacktrace: $stacktrace");
+    }
+  }
+
   /// using castId from cast list to get cast detail
   Future<CastModel> fetchCastDetail(int castId) async {
     try {

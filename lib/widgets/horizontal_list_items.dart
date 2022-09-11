@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../config/palettes.dart';
-import '../config/urls.dart';
 import '../model/movie_model.dart';
 import '../screens/detailpage/movie_detail_page.dart';
 
 class HorizontalItems extends StatelessWidget {
-  final List<Movie>? movies;
-  const HorizontalItems({Key? key, this.movies}) : super(key: key);
+  final List? list;
+  const HorizontalItems({Key? key, this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,9 @@ class HorizontalItems extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: movies!.length,
+        itemCount: list!.length,
         itemBuilder: (context, index) {
-          final movie = movies![index];
+          final movie = list![index];
           return Container(
             padding: const EdgeInsets.only(right: 8.0),
             child: InkWell(
