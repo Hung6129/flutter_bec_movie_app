@@ -14,6 +14,7 @@ class Urls {
 
   /// Youtube trailer
   static String movieTrailer(int id) => '$baseUrl/movie/$id/videos?$apiKey';
+  static String tvShowTrailer(int id) => '$baseUrl/tv/$id/videos?$apiKey';
 
   /// Movies
   static const String upCommingMovies = '$baseUrl/movie/upcoming?$apiKey';
@@ -38,6 +39,7 @@ class Urls {
   static const String onTheAirTvs = '$baseUrl/tv/on_the_air?$apiKey';
   static const String popularTvs = '$baseUrl/tv/popular?$apiKey';
   static const String topRatedTvs = '$baseUrl/tv/top_rated?$apiKey';
+  static String tvShowCredits(int id) => '$baseUrl/tv/$id/credits?$apiKey';
   static String tvDetail(int id) => '$baseUrl/tv/$id?$apiKey';
   static String tvSeasons(int id, int seasonNumber) =>
       '$baseUrl/tv/$id/season/$seasonNumber?$apiKey';

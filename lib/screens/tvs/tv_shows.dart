@@ -85,7 +85,10 @@ class _TVShowsState extends State<TVShows> {
                   return ShimmerListHorizontal();
                 } else if (state is TvShowLoaded) {
                   var tvShow = state.listTopRated;
-                  return HorizontalItems(list: tvShow);
+                  return HorizontalItems(
+                    list: tvShow,
+                    isTVShow: true,
+                  );
                 } else {
                   return const AppText(text: "Something went wrong");
                 }

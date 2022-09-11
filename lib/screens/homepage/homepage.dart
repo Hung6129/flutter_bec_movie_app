@@ -1,16 +1,14 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
-import 'package:flutter_bec_movie_app/widgets/heading_w_sub.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_list_shimmer.dart';
+import '/config/palettes.dart';
+import '/screens/searchpage/search_page.dart';
+import '/widgets/heading_w_sub.dart';
+import '/widgets/horizontal_cast_list.dart';
+import '/widgets/horizontal_list_shimmer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
-import '../../config/urls.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/horizontal_list_items.dart';
 

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_bec_movie_app/model/cast_model.dart';
 import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
+import 'package:flutter_bec_movie_app/model/tv_show_detail_model.dart';
 import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
 
 import '../model/movie_cast.dart';
@@ -54,17 +55,17 @@ class DataService {
   }
 
   /// get movie detail by movie id
-  Future<MovieDetail> fetchTVShowMovie(int movieId) async {
+  Future<TVShowDetailModel> fetchTVShowDetail(int movieId) async {
     try {
       final res = await _dio.get(Urls.movieDetail(movieId));
-      MovieDetail movieDetail = MovieDetail.fromJson(res.data);
-      movieDetail.trailerId = await getYoutubeId(movieId);
+      TVShowDetailModel movieDetail = TVShowDetailModel.fromJson(res.data);
+      movieDetail.trailerId = await getYoutubeTVShowId(movieId);
 
       // movieDetail.movieImage = await getMovieImage(id);
 
-      movieDetail.topBillCastedList = await getTopCastedList(movieId);
-      movieDetail.recommendedList = await getRecommendationList(movieId);
-
+      movieDetail.topBillCastedList = await getTopCastedTVShowList(movieId);
+      // movieDetail.recommendedList = await getRecommendationList(movieId);
+      print(movieDetail);
       return movieDetail;
     } catch (error, stacktrace) {
       throw Exception(
@@ -89,7 +90,7 @@ class DataService {
   /// get movie cast credit list by movieId
   Future<List<MovieCast>> getTopCastedTVShowList(int movieId) async {
     try {
-      final response = await _dio.get(Urls.movieCredits(movieId));
+      final response = await _dio.get(Urls.tvShowCredits(movieId));
       var list = response.data['cast'] as List;
       List<MovieCast> castList = list
           .map(
@@ -109,10 +110,10 @@ class DataService {
   }
 
   /// getting youtubeId by using movieId
-  Future<List<dynamic>> getYoutubeTVShowId(int movieId) async {
+  Future<String> getYoutubeTVShowId(int movieId) async {
     try {
-      final response = await _dio.get(Urls.movieTrailer(movieId));
-      List youtubeId = response.data['results']['key'] as List;
+      final response = await _dio.get(Urls.tvShowTrailer(movieId));
+      var youtubeId = response.data['results'][0]['key'];
       print(youtubeId);
       return youtubeId;
     } catch (error, stacktrace) {

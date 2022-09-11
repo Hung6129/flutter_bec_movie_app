@@ -1,3 +1,7 @@
+import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
+
+import 'movie_cast.dart';
+
 class TVShowDetailModel {
   // bool? adult;
   String? backdropPath;
@@ -31,6 +35,10 @@ class TVShowDetailModel {
   // String? type;
   double? voteAverage;
   int? voteCount;
+
+  late String trailerId;
+  late List<MovieCast> topBillCastedList;
+  late List<TVShowModel> recommendedList;
 
   TVShowDetailModel({
     // {this.adult,

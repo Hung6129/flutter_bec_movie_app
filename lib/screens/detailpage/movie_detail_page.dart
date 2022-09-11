@@ -43,7 +43,7 @@ class MovieDetailScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               SliverAppBar(
-                leading: Icon(Icons.home),
+                // leading: Icon(Icons.home),
                 // automaticallyImplyLeading: false,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 pinned: true,
@@ -177,10 +177,21 @@ class MovieDetailScreen extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: true,
+                iconTheme: IconThemeData(color: Palettes.p3),
+                actions: [
+                  IconButton(
+                    iconSize: 24,
+                    icon: const Icon(
+                      Icons.home_filled,
+                    ),
+                    color: Palettes.p3,
+                    onPressed: () {},
+                  ),
+                ],
                 stretch: true,
-                stretchTriggerOffset: 150,
+                stretchTriggerOffset: 100,
                 toolbarHeight: maxHeight / (maxHeight / 50),
-                backgroundColor: Palettes.p3,
+                backgroundColor: Palettes.p6,
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 300),
                 flexibleSpace: FlexibleSpaceBar(

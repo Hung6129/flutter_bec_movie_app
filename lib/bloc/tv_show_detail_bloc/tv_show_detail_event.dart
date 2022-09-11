@@ -5,7 +5,7 @@ abstract class TVShowDetailEvent extends Equatable {
 }
 
 class TVShowDetailEventStated extends TVShowDetailEvent {
-  final String id;
+  final int id;
   TVShowDetailEventStated(this.id);
   @override
   List<Object> get props => [];

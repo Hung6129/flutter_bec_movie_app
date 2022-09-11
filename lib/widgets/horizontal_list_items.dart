@@ -1,14 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/screens/detailpage/tv_show_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../config/palettes.dart';
-import '../model/movie_model.dart';
 import '../screens/detailpage/movie_detail_page.dart';
 
 class HorizontalItems extends StatelessWidget {
   final List? list;
-  const HorizontalItems({Key? key, this.list}) : super(key: key);
+  final bool? isTVShow;
+  const HorizontalItems({
+    Key? key,
+    this.list,
+    this.isTVShow = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +29,20 @@ class HorizontalItems extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.only(right: 8.0),
             child: InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MovieDetailScreen(movie: movie),
-                ),
-              ),
+              onTap: () => isTVShow == false
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieDetailScreen(movie: movie),
+                      ),
+                    )
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            TVShowDetailPage(tvShowModel: movie),
+                      ),
+                    ),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 child: CachedNetworkImage(

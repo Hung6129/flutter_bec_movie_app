@@ -9,10 +9,16 @@ class TVShowDetailLoading extends TVShowDetailState {}
 
 class TVShowDetailLoaded extends TVShowDetailState {
   final TVShowDetailModel detail;
-  final List<Movie> recommendation;
-  TVShowDetailLoaded(this.detail, this.recommendation);
+  // final List<Movie> recommendation;
+  TVShowDetailLoaded(
+    this.detail,
+    // this.recommendation,
+  );
   @override
-  List<Object> get props => [detail, recommendation];
+  List<Object> get props => [
+        detail,
+        // recommendation,
+      ];
 }
 
 class TVShowDetailError extends TVShowDetailState {
