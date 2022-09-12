@@ -25,7 +25,7 @@ class HorizontalItems extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         itemCount: list!.length,
         itemBuilder: (context, index) {
-          final movie = list![index];
+          final items = list![index];
           return Container(
             padding: const EdgeInsets.only(right: 8.0),
             child: InkWell(
@@ -33,14 +33,14 @@ class HorizontalItems extends StatelessWidget {
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MovieDetailScreen(movie: movie),
+                        builder: (context) => MovieDetailScreen(movie: items),
                       ),
                     )
                   : Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            TVShowDetailPage(tvShowModel: movie),
+                            TVShowDetailPage(tvShowModel: items),
                       ),
                     ),
               child: ClipRRect(
@@ -50,7 +50,7 @@ class HorizontalItems extends StatelessWidget {
                   fit: BoxFit.cover,
                   // imageUrl: Urls.imageUrl(movie.posterPath!),
                   imageUrl:
-                      "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
+                      "https://image.tmdb.org/t/p/w500/${items.posterPath}",
                   placeholder: (context, url) => Shimmer.fromColors(
                     child: Container(
                       height: 170.0,

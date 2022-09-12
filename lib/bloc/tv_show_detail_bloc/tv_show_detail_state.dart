@@ -9,15 +9,15 @@ class TVShowDetailLoading extends TVShowDetailState {}
 
 class TVShowDetailLoaded extends TVShowDetailState {
   final TVShowDetailModel detail;
-  // final List<Movie> recommendation;
+  final List<TVShowModel> recommendation;
   TVShowDetailLoaded(
     this.detail,
-    // this.recommendation,
+    this.recommendation,
   );
   @override
   List<Object> get props => [
         detail,
-        // recommendation,
+        recommendation,
       ];
 }
 

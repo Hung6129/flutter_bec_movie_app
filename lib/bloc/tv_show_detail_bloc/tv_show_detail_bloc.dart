@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bec_movie_app/bloc/tv_show_detail_bloc/tv_show_detail_event.dart';
+import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
 import 'package:meta/meta.dart';
 
 import '../../model/movie_model.dart';
@@ -15,14 +16,14 @@ class TVShowDetailBloc extends Bloc<TVShowDetailEvent, TVShowDetailState> {
         emit(TVShowDetailLoading());
         try {
           final tvShowDetail = await DataService().fetchTVShowDetail(event.id);
-          // final recommendationDetail =
-          //     await DataService().getRecommendationList(
-          //   event.id,
-          // );
+          final recommendationDetail =
+              await DataService().getRecommendationTVShowList(
+            event.id,
+          );
           emit(
             TVShowDetailLoaded(
               tvShowDetail,
-              // recommendationDetail,
+              recommendationDetail,
             ),
           );
         } catch (e) {

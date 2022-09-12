@@ -26,7 +26,7 @@ class DataService {
 
 ////////// TV shows
 
-  /// get list now playing movie
+  /// get list top rated tv show
   Future<List<TVShowModel>> fetchTopRatedTVShow() async {
     try {
       final res = await _dio.get(Urls.onTheAirTvs);
@@ -40,7 +40,7 @@ class DataService {
     }
   }
 
-  /// get list top rated movie
+  /// get list air playing tv show
   Future<List<TVShowModel>> fetchAirPlayingTVShow() async {
     try {
       final res = await _dio.get(Urls.topRatedTvs);
@@ -54,43 +54,43 @@ class DataService {
     }
   }
 
-  /// get movie detail by movie id
-  Future<TVShowDetailModel> fetchTVShowDetail(int movieId) async {
+  /// get tv show detail by tv show id
+  Future<TVShowDetailModel> fetchTVShowDetail(int tvId) async {
     try {
-      final res = await _dio.get(Urls.movieDetail(movieId));
-      TVShowDetailModel movieDetail = TVShowDetailModel.fromJson(res.data);
-      movieDetail.trailerId = await getYoutubeTVShowId(movieId);
+      final res = await _dio.get(Urls.tvDetail(tvId));
+      TVShowDetailModel tvShowDetail = TVShowDetailModel.fromJson(res.data);
+      tvShowDetail.trailerId = await getYoutubeTVShowId(tvId);
 
       // movieDetail.movieImage = await getMovieImage(id);
 
-      movieDetail.topBillCastedList = await getTopCastedTVShowList(movieId);
-      // movieDetail.recommendedList = await getRecommendationList(movieId);
-      print(movieDetail);
-      return movieDetail;
+      tvShowDetail.topBillCastedList = await getTopCastedTVShowList(tvId);
+      // tvShowDetail.recommendedList = await getRecommendationList(tvId);
+      return tvShowDetail;
     } catch (error, stacktrace) {
       throw Exception(
           "Exception accoured: $error with stacktrace: $stacktrace");
     }
   }
 
-  /// get a recommended list from movieId to show in the detail movie
-  Future<List<Movie>> getRecommendationTVShowList(int movieId) async {
+  /// get a recommended list from tvId to show in the detail tv show
+  Future<List<TVShowModel>> getRecommendationTVShowList(int tvId) async {
     try {
-      final res = await _dio.get(Urls.movieRecommendations(movieId));
-      var movies = res.data['results'] as List;
-      List<Movie> movieList = movies.map((e) => Movie.fromJson(e)).toList();
+      final res = await _dio.get(Urls.tvRecommendations(tvId));
+      var tvShows = res.data['results'] as List;
+      List<TVShowModel> tvShowList =
+          tvShows.map((e) => TVShowModel.fromJson(e)).toList();
 
-      return movieList;
+      return tvShowList;
     } catch (error, stacktrace) {
       throw Exception(
           "Exception accoured: $error with stacktrace: $stacktrace");
     }
   }
 
-  /// get movie cast credit list by movieId
-  Future<List<MovieCast>> getTopCastedTVShowList(int movieId) async {
+  /// get movie cast credit list by tvId
+  Future<List<MovieCast>> getTopCastedTVShowList(int tvId) async {
     try {
-      final response = await _dio.get(Urls.tvShowCredits(movieId));
+      final response = await _dio.get(Urls.tvShowCredits(tvId));
       var list = response.data['cast'] as List;
       List<MovieCast> castList = list
           .map(
@@ -109,12 +109,11 @@ class DataService {
     }
   }
 
-  /// getting youtubeId by using movieId
-  Future<String> getYoutubeTVShowId(int movieId) async {
+  /// getting youtubeId by using tvId
+  Future<String> getYoutubeTVShowId(int tvId) async {
     try {
-      final response = await _dio.get(Urls.tvShowTrailer(movieId));
+      final response = await _dio.get(Urls.tvShowTrailer(tvId));
       var youtubeId = response.data['results'][0]['key'];
-      print(youtubeId);
       return youtubeId;
     } catch (error, stacktrace) {
       throw Exception(

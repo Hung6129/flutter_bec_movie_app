@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../config/urls.dart';
+import '../../widgets/horizontal_list_items.dart';
 import '/config/palettes.dart';
 import '/config/view/erorr_page.dart';
 import '/model/tv_show_detail_model.dart';
@@ -10,7 +12,6 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../bloc/tv_show_detail_bloc/tv_show_detail_bloc.dart';
 import '../../bloc/tv_show_detail_bloc/tv_show_detail_event.dart';
-import '../../config/urls.dart';
 
 class TVShowDetailPage extends StatelessWidget {
   final TVShowModel tvShowModel;
@@ -35,6 +36,7 @@ class TVShowDetailPage extends StatelessWidget {
   }
 
   Widget _buildDetailBody(BuildContext context) {
+    print(tvShowModel.id);
     return BlocBuilder<TVShowDetailBloc, TVShowDetailState>(
       builder: (context, state) {
         double maxHeight = MediaQuery.of(context).size.height;
@@ -170,17 +172,28 @@ class TVShowDetailPage extends StatelessWidget {
           int finalNum = num.round();
 
           ///recommended
-          // List<Movie> movies = state.recommendation;
+          List<TVShowModel> tvShowRecommended = state.recommendation;
 
           return CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: true,
+                iconTheme: IconThemeData(color: Palettes.p3),
+                actions: [
+                  IconButton(
+                    iconSize: 24,
+                    icon: const Icon(
+                      Icons.home_filled,
+                    ),
+                    color: Palettes.p3,
+                    onPressed: () {},
+                  ),
+                ],
                 stretch: true,
-                stretchTriggerOffset: 150,
+                stretchTriggerOffset: 100,
                 toolbarHeight: maxHeight / (maxHeight / 50),
-                backgroundColor: Palettes.p3,
+                backgroundColor: Palettes.p6,
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 300),
                 flexibleSpace: FlexibleSpaceBar(
@@ -190,8 +203,7 @@ class TVShowDetailPage extends StatelessWidget {
                     StretchMode.blurBackground,
                   ],
                   background: CachedNetworkImage(
-                    imageUrl:
-                        "https://image.tmdb.org/t/p/w500/${tvShowDetail.backdropPath}",
+                    imageUrl: Urls.imagesUrl + tvShowDetail.backdropPath!,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
                       baseColor: (Colors.grey[300])!,
@@ -216,12 +228,13 @@ class TVShowDetailPage extends StatelessWidget {
                   children: [
                     /// Title
                     Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Text(
-                          tvShowDetail.name!,
-                          textAlign: TextAlign.center,
-                          style: Palettes.movieTitle,
-                        )),
+                      padding: const EdgeInsets.all(4),
+                      child: Text(
+                        tvShowDetail.name ?? "Phim Hay",
+                        textAlign: TextAlign.center,
+                        style: Palettes.movieTitle,
+                      ),
+                    ),
 
                     /// Poster and play trailer
                     Padding(
@@ -426,29 +439,30 @@ class TVShowDetailPage extends StatelessWidget {
                     ),
 
                     /// Recommendation list
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Text(
-                    //         "Recommended for you",
-                    //         style: Palettes.movieTitle,
-                    //       ),
-                    //       movies.isEmpty
-                    //           ? Text(
-                    //               "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
-                    //               style: Palettes.bodyText,
-                    //             )
-                    //           : HorizontalItems(
-                    //               list: movies,
-                    //             )
-                    //     ],
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: maxHeight / (maxHeight / 50),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Recommended for you",
+                            style: Palettes.movieTitle,
+                          ),
+                          tvShowRecommended.isEmpty
+                              ? Text(
+                                  "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
+                                  style: Palettes.bodyText,
+                                )
+                              : HorizontalItems(
+                                  isTVShow: true,
+                                  list: tvShowRecommended,
+                                )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: maxHeight / (maxHeight / 50),
+                    ),
                   ],
                 ),
               ),

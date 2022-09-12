@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/config/view/erorr_page.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_cast_list.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_list_items.dart';
+import '/config/palettes.dart';
+import '/config/view/erorr_page.dart';
+import '/widgets/horizontal_cast_list.dart';
+import '/widgets/horizontal_list_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
