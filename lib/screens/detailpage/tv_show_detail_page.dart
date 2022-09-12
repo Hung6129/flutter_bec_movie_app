@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../config/urls.dart';
 import '../../widgets/horizontal_list_items.dart';
+import '../../widgets/loading_detail_page.dart';
+import '../../widgets/row_vote_icons.dart';
 import '/config/palettes.dart';
 import '/config/view/erorr_page.dart';
 import '/model/tv_show_detail_model.dart';
@@ -42,134 +44,10 @@ class TVShowDetailPage extends StatelessWidget {
         double maxHeight = MediaQuery.of(context).size.height;
         double maxWidth = MediaQuery.of(context).size.width;
         if (state is TVShowDetailLoading) {
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                leading: Icon(Icons.home),
-                // automaticallyImplyLeading: false,
-                toolbarHeight: maxHeight / (maxHeight / 50),
-                pinned: true,
-                expandedHeight: maxHeight / (maxHeight / 250),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Shimmer.fromColors(
-                    baseColor: (Colors.grey[300])!,
-                    highlightColor: (Colors.grey[100])!,
-                    child: Container(
-                      color: Colors.white,
-                      height: maxHeight / (maxHeight / 250),
-                    ),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    /// Title
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Shimmer.fromColors(
-                        baseColor: (Colors.grey[300])!,
-                        highlightColor: (Colors.grey[100])!,
-                        child: Container(
-                          color: Colors.white,
-                          height: maxHeight / (maxHeight / 50),
-                        ),
-                      ),
-                    ),
-
-                    /// Poster and play trailer
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          /// Poster
-                          Shimmer.fromColors(
-                            baseColor: (Colors.grey[300])!,
-                            highlightColor: (Colors.grey[100])!,
-                            child: Container(
-                              color: Colors.white,
-                              height: maxHeight / (maxHeight / 250),
-                            ),
-                          ),
-                          SizedBox(
-                            width: maxWidth / (maxWidth / 10),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Shimmer.fromColors(
-                                  baseColor: (Colors.grey[300])!,
-                                  highlightColor: (Colors.grey[100])!,
-                                  child: Container(
-                                    color: Colors.white,
-                                    height: maxHeight / (maxHeight / 50),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: maxHeight / (maxHeight / 10),
-                                ),
-                                Shimmer.fromColors(
-                                  baseColor: (Colors.grey[300])!,
-                                  highlightColor: (Colors.grey[100])!,
-                                  child: Container(
-                                    color: Colors.white,
-                                    height: maxHeight / (maxHeight / 50),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: maxHeight / (maxHeight / 5),
-                                ),
-                                Shimmer.fromColors(
-                                  baseColor: (Colors.grey[300])!,
-                                  highlightColor: (Colors.grey[100])!,
-                                  child: Container(
-                                    color: Colors.white,
-                                    height: maxHeight / (maxHeight / 50),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: maxHeight / (maxHeight / 10),
-                                ),
-                                Row(
-                                  children: [
-                                    Shimmer.fromColors(
-                                      baseColor: (Colors.grey[300])!,
-                                      highlightColor: (Colors.grey[100])!,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: maxHeight / (maxHeight / 40),
-                                        width: maxWidth / (maxWidth / 90),
-                                      ),
-                                    ),
-                                    Shimmer.fromColors(
-                                      baseColor: (Colors.grey[300])!,
-                                      highlightColor: (Colors.grey[100])!,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: maxHeight / (maxHeight / 40),
-                                        width: maxWidth / (maxWidth / 90),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
+          return LoadingDetailPage();
         } else if (state is TVShowDetailLoaded) {
           /// movie detail
           TVShowDetailModel tvShowDetail = state.detail;
-          double x = tvShowDetail.voteAverage!;
-          double num = x / 0.1;
-          int finalNum = num.round();
 
           ///recommended
           List<TVShowModel> tvShowRecommended = state.recommendation;
@@ -191,7 +69,7 @@ class TVShowDetailPage extends StatelessWidget {
                   ),
                 ],
                 stretch: true,
-                stretchTriggerOffset: 100,
+                // stretchTriggerOffset: 100,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 backgroundColor: Palettes.p6,
                 pinned: true,
@@ -199,8 +77,8 @@ class TVShowDetailPage extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   stretchModes: [
                     StretchMode.zoomBackground,
-                    StretchMode.fadeTitle,
-                    StretchMode.blurBackground,
+                    // StretchMode.fadeTitle,
+                    // StretchMode.blurBackground,
                   ],
                   background: CachedNetworkImage(
                     imageUrl: Urls.imagesUrl + tvShowDetail.backdropPath!,
@@ -350,48 +228,10 @@ class TVShowDetailPage extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    /// vote
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Image.asset(
-                              "assets/vote_count_icon.png",
-                              height: maxHeight / (maxHeight / 35),
-                              width: maxWidth / (maxWidth / 35),
-                            ),
-                            Text(tvShowDetail.voteCount.toString(),
-                                style: Palettes.kHeading6),
-                          ],
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Image.asset(
-                              "assets/user_score_icon.png",
-                              height: maxHeight / (maxHeight / 35),
-                              width: maxWidth / (maxWidth / 35),
-                            ),
-                            Text(finalNum.toString() + "%",
-                                style: Palettes.kHeading6),
-                          ],
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Image.asset(
-                              "assets/popularity_icon.png",
-                              height: maxHeight / (maxHeight / 35),
-                              width: maxWidth / (maxWidth / 35),
-                            ),
-                            Text(tvShowDetail.popularity.toString(),
-                                style: Palettes.kHeading6),
-                          ],
-                        )
-                      ],
+                    RowVoteIcons(
+                      popularity: tvShowDetail.popularity!,
+                      voteAverage: tvShowDetail.voteAverage!,
+                      voteCount: tvShowDetail.voteCount!,
                     ),
                     SizedBox(
                       height: maxHeight / (maxHeight / 10),
