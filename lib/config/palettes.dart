@@ -12,6 +12,11 @@ class Palettes {
       fontWeight: FontWeight.w500,
       letterSpacing: 0.15,
       color: p3);
+  static TextStyle kHeading8 = GoogleFonts.poppins(
+      fontSize: 19,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+      color: textWhite);
   static TextStyle kHeading7 = GoogleFonts.poppins(
       fontSize: 19,
       fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/cus_text_btn.dart';
 import '../../widgets/loading_detail_page.dart';
 import '../../widgets/row_vote_icons.dart';
 import '/config/palettes.dart';
@@ -46,6 +47,9 @@ class MovieDetailScreen extends StatelessWidget {
         } else if (state is MovieDetailLoaded) {
           /// movie detail
           MovieDetail movieDetail = state.detail;
+          var listGenres = movieDetail.genres!
+              .map((e) => e.name)
+              .reduce((value, element) => value! + ", " + element!);
 
           ///recommended
           List<Movie> movies = state.recommendation;
@@ -112,7 +116,7 @@ class MovieDetailScreen extends StatelessWidget {
                           style: Palettes.movieTitle,
                         )),
 
-                    /// Poster and play trailer
+                    /// Poster
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Row(
@@ -188,38 +192,20 @@ class MovieDetailScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    MaterialButton(
-                                      shape: const CircleBorder(),
-                                      color: Palettes.p6,
-                                      onPressed: () async {
-                                        final youtubeUrl =
-                                            'https://www.youtube.com/embed/${movieDetail.trailerId}';
-                                        if (await canLaunchUrl(
-                                            Uri.parse(youtubeUrl))) {
-                                          await launchUrl(
-                                              Uri.parse(youtubeUrl));
-                                        }
-                                      },
-                                      child: const Icon(
-                                        Icons.play_arrow,
-                                        size: 20,
-                                        color: Palettes.p3,
-                                      ),
-                                    ),
-                                    MaterialButton(
-                                      shape: const CircleBorder(),
-                                      color: Palettes.p6,
-                                      onPressed: () {},
-                                      child: const Icon(
-                                        Icons.favorite_border,
-                                        size: 20,
-                                        color: Palettes.p3,
-                                      ),
-                                    )
-                                  ],
-                                )
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'Genres: ',
+                                    style: TextStyle(
+                                        fontSize: maxHeight / (maxHeight / 15),
+                                        fontWeight: FontWeight.bold,
+                                        color: Palettes.p3),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: listGenres ?? "Unknow",
+                                          style: Palettes.bodyText),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -236,6 +222,9 @@ class MovieDetailScreen extends StatelessWidget {
                     SizedBox(
                       height: maxHeight / (maxHeight / 10),
                     ),
+
+                    ///add to favorite and play trailer
+                    CustomTextButton(url: movieDetail.trailerId),
 
                     /// Overview
                     Padding(

@@ -16,6 +16,7 @@ class MovieDetail {
   String? poster_path;
   String? tagline;
   double? popularity;
+  List<Genres>? genres;
   late String trailerId;
   late List<MovieCast> topBillCastedList;
   late List<Movie> recommendedList;
@@ -34,6 +35,7 @@ class MovieDetail {
     this.poster_path,
     this.tagline,
     this.popularity,
+    this.genres,
   });
 
   MovieDetail.fromJson(Map<String, dynamic> json) {
@@ -54,5 +56,23 @@ class MovieDetail {
     poster_path = json['poster_path'].toString();
     tagline = json['tagline'].toString();
     popularity = json['popularity'];
+    if (json['genres'] != null) {
+      genres = <Genres>[];
+      json['genres'].forEach((v) {
+        genres!.add(new Genres.fromJson(v));
+      });
+    }
+  }
+}
+
+class Genres {
+  int? id;
+  String? name;
+
+  Genres({this.id, this.name});
+
+  Genres.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
   }
 }

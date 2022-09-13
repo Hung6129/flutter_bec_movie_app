@@ -1,17 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/model/movie_cast.dart';
-import 'package:flutter_bec_movie_app/model/movie_model.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_list_items.dart';
+import '/config/palettes.dart';
+import '/model/movie_cast.dart';
+import '/model/movie_model.dart';
+import '/widgets/horizontal_list_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
-
-import 'package:flutter_bec_movie_app/bloc/cast_detail/cast_detail_bloc_bloc.dart';
-
-import '../../config/urls.dart';
+import '/bloc/cast_detail/cast_detail_bloc_bloc.dart';
 import '../../model/cast_model.dart';
-import 'movie_detail_page.dart';
 
 class CastDetailPage extends StatelessWidget {
   MovieCast movieCre;
@@ -28,6 +24,7 @@ class CastDetailPage extends StatelessWidget {
     /// build body
     Widget _buildBody(CastModel dataCast, List<Movie> creditMovie) {
       return SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Padding(
@@ -220,7 +217,7 @@ class CastDetailPage extends StatelessWidget {
       );
     }
 
-    /// build loding body
+    /// build loading body
     Widget _buildLoadingBody() {
       return Column(
         children: [
@@ -326,7 +323,6 @@ class CastDetailPage extends StatelessWidget {
     /// build appbar
     PreferredSizeWidget _buildAppBar() {
       return AppBar(
-        
         backgroundColor: Palettes.p3,
       );
     }
