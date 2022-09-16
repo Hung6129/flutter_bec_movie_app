@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
-import 'package:flutter_bec_movie_app/screens/drawer/drawer_page.dart';
-import 'package:flutter_bec_movie_app/screens/homepage/homepage.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../presentation/screens/drawer/drawer_page.dart';
 
 class AppRoutes {
   static MaterialPageRoute getMaterialRoute(screen) {

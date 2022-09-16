@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../model/movie_detail_model.dart';
-import '../../model/movie_model.dart';
-import '../../service/data_service.dart';
+import '../../data_layer/model/movie_detail_model.dart';
+import '../../data_layer/model/movie_model.dart';
+import '../../repository/service/data_service.dart';
 import 'movie_detail_event.dart';
 
 part 'movie_detail_state.dart';

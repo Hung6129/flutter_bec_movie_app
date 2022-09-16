@@ -1,6 +1,5 @@
 part of 'tv_show_detail_bloc.dart';
 
-@immutable
 abstract class TVShowDetailState {}
 
 class TVShowDetailInitial extends TVShowDetailState {}

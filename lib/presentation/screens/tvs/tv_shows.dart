@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/bloc/tv_shows_bloc/tv_show_bloc.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/screens/searchpage/search_page.dart';
-import 'package:flutter_bec_movie_app/widgets/heading_w_sub.dart';
-import 'package:flutter_bec_movie_app/widgets/horizontal_list_shimmer.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../../widgets/app_text.dart';
+import '../../widgets/heading_w_sub.dart';
 import '../../widgets/horizontal_list_items.dart';
+import '../../widgets/horizontal_list_shimmer.dart';
+import '../searchpage/search_page.dart';
 
 class TVShows extends StatefulWidget {
   const TVShows({Key? key}) : super(key: key);

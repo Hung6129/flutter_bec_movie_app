@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/palettes.dart';
+import '../../config/palettes.dart';
 
 class RowVoteIcons extends StatelessWidget {
   final double popularity;

@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../../data_layer/model/cast_model.dart';
+import '../../../data_layer/model/movie_cast.dart';
+import '../../../data_layer/model/movie_model.dart';
+import '../../widgets/horizontal_list_items.dart';
 import '/config/palettes.dart';
-import '/model/movie_cast.dart';
-import '/model/movie_model.dart';
-import '/widgets/horizontal_list_items.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '/bloc/cast_detail/cast_detail_bloc_bloc.dart';
-import '../../model/cast_model.dart';
 
 class CastDetailPage extends StatelessWidget {
   MovieCast movieCre;

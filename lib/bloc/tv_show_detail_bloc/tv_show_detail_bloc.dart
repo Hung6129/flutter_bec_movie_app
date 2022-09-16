@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bec_movie_app/bloc/tv_show_detail_bloc/tv_show_detail_event.dart';
-import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
-import 'package:meta/meta.dart';
 
-import '../../model/movie_model.dart';
-import '../../model/tv_show_detail_model.dart';
-import '../../service/data_service.dart';
+import '../../data_layer/model/tv_show_detail_model.dart';
+import '../../data_layer/model/tv_show_model.dart';
+import '../../repository/service/data_service.dart';
+
 
 part 'tv_show_detail_state.dart';
 

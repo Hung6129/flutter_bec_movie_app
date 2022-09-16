@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
 
-import '../../service/data_service.dart';
+import '../../data_layer/model/tv_show_model.dart';
+import '../../repository/service/data_service.dart';
+
 
 part 'tv_show_event.dart';
 part 'tv_show_state.dart';

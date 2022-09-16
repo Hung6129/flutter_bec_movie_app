@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/widgets/app_text.dart';
-import 'package:flutter_bec_movie_app/widgets/menu_item.dart';
+
+import '../../widgets/app_text.dart';
+import '../../widgets/menu_item.dart';
+
 
 class MenuItems {
   static const home = DrawerThings("Home Page", Icons.home_filled);

@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bec_movie_app/config/urls.dart';
-import 'package:flutter_bec_movie_app/model/cast_model.dart';
-import 'package:flutter_bec_movie_app/model/movie_detail_model.dart';
-import 'package:flutter_bec_movie_app/model/tv_show_detail_model.dart';
-import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
 
-import '../model/movie_cast.dart';
-import '../model/movie_model.dart';
+import '../../data_layer/model/cast_model.dart';
+import '../../data_layer/model/movie_cast.dart';
+import '../../data_layer/model/movie_detail_model.dart';
+import '../../data_layer/model/movie_model.dart';
+import '../../data_layer/model/tv_show_detail_model.dart';
+import '../../data_layer/model/tv_show_model.dart';
+
 
 class DataService {
   final Dio _dio = Dio();

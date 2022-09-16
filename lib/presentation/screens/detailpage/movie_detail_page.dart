@@ -1,32 +1,32 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../config/urls.dart';
+import '../../../bloc/movie_detail_bloc/movie_detail_bloc.dart';
+import '../../../bloc/movie_detail_bloc/movie_detail_event.dart';
+import '../../../config/urls.dart';
+import '../../../data_layer/model/movie_detail_model.dart';
+import '../../../data_layer/model/movie_model.dart';
+import '../../widgets/cus_text_btn.dart';
+import '../../widgets/horizontal_cast_list.dart';
 import '../../widgets/horizontal_list_items.dart';
 import '../../widgets/loading_detail_page.dart';
 import '../../widgets/row_vote_icons.dart';
 import '/config/palettes.dart';
 import '/config/view/erorr_page.dart';
-import '/model/tv_show_detail_model.dart';
-import '/model/tv_show_model.dart';
-import '/widgets/horizontal_cast_list.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../bloc/tv_show_detail_bloc/tv_show_detail_bloc.dart';
-import '../../bloc/tv_show_detail_bloc/tv_show_detail_event.dart';
 
-class TVShowDetailPage extends StatelessWidget {
-  final TVShowModel tvShowModel;
+class MovieDetailScreen extends StatelessWidget {
+  final Movie movie;
 
-  const TVShowDetailPage({Key? key, required this.tvShowModel})
-      : super(key: key);
+  const MovieDetailScreen({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => TVShowDetailBloc()
+      create: (_) => MovieDetailBloc()
         ..add(
-          TVShowDetailEventStated(tvShowModel.id!),
+          MovieDetailEventStated(movie.id!),
         ),
       child: WillPopScope(
         child: Scaffold(
@@ -38,19 +38,21 @@ class TVShowDetailPage extends StatelessWidget {
   }
 
   Widget _buildDetailBody(BuildContext context) {
-    print(tvShowModel.id);
-    return BlocBuilder<TVShowDetailBloc, TVShowDetailState>(
+    return BlocBuilder<MovieDetailBloc, MovieDetailState>(
       builder: (context, state) {
         double maxHeight = MediaQuery.of(context).size.height;
         double maxWidth = MediaQuery.of(context).size.width;
-        if (state is TVShowDetailLoading) {
+        if (state is MovieDetailLoading) {
           return LoadingDetailPage();
-        } else if (state is TVShowDetailLoaded) {
+        } else if (state is MovieDetailLoaded) {
           /// movie detail
-          TVShowDetailModel tvShowDetail = state.detail;
+          MovieDetail movieDetail = state.detail;
+          var listGenres = movieDetail.genres!
+              .map((e) => e.name)
+              .reduce((value, element) => value! + ", " + element!);
 
           ///recommended
-          List<TVShowModel> tvShowRecommended = state.recommendation;
+          List<Movie> movies = state.recommendation;
 
           return CustomScrollView(
             physics: const BouncingScrollPhysics(),
@@ -72,6 +74,7 @@ class TVShowDetailPage extends StatelessWidget {
                 // stretchTriggerOffset: 100,
                 toolbarHeight: maxHeight / (maxHeight / 50),
                 backgroundColor: Palettes.p6,
+
                 pinned: true,
                 expandedHeight: maxHeight / (maxHeight / 300),
                 flexibleSpace: FlexibleSpaceBar(
@@ -81,7 +84,7 @@ class TVShowDetailPage extends StatelessWidget {
                     // StretchMode.blurBackground,
                   ],
                   background: CachedNetworkImage(
-                    imageUrl: Urls.imagesUrl + tvShowDetail.backdropPath!,
+                    imageUrl: Urls.imagesUrl + movieDetail.backdropPath!,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
                       baseColor: (Colors.grey[300])!,
@@ -106,15 +109,14 @@ class TVShowDetailPage extends StatelessWidget {
                   children: [
                     /// Title
                     Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Text(
-                        tvShowDetail.name ?? "Phim Hay",
-                        textAlign: TextAlign.center,
-                        style: Palettes.movieTitle,
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(4),
+                        child: Text(
+                          movieDetail.originalTitle!,
+                          textAlign: TextAlign.center,
+                          style: Palettes.movieTitle,
+                        )),
 
-                    /// Poster and play trailer
+                    /// Poster
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Row(
@@ -122,7 +124,7 @@ class TVShowDetailPage extends StatelessWidget {
                           /// Poster
                           CachedNetworkImage(
                             imageUrl:
-                                'https://image.tmdb.org/t/p/original/${tvShowDetail.posterPath}',
+                                'https://image.tmdb.org/t/p/original/${movieDetail.poster_path}',
                             width: maxWidth / (maxWidth / 120),
                             height: maxHeight / (maxHeight / 180),
                             fit: BoxFit.cover,
@@ -155,7 +157,7 @@ class TVShowDetailPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(tvShowDetail.tagline!,
+                                Text(movieDetail.tagline!,
                                     style: Palettes.bodyText),
                                 SizedBox(
                                   height: maxHeight / (maxHeight / 10),
@@ -170,7 +172,7 @@ class TVShowDetailPage extends StatelessWidget {
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                          text: tvShowDetail.firstAirDate,
+                                          text: movieDetail.releaseDate,
                                           style: Palettes.bodyText),
                                     ],
                                   ),
@@ -185,57 +187,44 @@ class TVShowDetailPage extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                           text:
-                                              "${tvShowDetail.numberOfEpisodes} eps",
+                                              "${movieDetail.runtime} minutes",
                                           style: Palettes.bodyText),
                                     ],
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    MaterialButton(
-                                      shape: const CircleBorder(),
-                                      color: Palettes.p6,
-                                      onPressed: () async {
-                                        final youtubeUrl =
-                                            'https://www.youtube.com/embed/${tvShowDetail.trailerId}';
-                                        if (await canLaunchUrl(
-                                            Uri.parse(youtubeUrl))) {
-                                          await launchUrl(
-                                              Uri.parse(youtubeUrl));
-                                        }
-                                      },
-                                      child: const Icon(
-                                        Icons.play_arrow,
-                                        size: 20,
-                                        color: Palettes.p3,
-                                      ),
-                                    ),
-                                    MaterialButton(
-                                      shape: const CircleBorder(),
-                                      color: Palettes.p6,
-                                      onPressed: () {},
-                                      child: const Icon(
-                                        Icons.favorite_border,
-                                        size: 20,
-                                        color: Palettes.p3,
-                                      ),
-                                    )
-                                  ],
-                                )
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'Genres: ',
+                                    style: TextStyle(
+                                        fontSize: maxHeight / (maxHeight / 15),
+                                        fontWeight: FontWeight.bold,
+                                        color: Palettes.p3),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: listGenres ?? "Unknow",
+                                          style: Palettes.bodyText),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           )
                         ],
                       ),
                     ),
+
+                    /// vote
                     RowVoteIcons(
-                      popularity: tvShowDetail.popularity!,
-                      voteAverage: tvShowDetail.voteAverage!,
-                      voteCount: tvShowDetail.voteCount!,
+                      popularity: movieDetail.popularity!,
+                      voteAverage: movieDetail.voteAverage!,
+                      voteCount: movieDetail.voteCount!,
                     ),
                     SizedBox(
                       height: maxHeight / (maxHeight / 10),
                     ),
+
+                    ///add to favorite and play trailer
+                    CustomTextButton(url: movieDetail.trailerId),
 
                     /// Overview
                     Padding(
@@ -251,7 +240,7 @@ class TVShowDetailPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              tvShowDetail.overview!,
+                              movieDetail.overview!,
                               // overflow: TextOverflow.ellipsis,
                               style: Palettes.bodyText,
                             ),
@@ -273,7 +262,7 @@ class TVShowDetailPage extends StatelessWidget {
                           ),
                           HorizontalCastList(
                               topBillCasted: true,
-                              peopleList: tvShowDetail.topBillCastedList)
+                              peopleList: movieDetail.topBillCastedList)
                         ],
                       ),
                     ),
@@ -288,14 +277,13 @@ class TVShowDetailPage extends StatelessWidget {
                             "Recommended for you",
                             style: Palettes.movieTitle,
                           ),
-                          tvShowRecommended.isEmpty
+                          movies.isEmpty
                               ? Text(
                                   "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
                                   style: Palettes.bodyText,
                                 )
                               : HorizontalItems(
-                                  isTVShow: true,
-                                  list: tvShowRecommended,
+                                  list: movies,
                                 )
                         ],
                       ),
@@ -308,8 +296,8 @@ class TVShowDetailPage extends StatelessWidget {
               ),
             ],
           );
-        } else if (state is TVShowDetailError) {
-          return ErrorPage(errorText: "CON CAC");
+        } else if (state is MovieDetailError) {
+          return ErrorPage(errorText: state.error);
         } else {
           return Container();
         }

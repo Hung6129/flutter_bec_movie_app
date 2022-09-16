@@ -2,9 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../config/palettes.dart';
-import '../config/urls.dart';
-import '../model/movie_cast.dart';
+import '../../config/palettes.dart';
+import '../../data_layer/model/movie_cast.dart';
 import '../screens/detailpage/cast_detail_page.dart';
 
 class HorizontalCastList extends StatelessWidget {
@@ -24,6 +23,7 @@ class HorizontalCastList extends StatelessWidget {
     return SizedBox(
       height: topBillCasted == true ? 250 : 220,
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: peopleList.length,
         itemBuilder: (context, index) {

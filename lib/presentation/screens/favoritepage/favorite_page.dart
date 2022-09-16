@@ -38,19 +38,25 @@ class _FavoritePageState extends State<FavoritePage>
           controller: _tabController,
           tabs: [
             Tab(
-              icon: Icon(Icons.movie_filter_sharp),
+              icon: Icon(
+                Icons.movie_filter_sharp,
+                color: Palettes.p3,
+              ),
             ),
             Tab(
-              icon: Icon(CupertinoIcons.tv),
+              icon: Icon(
+                CupertinoIcons.tv,
+                color: Palettes.p3,
+              ),
             ),
           ],
         ),
-        title: AppText(
-          text: title,
-          color: Palettes.p6,
+        title: Text(
+          title,
+          style: Palettes.movieTitle,
         ),
         centerTitle: true,
-        backgroundColor: Palettes.p3,
+        backgroundColor: Palettes.p6,
         // actions: [
         //   IconButton(
         //     onPressed: () {
@@ -94,7 +100,7 @@ class _FavoritePageState extends State<FavoritePage>
                   padding: const EdgeInsets.all(8.0),
                   margin: const EdgeInsets.only(bottom: 16.0),
                   decoration: BoxDecoration(
-                    color: Palettes.p6,
+                    color: Palettes.p4,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Row(
@@ -172,13 +178,13 @@ class _FavoritePageState extends State<FavoritePage>
               padding: EdgeInsets.all(8.0),
               shrinkWrap: true,
               physics: ScrollPhysics(),
-              itemCount: 10,
+              itemCount: 5,
               itemBuilder: (context, index) {
                 return Container(
                   padding: const EdgeInsets.all(8.0),
                   margin: const EdgeInsets.only(bottom: 16.0),
                   decoration: BoxDecoration(
-                    color: Palettes.p6,
+                    color: Palettes.p4,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Row(
@@ -257,7 +263,7 @@ class _FavoritePageState extends State<FavoritePage>
     return SafeArea(
       child: Scaffold(
         backgroundColor: Palettes.textWhite,
-        appBar: _buildAppBar("Your Favorite Movie"),
+        appBar: _buildAppBar("Your Favorite List"),
         body: _buildBody(),
       ),
     );

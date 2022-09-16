@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bec_movie_app/model/cast_model.dart';
-
-import '../../model/movie_model.dart';
-import '../../service/data_service.dart';
-
+import '../../data_layer/model/cast_model.dart';
+import '../../data_layer/model/movie_model.dart';
+import '../../repository/service/data_service.dart';
 part 'cast_detail_bloc_event.dart';
 part 'cast_detail_bloc_state.dart';
 

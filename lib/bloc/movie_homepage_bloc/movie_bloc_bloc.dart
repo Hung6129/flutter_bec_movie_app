@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bec_movie_app/model/movie_cast.dart';
 import 'package:meta/meta.dart';
-import '../../service/data_service.dart';
 
-import '../../model/movie_model.dart';
+import '../../data_layer/model/movie_cast.dart';
+import '../../data_layer/model/movie_model.dart';
+import '../../repository/service/data_service.dart';
 
 part 'movie_bloc_event.dart';
 part 'movie_bloc_state.dart';

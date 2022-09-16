@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/screens/detailpage/tv_show_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../config/palettes.dart';
+import '../../config/palettes.dart';
 import '../screens/detailpage/movie_detail_page.dart';
+import '../screens/detailpage/tv_show_detail_page.dart';
 
 class HorizontalItems extends StatelessWidget {
   final List? list;

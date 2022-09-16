@@ -1,4 +1,5 @@
-import 'package:flutter_bec_movie_app/model/tv_show_model.dart';
+
+import 'package:flutter_bec_movie_app/data_layer/model/tv_show_model.dart';
 
 import 'movie_cast.dart';
 
@@ -8,7 +9,7 @@ class TVShowDetailModel {
   // List<CreatedBy>? createdBy;
   // List<int>? episodeRunTime;
   String? firstAirDate;
-  // List<Genres>? genres;
+  List<Genres>? genres;
   // String? homepage;
   int? id;
   // bool? inProduction;
@@ -46,7 +47,7 @@ class TVShowDetailModel {
     // this.createdBy,
     // this.episodeRunTime,
     this.firstAirDate,
-    // this.genres,
+    this.genres,
     // this.homepage,
     this.id,
     // this.inProduction,
@@ -86,12 +87,12 @@ class TVShowDetailModel {
     // }
     // episodeRunTime = json['episode_run_time'].cast<int>();
     firstAirDate = json['first_air_date'];
-    // if (json['genres'] != null) {
-    //   genres = <Genres>[];
-    //   json['genres'].forEach((v) {
-    //     genres!.add(new Genres.fromJson(v));
-    //   });
-    // }
+    if (json['genres'] != null) {
+      genres = <Genres>[];
+      json['genres'].forEach((v) {
+        genres!.add(new Genres.fromJson(v));
+      });
+    }
     // homepage = json['homepage'];
     id = json['id'];
     // inProduction = json['in_production'];
@@ -232,24 +233,17 @@ class TVShowDetailModel {
 //   }
 // }
 
-// class Genres {
-//   int? id;
-//   String? name;
+class Genres {
+  int? id;
+  String? name;
 
-//   Genres({this.id, this.name});
+  Genres({this.id, this.name});
 
-//   Genres.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     name = json['name'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['name'] = this.name;
-//     return data;
-//   }
-// }
+  Genres.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+}
 
 // class LastEpisodeToAir {
 //   String? airDate;

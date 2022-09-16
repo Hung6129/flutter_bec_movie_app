@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../config/palettes.dart';
+import '../../config/palettes.dart';
+
 
 class CustomTextButton extends StatelessWidget {
   final String url;
