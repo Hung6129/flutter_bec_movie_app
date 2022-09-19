@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/data_layer/model/movie_detail_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/palettes.dart';
-
+import '../../repository/persist_data/progress_data.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String url;
-  const CustomTextButton({Key? key, required this.url}) : super(key: key);
+  const CustomTextButton({
+    Key? key,
+    required this.url,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,10 @@ class CustomTextButton extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            // PersitsData().addToFavoriteList(movieDetail);
+            // print(movieDetail);
+          },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

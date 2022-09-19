@@ -29,141 +29,139 @@ class _HomePageState extends State<HomePage> {
 
     /// build body
     Widget _buildBoody() {
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SubHeading(
-              textTitle: "Now Playing",
-              onSeeMoreTapped: () {},
-            ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SubHeading(
+            textTitle: "Now Playing",
+            onSeeMoreTapped: () {},
+          ),
 
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
-              builder: (context, state) {
-                if (state is MovieBlocLoading) {
-                  return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var movies = state.nowPlayingList;
-                  return HorizontalItems(list: movies);
-                } else {
-                  return const AppText(text: "Something went wrong");
-                }
-              },
-            ),
+          BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            builder: (context, state) {
+              if (state is MovieBlocLoading) {
+                return ShimmerListHorizontal();
+              } else if (state is MovieBlocLoaded) {
+                var movies = state.nowPlayingList;
+                return HorizontalItems(list: movies);
+              } else {
+                return const AppText(text: "Something went wrong");
+              }
+            },
+          ),
 
-            SizedBox(
-              height: _maxHeight / (_maxHeight / 10),
-            ),
+          SizedBox(
+            height: _maxHeight / (_maxHeight / 10),
+          ),
 
-            SubHeading(
-              textTitle: "Popular People",
-              onSeeMoreTapped: () {},
-            ),
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
-              builder: (context, state) {
-                if (state is MovieBlocLoading) {
-                  return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var cast = state.peopleList;
-                  return HorizontalCastList(
-                    peopleList: cast,
-                    topBillCasted: false,
-                  );
-                } else {
-                  return const AppText(text: "Something went wrong");
-                }
-              },
-            ),
-            SizedBox(
-              height: _maxHeight / (_maxHeight / 10),
-            ),
+          SubHeading(
+            textTitle: "Popular People",
+            onSeeMoreTapped: () {},
+          ),
+          BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            builder: (context, state) {
+              if (state is MovieBlocLoading) {
+                return ShimmerListHorizontal();
+              } else if (state is MovieBlocLoaded) {
+                var cast = state.peopleList;
+                return HorizontalCastList(
+                  peopleList: cast,
+                  topBillCasted: false,
+                );
+              } else {
+                return const AppText(text: "Something went wrong");
+              }
+            },
+          ),
+          SizedBox(
+            height: _maxHeight / (_maxHeight / 10),
+          ),
 
-            SubHeading(
-              textTitle: "Top Rated",
-              onSeeMoreTapped: () {},
-            ),
-            BlocBuilder<MovieBlocBloc, MovieBlocState>(
-              builder: (context, state) {
-                if (state is MovieBlocLoading) {
-                  return ShimmerListHorizontal();
-                } else if (state is MovieBlocLoaded) {
-                  var movies = state.topRated;
-                  return HorizontalItems(list: movies);
-                } else {
-                  return const AppText(text: "Something went wrong");
-                }
-              },
-            ),
-            SizedBox(
-              height: _maxHeight / (_maxHeight / 50),
-            ),
-            // BlocBuilder<MovieBlocBloc, MovieBlocState>(
-            //   builder: (context, state) {
-            //     if (state is MovieBlocLoading) {
-            //       return Container(
-            //         padding: const EdgeInsets.only(left: 20),
-            //         height: 220,
-            //         width: double.maxFinite,
-            //         child: ListView.builder(
-            //           itemCount: 5,
-            //           scrollDirection: Axis.horizontal,
-            //           itemBuilder: (BuildContext context, int index) {
-            //             return Shimmer.fromColors(
-            //               baseColor: (Colors.grey[300])!,
-            //               highlightColor: (Colors.grey[300])!,
-            //               child: Container(
-            //                 margin: const EdgeInsets.only(right: 20, top: 10),
-            //                 color: Colors.white,
-            //                 width: 150,
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //       );
-            //     } else if (state is MovieBlocLoaded) {
-            //       var movies = state.popularList;
-            //       return SizedBox(
-            //         width: double.maxFinite,
-            //         height: 250,
-            //         child: ListView.builder(
-            //           scrollDirection: Axis.horizontal,
-            //           itemCount: movies.length,
-            //           itemBuilder: (context, index) {
-            //             Movie movie = movies[index];
-            //             return GestureDetector(
-            //               onTap: () => Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) =>
-            //                       MovieDetailScreen(movie: movie),
-            //                 ),
-            //               ),
-            //               child: Padding(
-            //                 padding: const EdgeInsets.all(8.0),
-            //                 child: CachedNetworkImage(
-            //                   imageUrl:
-            //                       Urls.imagesUrl + movies[index].posterPath!,
-            //                   placeholder: (ctx, url) => Shimmer.fromColors(
-            //                     baseColor: (Colors.grey[300])!,
-            //                     highlightColor: (Colors.grey[100])!,
-            //                     child: Container(
-            //                       color: Colors.white,
-            //                       // width: 150,
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //       );
-            //     } else {
-            //       return const AppText(text: "Something went wrong");
-            //     }
-            //   },
-            // ),
-          ],
-        ),
+          SubHeading(
+            textTitle: "Top Rated",
+            onSeeMoreTapped: () {},
+          ),
+          BlocBuilder<MovieBlocBloc, MovieBlocState>(
+            builder: (context, state) {
+              if (state is MovieBlocLoading) {
+                return ShimmerListHorizontal();
+              } else if (state is MovieBlocLoaded) {
+                var movies = state.topRated;
+                return HorizontalItems(list: movies);
+              } else {
+                return const AppText(text: "Something went wrong");
+              }
+            },
+          ),
+          SizedBox(
+            height: _maxHeight / (_maxHeight / 50),
+          ),
+          // BlocBuilder<MovieBlocBloc, MovieBlocState>(
+          //   builder: (context, state) {
+          //     if (state is MovieBlocLoading) {
+          //       return Container(
+          //         padding: const EdgeInsets.only(left: 20),
+          //         height: 220,
+          //         width: double.maxFinite,
+          //         child: ListView.builder(
+          //           itemCount: 5,
+          //           scrollDirection: Axis.horizontal,
+          //           itemBuilder: (BuildContext context, int index) {
+          //             return Shimmer.fromColors(
+          //               baseColor: (Colors.grey[300])!,
+          //               highlightColor: (Colors.grey[300])!,
+          //               child: Container(
+          //                 margin: const EdgeInsets.only(right: 20, top: 10),
+          //                 color: Colors.white,
+          //                 width: 150,
+          //               ),
+          //             );
+          //           },
+          //         ),
+          //       );
+          //     } else if (state is MovieBlocLoaded) {
+          //       var movies = state.popularList;
+          //       return SizedBox(
+          //         width: double.maxFinite,
+          //         height: 250,
+          //         child: ListView.builder(
+          //           scrollDirection: Axis.horizontal,
+          //           itemCount: movies.length,
+          //           itemBuilder: (context, index) {
+          //             Movie movie = movies[index];
+          //             return GestureDetector(
+          //               onTap: () => Navigator.push(
+          //                 context,
+          //                 MaterialPageRoute(
+          //                   builder: (context) =>
+          //                       MovieDetailScreen(movie: movie),
+          //                 ),
+          //               ),
+          //               child: Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: CachedNetworkImage(
+          //                   imageUrl:
+          //                       Urls.imagesUrl + movies[index].posterPath!,
+          //                   placeholder: (ctx, url) => Shimmer.fromColors(
+          //                     baseColor: (Colors.grey[300])!,
+          //                     highlightColor: (Colors.grey[100])!,
+          //                     child: Container(
+          //                       color: Colors.white,
+          //                       // width: 150,
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ),
+          //             );
+          //           },
+          //         ),
+          //       );
+          //     } else {
+          //       return const AppText(text: "Something went wrong");
+          //     }
+          //   },
+          // ),
+        ],
       );
     }
 
@@ -205,7 +203,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(),
-        body: _buildBoody(),
+        body: SingleChildScrollView(child: _buildBoody()),
       ),
     );
   }

@@ -224,7 +224,10 @@ class MovieDetailScreen extends StatelessWidget {
                     ),
 
                     ///add to favorite and play trailer
-                    CustomTextButton(url: movieDetail.trailerId),
+                    CustomTextButton(
+                      url: movieDetail.trailerId,
+                      // movieDetail: movieDetail,
+                    ),
 
                     /// Overview
                     Padding(

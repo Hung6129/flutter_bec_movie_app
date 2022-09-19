@@ -17,7 +17,6 @@ import '/config/view/erorr_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
-
 class TVShowDetailPage extends StatefulWidget {
   final TVShowModel tvShowModel;
 
@@ -236,7 +235,8 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                       ),
                     ),
 
-                    CustomTextButton(url: tvShowDetail.trailerId),
+                    // CustomTextButton(
+                    //     url: tvShowDetail.trailerId, listMovie: []),
                     RowVoteIcons(
                       popularity: tvShowDetail.popularity!,
                       voteAverage: tvShowDetail.voteAverage!,
@@ -314,7 +314,8 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            width: maxHeight / (maxHeight / 200),
+                                            width:
+                                                maxHeight / (maxHeight / 200),
                                             child: Text(
                                               // '${seasonEpisode.episodeNumber}. ${seasonEpisode.name}',
                                               "1. A Normal Amount of Rage",

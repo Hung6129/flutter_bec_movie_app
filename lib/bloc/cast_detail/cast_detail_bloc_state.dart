@@ -2,7 +2,6 @@ part of 'cast_detail_bloc_bloc.dart';
 
 abstract class CastDetailBlocState extends Equatable {
   const CastDetailBlocState();
-
   @override
   List<Object> get props => [];
 }

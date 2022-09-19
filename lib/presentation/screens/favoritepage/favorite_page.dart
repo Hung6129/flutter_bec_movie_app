@@ -7,8 +7,6 @@ import 'package:flutter_bec_movie_app/config/palettes.dart';
 import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-import '../../widgets/app_text.dart';
-
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
 
@@ -35,6 +33,7 @@ class _FavoritePageState extends State<FavoritePage>
     PreferredSizeWidget _buildAppBar(String title) {
       return AppBar(
         bottom: TabBar(
+          indicatorColor: Palettes.p3,
           controller: _tabController,
           tabs: [
             Tab(
@@ -93,7 +92,7 @@ class _FavoritePageState extends State<FavoritePage>
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.all(8.0),
               shrinkWrap: true,
-              physics: ScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               itemCount: 10,
               itemBuilder: (context, index) {
                 return Container(
@@ -177,7 +176,7 @@ class _FavoritePageState extends State<FavoritePage>
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.all(8.0),
               shrinkWrap: true,
-              physics: ScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               itemCount: 5,
               itemBuilder: (context, index) {
                 return Container(
