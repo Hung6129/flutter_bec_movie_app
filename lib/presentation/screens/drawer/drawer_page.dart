@@ -38,13 +38,13 @@ class _DrawerPageState extends State<DrawerPage> {
       }),
       mainScreen: _getMenuPage(),
       slideWidth: 200,
-      
+
       mainScreenTapClose: true,
       menuBackgroundColor: Palettes.p4,
       // slideWidth: MediaQuery.of(context).size.width * .65,
       // openCurve: Curves.fastOutSlowIn,
       // closeCurve: Curves.bounceIn,
-      borderRadius: 24.0,
+      // borderRadius: 24.0,
       drawerShadowsBackgroundColor: Palettes.p4,
       // showShadow: true,
       angle: 0.0,
