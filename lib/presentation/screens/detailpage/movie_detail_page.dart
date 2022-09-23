@@ -51,6 +51,13 @@ class MovieDetailScreen extends StatelessWidget {
               .map((e) => e.name)
               .reduce((value, element) => value! + ", " + element!);
 
+          /// cast map
+          var maps = {
+            'id': movieDetail.id,
+            'name': movieDetail.title,
+            'posterPath': movieDetail.poster_path,
+          };
+
           ///recommended
           List<Movie> movies = state.recommendation;
 
@@ -225,6 +232,8 @@ class MovieDetailScreen extends StatelessWidget {
 
                     ///add to favorite and play trailer
                     CustomTextButton(
+                      isMovie: true,
+                      data: maps,
                       url: movieDetail.trailerId,
                       // movieDetail: movieDetail,
                     ),

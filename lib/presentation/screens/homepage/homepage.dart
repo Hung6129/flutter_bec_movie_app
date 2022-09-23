@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double _maxHeight = MediaQuery.of(context).size.height;
-    double _maxWidth = MediaQuery.of(context).size.width;
 
     /// build body
     Widget _buildBoody() {

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/data_layer/model/movie_detail_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/palettes.dart';
-import '../../repository/persist_data/progress_data.dart';
+import '../../repository/storeage_data/favorite_movie_data.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String url;
+  final Map<String, dynamic> data;
+  final bool isMovie;
   const CustomTextButton({
     Key? key,
     required this.url,
+    required this.data,
+    required this.isMovie,
   }) : super(key: key);
 
   @override
@@ -50,9 +53,10 @@ class CustomTextButton extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {
-            // PersitsData().addToFavoriteList(movieDetail);
-            // print(movieDetail);
+          onPressed: () async {
+            isMovie == true
+                ? await FavoriteData().addFavoriteMovie(data)
+                : await FavoriteData().addFavoriteTVShow(data);
           },
           child: Container(
             decoration: BoxDecoration(

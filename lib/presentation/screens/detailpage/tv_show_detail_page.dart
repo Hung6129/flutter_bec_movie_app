@@ -59,6 +59,13 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
               .map((e) => e.name)
               .reduce((value, element) => value! + ", " + element!);
 
+          /// cast map
+          var maps = {
+            'id': tvShowDetail.id,
+            'name': tvShowDetail.name,
+            'posterPath': tvShowDetail.posterPath,
+          };
+
           ///recommended
           List<TVShowModel> tvShowRecommended = state.recommendation;
 
@@ -235,8 +242,11 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                       ),
                     ),
 
-                    // CustomTextButton(
-                    //     url: tvShowDetail.trailerId, listMovie: []),
+                    CustomTextButton(
+                      isMovie: false,
+                      url: tvShowDetail.trailerId,
+                      data: maps,
+                    ),
                     RowVoteIcons(
                       popularity: tvShowDetail.popularity!,
                       voteAverage: tvShowDetail.voteAverage!,
