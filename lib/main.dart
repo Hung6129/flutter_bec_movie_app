@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import 'presentation/screens/homepage/home_provider.dart';
-
+import 'package:flutter_bec_movie_app/presentation/screens/splashpage/splash_page.dart';
 
 const favoritesBox = 'favorite_movies';
 
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'BecMovie',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: HomeProvider(),
+      home: SplashPage(),
     );
   }
 }

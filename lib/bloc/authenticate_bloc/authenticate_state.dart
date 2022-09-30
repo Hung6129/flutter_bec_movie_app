@@ -13,6 +13,6 @@ class AuthenticateLoading extends AuthenticateState {}
 
 class AuthenticateSuccess extends AuthenticateState {}
 
-class AuthenticateFail extends AuthenticateState {}
+class AuthenticateFailed extends AuthenticateState {}
 
 class AuthenticateError extends AuthenticateState {}

@@ -35,7 +35,6 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   google_fonts: ^3.0.1
-  # carousel_slider: ^4.1.1
   # persistent_bottom_nav_bar: any
   cached_network_image: ^3.2.1
   dio: ^4.0.6
@@ -54,6 +53,8 @@ dependencies:
   flutter_zoom_drawer: ^3.0.3
   # shared_preferences: ^2.0.15
   cloud_firestore: ^3.4.5
+  simple_animations: ^5.0.0+2
+  animations: ^2.0.5
 
 dev_dependencies:
   flutter_test:
