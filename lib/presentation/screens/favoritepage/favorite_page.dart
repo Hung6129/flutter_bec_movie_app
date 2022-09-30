@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import 'package:flutter_bec_movie_app/config/urls.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
@@ -52,7 +53,7 @@ class _FavoritePageState extends State<FavoritePage>
         ),
         title: Text(
           title,
-          style: Palettes.movieTitle,
+          style: TextStyles.defaultStyle.bold.primaryTextColor,
         ),
         centerTitle: true,
         backgroundColor: Palettes.p6,

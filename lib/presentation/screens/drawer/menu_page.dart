@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 import '../../../repository/service/authenticate.dart';
 import '../../widgets/app_text.dart';
@@ -78,7 +79,10 @@ class MenuPage extends StatelessWidget {
             ListTile(
               minLeadingWidth: 20,
               leading: Icon(Icons.logout),
-              title: Text("Sign Out",style: Palettes.bodyText,),
+              title: Text(
+                "Sign Out",
+                style: TextStyles.defaultStyle,
+              ),
               onTap: () async {
                 await Authentication().signOut();
               },

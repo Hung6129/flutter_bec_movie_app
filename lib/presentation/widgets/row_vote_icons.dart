@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 import '../../config/palettes.dart';
 
@@ -33,7 +34,7 @@ class RowVoteIcons extends StatelessWidget {
             ),
             Text(
               voteCount.toString(),
-              style: Palettes.kHeading6,
+              style: TextStyles.defaultStyle.bold.primaryTextColor,
             ),
           ],
         ),
@@ -47,7 +48,7 @@ class RowVoteIcons extends StatelessWidget {
             ),
             Text(
               popularity.toStringAsFixed(0),
-              style: Palettes.kHeading6,
+              style: TextStyles.defaultStyle.bold.primaryTextColor,
             ),
           ],
         ),
@@ -59,7 +60,7 @@ class RowVoteIcons extends StatelessWidget {
               height: maxHeight / (maxHeight / 35),
               width: maxWidth / (maxWidth / 35),
             ),
-            Text(finalVoteAverage.toString() + "/5", style: Palettes.kHeading6),
+            Text(finalVoteAverage.toString() + "/5", style: TextStyles.defaultStyle.bold.primaryTextColor),
           ],
         )
       ],

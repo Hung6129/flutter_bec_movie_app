@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../presentation/screens/drawer/drawer_page.dart';
+import '/presentation/screens/homepage/home_provider.dart';
+import '/presentation/screens/splashpage/splash_page.dart';
 
 class AppRoutes {
   static MaterialPageRoute getMaterialRoute(screen) {
@@ -20,14 +17,11 @@ class AppRoutes {
 
   static Route? onGeneratedRoutes(RouteSettings route) {
     switch (route.name) {
-      // case "/":
-      //   return getPageRoute(SplashScreen());
+      case "/":
+        return getPageRoute(SplashPage());
 
       case "/home":
-        return getPageRoute(BlocProvider(
-          create: (context) => MovieBlocBloc(),
-          child: DrawerPage(),
-        ));
+        return getPageRoute(HomeProvider());
 
       // case "/search":
       //   final WikiSearchArgs? args = route.arguments as WikiSearchArgs?;

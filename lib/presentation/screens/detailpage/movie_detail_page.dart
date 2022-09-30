@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import '../../../bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import '../../../bloc/movie_detail_bloc/movie_detail_event.dart';
 import '../../../config/urls.dart';
@@ -120,7 +121,8 @@ class MovieDetailScreen extends StatelessWidget {
                         child: Text(
                           movieDetail.originalTitle!,
                           textAlign: TextAlign.center,
-                          style: Palettes.movieTitle,
+                          style: TextStyles
+                              .defaultStyle.fontHeader.primaryTextColor,
                         )),
 
                     /// Poster
@@ -165,37 +167,32 @@ class MovieDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(movieDetail.tagline!,
-                                    style: Palettes.bodyText),
+                                    style: TextStyles.defaultStyle.italic),
                                 SizedBox(
                                   height: maxHeight / (maxHeight / 10),
                                 ),
                                 RichText(
                                   text: TextSpan(
                                     text: 'Release Date: ',
-                                    style: TextStyle(
-                                      fontSize: maxHeight / (maxHeight / 15),
-                                      fontWeight: FontWeight.bold,
-                                      color: Palettes.p3,
-                                    ),
+                                    style: TextStyles
+                                        .customStyle.bold.primaryTextColor,
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: movieDetail.releaseDate,
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
                                 RichText(
                                   text: TextSpan(
                                     text: 'Run Time: ',
-                                    style: TextStyle(
-                                        fontSize: maxHeight / (maxHeight / 15),
-                                        fontWeight: FontWeight.bold,
-                                        color: Palettes.p3),
+                                    style: TextStyles
+                                        .customStyle.bold.primaryTextColor,
                                     children: <TextSpan>[
                                       TextSpan(
                                           text:
                                               "${movieDetail.runtime} minutes",
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -209,7 +206,7 @@ class MovieDetailScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: listGenres ?? "Unknow",
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -247,14 +244,14 @@ class MovieDetailScreen extends StatelessWidget {
                           Text(
                             "Overview",
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               movieDetail.overview!,
                               // overflow: TextOverflow.ellipsis,
-                              style: Palettes.bodyText,
+                              style: TextStyles.defaultStyle,
                             ),
                           ),
                         ],
@@ -270,7 +267,7 @@ class MovieDetailScreen extends StatelessWidget {
                           Text(
                             "Top billed cast",
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           HorizontalCastList(
                               topBillCasted: true,
@@ -287,12 +284,12 @@ class MovieDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Recommended for you",
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           movies.isEmpty
                               ? Text(
                                   "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
-                                  style: Palettes.bodyText,
+                                  style: TextStyles.defaultStyle,
                                 )
                               : HorizontalItems(
                                   list: movies,
@@ -311,7 +308,9 @@ class MovieDetailScreen extends StatelessWidget {
         } else if (state is MovieDetailError) {
           return ErrorPage(errorText: state.error);
         } else {
-          return Container();
+          return ErrorPage(
+            errorText: 'Some things went worng!!!',
+          );
         }
       },
     );

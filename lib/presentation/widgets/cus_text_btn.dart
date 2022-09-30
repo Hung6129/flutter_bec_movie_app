@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/palettes.dart';
@@ -46,7 +47,7 @@ class CustomTextButton extends StatelessWidget {
                 ),
                 Text(
                   "Play Trailer",
-                  style: Palettes.kHeading8,
+                  style: TextStyles.defaultStyle.regular.whiteTextColor,
                 )
               ],
             ),
@@ -72,11 +73,11 @@ class CustomTextButton extends StatelessWidget {
                 const Icon(
                   Icons.favorite,
                   size: 28,
-                  color: Palettes.p3,
+                  color: Palettes.textWhite,
                 ),
                 Text(
                   "Add to favorite list",
-                  style: Palettes.kHeading8,
+                  style: TextStyles.defaultStyle.regular.whiteTextColor,
                 )
               ],
             ),

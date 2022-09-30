@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 import '../../../bloc/tv_show_detail_bloc/tv_show_detail_bloc.dart';
 import '../../../bloc/tv_show_detail_bloc/tv_show_detail_event.dart';
@@ -125,9 +126,9 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Text(
-                        tvShowDetail.name ?? "Phim Hay",
+                        tvShowDetail.name!,
                         textAlign: TextAlign.center,
-                        style: Palettes.movieTitle,
+                        style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                       ),
                     ),
 
@@ -174,7 +175,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(tvShowDetail.tagline!,
-                                    style: Palettes.bodyText),
+                                    style: TextStyles.defaultStyle.italic),
                                 RichText(
                                   text: TextSpan(
                                     text: 'First Air Date: ',
@@ -186,7 +187,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: tvShowDetail.firstAirDate,
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -202,7 +203,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                       TextSpan(
                                           text: tvShowDetail.lastAirDate ??
                                               "Unknow",
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -217,7 +218,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                       TextSpan(
                                           text:
                                               "${tvShowDetail.numberOfSeasons} Season",
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -231,7 +232,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: listGenres ?? "Unknow",
-                                          style: Palettes.bodyText),
+                                          style: TextStyles.defaultStyle),
                                     ],
                                   ),
                                 ),
@@ -265,14 +266,14 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                           Text(
                             "Overview",
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               tvShowDetail.overview!,
                               // overflow: TextOverflow.ellipsis,
-                              style: Palettes.bodyText,
+                              style: TextStyles.defaultStyle,
                             ),
                           ),
                         ],
@@ -283,7 +284,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                     Text(
                       "Episodes",
                       // overflow: TextOverflow.ellipsis,
-                      style: Palettes.movieTitle,
+                      style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                     ),
                     SizedBox(
                       height: maxHeight / (maxHeight / 300),
@@ -379,7 +380,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                           Text(
                             "Top billed cast",
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           HorizontalCastList(
                               topBillCasted: true,
@@ -396,12 +397,12 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                         children: [
                           Text(
                             "Recommended for you",
-                            style: Palettes.movieTitle,
+                            style: TextStyles.defaultStyle.bold.primaryTextColor.fontTitle,
                           ),
                           tvShowRecommended.isEmpty
                               ? Text(
                                   "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
-                                  style: Palettes.bodyText,
+                                  style: TextStyles.defaultStyle,
                                 )
                               : HorizontalItems(
                                   isTVShow: true,
@@ -419,9 +420,9 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
             ],
           );
         } else if (state is TVShowDetailError) {
-          return ErrorPage(errorText: "CON CAC");
+          return ErrorPage(errorText: "Some things went wrong");
         } else {
-          return Container();
+          return ErrorPage(errorText: "Some things went wrong");
         }
       },
     );

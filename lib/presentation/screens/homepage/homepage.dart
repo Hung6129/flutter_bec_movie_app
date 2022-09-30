@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import '../../../bloc/movie_homepage_bloc/movie_bloc_bloc.dart';
 import '../../widgets/heading_w_sub.dart';
 import '../../widgets/horizontal_cast_list.dart';
@@ -43,8 +44,10 @@ class _HomePageState extends State<HomePage> {
               } else if (state is MovieBlocLoaded) {
                 var movies = state.nowPlayingList;
                 return HorizontalItems(list: movies);
-              } else {
+              } else if (state is MovieBlocError) {
                 return const AppText(text: "Something went wrong");
+              } else {
+                return ShimmerListHorizontal();
               }
             },
           ),
@@ -67,8 +70,10 @@ class _HomePageState extends State<HomePage> {
                   peopleList: cast,
                   topBillCasted: false,
                 );
-              } else {
+              } else if (state is MovieBlocError) {
                 return const AppText(text: "Something went wrong");
+              } else {
+                return ShimmerListHorizontal();
               }
             },
           ),
@@ -87,8 +92,10 @@ class _HomePageState extends State<HomePage> {
               } else if (state is MovieBlocLoaded) {
                 var movies = state.topRated;
                 return HorizontalItems(list: movies);
-              } else {
+              } else if (state is MovieBlocError) {
                 return const AppText(text: "Something went wrong");
+              } else {
+                return ShimmerListHorizontal();
               }
             },
           ),
@@ -170,7 +177,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Palettes.p3.withOpacity(0.9),
         title: Text(
           'BecMovie',
-          style: Palettes.kHeading7,
+          style: TextStyles.defaultStyle.fontTitle.whiteTextColor,
         ),
         centerTitle: true,
         actions: [

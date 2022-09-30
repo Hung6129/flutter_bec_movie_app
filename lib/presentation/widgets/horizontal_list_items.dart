@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../config/palettes.dart';
+import '../../config/text_style.dart';
 import '../screens/detailpage/movie_detail_page.dart';
 import '../screens/detailpage/tv_show_detail_page.dart';
 
@@ -77,7 +78,7 @@ class HorizontalItems extends StatelessWidget {
                         ),
                         Text(
                           "No data",
-                          style: Palettes.bodyText,
+                          style: TextStyles.defaultStyle,
                         ),
                       ],
                     ),

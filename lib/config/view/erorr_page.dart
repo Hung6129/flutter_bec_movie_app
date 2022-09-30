@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 class ErrorPage extends StatelessWidget {
   final String errorText;
@@ -16,7 +16,7 @@ class ErrorPage extends StatelessWidget {
             Icon(Icons.error, color: Colors.redAccent),
             Text(
               "Something went wrong !!!",
-              style: Palettes.movieTitle,
+              style: TextStyles.defaultStyle.primaryTextColor.fontTitle,
             ),
             // Text(
             //   errorText,

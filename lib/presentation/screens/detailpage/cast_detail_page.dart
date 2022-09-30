@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import '../../../data_layer/model/cast_model.dart';
 import '../../../data_layer/model/movie_cast.dart';
 import '../../../data_layer/model/movie_model.dart';
@@ -70,7 +71,8 @@ class CastDetailPage extends StatelessWidget {
                       children: [
                         Text(dataCast.name!,
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.movieTitle),
+                            style:
+                                TextStyles.defaultStyle.bold.primaryTextColor),
                         SizedBox(
                           height: maxHeight / (maxHeight / 15),
                         ),
@@ -84,7 +86,7 @@ class CastDetailPage extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                   text: dataCast.placeOfBirth,
-                                  style: Palettes.bodyText),
+                                  style: TextStyles.defaultStyle),
                             ],
                           ),
                         ),
@@ -102,7 +104,7 @@ class CastDetailPage extends StatelessWidget {
                               TextSpan(
                                   text:
                                       dataCast.gender == 1 ? "Female" : "Male",
-                                  style: Palettes.bodyText),
+                                  style: TextStyles.defaultStyle),
                             ],
                           ),
                         ),
@@ -119,7 +121,7 @@ class CastDetailPage extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                   text: dataCast.birthday,
-                                  style: Palettes.bodyText),
+                                  style: TextStyles.defaultStyle),
                             ],
                           ),
                         ),
@@ -138,7 +140,7 @@ class CastDetailPage extends StatelessWidget {
                                   children: <TextSpan>[
                                     TextSpan(
                                         text: dataCast.deathday,
-                                        style: Palettes.bodyText),
+                                        style: TextStyles.defaultStyle),
                                   ],
                                 ),
                               ),
@@ -157,7 +159,7 @@ class CastDetailPage extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                   text: dataCast.knownForDepartment,
-                                  style: Palettes.bodyText),
+                                  style: TextStyles.defaultStyle),
                             ],
                           ),
                         ),
@@ -177,12 +179,12 @@ class CastDetailPage extends StatelessWidget {
                     children: [
                       Text("Biography",
                           // overflow: TextOverflow.ellipsis,
-                          style: Palettes.movieTitle),
+                          style: TextStyles.defaultStyle.bold.primaryTextColor),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(dataCast.biography!,
                             // overflow: TextOverflow.ellipsis,
-                            style: Palettes.bodyText),
+                            style: TextStyles.defaultStyle),
                       ),
                     ],
                   ),
@@ -196,11 +198,11 @@ class CastDetailPage extends StatelessWidget {
                     children: [
                       Text("Know for",
                           // overflow: TextOverflow.ellipsis,
-                          style: Palettes.movieTitle),
+                          style: TextStyles.defaultStyle.bold.primaryTextColor),
                       creditMovie.isEmpty
                           ? Text(
                               "Sorry ! We don't have enough data to suggest any movies based on Luck. You can help by rating movies you've seen.",
-                              style: Palettes.bodyText,
+                              style: TextStyles.defaultStyle,
                             )
                           : HorizontalItems(
                               list: creditMovie,

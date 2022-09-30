@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 class SubHeading extends StatelessWidget {
   final String textTitle;
@@ -23,14 +23,18 @@ class SubHeading extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(textTitle, style: Palettes.kHeading6),
+          Text(textTitle,
+              style: TextStyles.defaultStyle.primaryTextColor.bold),
           InkWell(
             onTap: onSeeMoreTapped,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: const [
-                  Text('See More'),
+                children: [
+                  Text(
+                    'See More',
+                    style: TextStyles.defaultStyle.italic,
+                  ),
                   Icon(Icons.arrow_forward_ios, size: 16.0)
                 ],
               ),

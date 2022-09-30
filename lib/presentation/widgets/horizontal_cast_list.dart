@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../config/palettes.dart';
@@ -81,7 +82,7 @@ class HorizontalCastList extends StatelessWidget {
                                   ),
                                   Text(
                                     "No data",
-                                    style: Palettes.bodyText,
+                                    style: TextStyles.defaultStyle,
                                   ),
                                 ],
                               ),
@@ -111,7 +112,7 @@ class HorizontalCastList extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
-                                        style: Palettes.bodyText),
+                                        style: TextStyles.defaultStyle),
                                     Text(
                                       peopleList[index].character!,
                                       textAlign: TextAlign.center,

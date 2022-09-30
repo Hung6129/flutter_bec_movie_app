@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 import '../../../repository/service/authenticate.dart';
 import '../../widgets/app_text.dart';
@@ -19,6 +20,7 @@ class _SignInPageState extends State<SignInPage> {
     final maxW = MediaQuery.of(context).size.width;
     final maxH = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Palettes.p9,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,8 +137,8 @@ class _SignInPageState extends State<SignInPage> {
           Center(
             child: Image.asset(
               "assets/iHun.png",
-              height: 150,
-              width: 200,
+              height: 250,
+              width: 250,
             ),
           ),
 
@@ -152,9 +154,10 @@ class _SignInPageState extends State<SignInPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const AppText(
-                      text: "Sign in with Google",
-                      color: Palettes.textWhite,
+                    Text(
+                      "Sign in with Google",
+                      style:
+                          TextStyles.defaultStyle.bold.fontTitle.whiteTextColor,
                     ),
                     const SizedBox(
                       width: 10,
@@ -184,10 +187,11 @@ class _SignInPageState extends State<SignInPage> {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    AppText(
-                      text: "Sign in with Facebook",
-                      color: Palettes.textWhite,
+                  children: [
+                    Text(
+                      "Sign in with Facebook",
+                      style:
+                          TextStyles.defaultStyle.bold.fontTitle.whiteTextColor,
                     ),
                     SizedBox(
                       width: 10,

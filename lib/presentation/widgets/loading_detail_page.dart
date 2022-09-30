@@ -10,7 +10,7 @@ class LoadingDetailPage extends StatelessWidget {
     double maxWidth = MediaQuery.of(context).size.width;
     return CustomScrollView(slivers: [
       SliverAppBar(
-        leading: Icon(Icons.home),
+        // leading: Icon(Icons.home),
         // automaticallyImplyLeading: false,
         toolbarHeight: maxHeight / (maxHeight / 50),
         expandedHeight: maxHeight / (maxHeight / 250),

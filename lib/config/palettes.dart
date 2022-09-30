@@ -1,37 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Palettes {
-  // static TextStyle kBody = GoogleFonts.poppins(
+  // // static TextStyle kBody = GoogleFonts.poppins(
+  // //     fontSize: 19,
+  // //     fontWeight: FontWeight.w500,
+  // //     letterSpacing: 0.15,
+  // //     color: p3);
+  // static TextStyle kHeading6 = GoogleFonts.poppins(
   //     fontSize: 19,
   //     fontWeight: FontWeight.w500,
   //     letterSpacing: 0.15,
   //     color: p3);
-  static TextStyle kHeading6 = GoogleFonts.poppins(
-      fontSize: 19,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
-      color: p3);
-  static TextStyle kHeading8 = GoogleFonts.poppins(
-      fontSize: 19,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
-      color: textWhite);
-  static TextStyle kHeading7 = GoogleFonts.poppins(
-      fontSize: 19,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
-      color: p6);
-  static TextStyle bodyText = GoogleFonts.poppins(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.15,
-      color: textBlack);
-  static TextStyle movieTitle = GoogleFonts.poppins(
-      fontSize: 22,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.15,
-      color: p3);
+  // static TextStyle kHeading8 = GoogleFonts.poppins(
+  //     fontSize: 19,
+  //     fontWeight: FontWeight.w500,
+  //     letterSpacing: 0.15,
+  //     color: textWhite);
+  // static TextStyle kHeading7 = GoogleFonts.poppins(
+  //     fontSize: 19,
+  //     fontWeight: FontWeight.w500,
+  //     letterSpacing: 0.15,
+  //     color: p6);
+  // static TextStyle bodyText = GoogleFonts.poppins(
+  //     fontSize: 12,
+  //     fontWeight: FontWeight.w400,
+  //     letterSpacing: 0.15,
+  //     color: textBlack);
+  // static TextStyle bodyTextWhite = GoogleFonts.poppins(
+  //     fontSize: 12,
+  //     fontWeight: FontWeight.w400,
+  //     letterSpacing: 0.15,
+  //     color: textWhite);
+  // static TextStyle movieTitle = GoogleFonts.poppins(
+  //     fontSize: 22,
+  //     fontWeight: FontWeight.w400,
+  //     letterSpacing: 0.15,
+  //     color: p3);
 
   /// Text color
   static const Color textWhite = Color(0xFFFFFFFF);

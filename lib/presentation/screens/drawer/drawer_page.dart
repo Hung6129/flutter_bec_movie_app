@@ -37,7 +37,7 @@ class _DrawerPageState extends State<DrawerPage> {
         );
       }),
       mainScreen: _getMenuPage(),
-      slideWidth: 200,
+      slideWidth: 250,
 
       mainScreenTapClose: true,
       menuBackgroundColor: Palettes.p4,

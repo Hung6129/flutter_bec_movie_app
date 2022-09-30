@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
+import 'package:flutter_bec_movie_app/config/text_style.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -14,6 +15,6 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: Palettes.bodyText);
+    return Text(text, style: TextStyles.defaultStyle);
   }
 }

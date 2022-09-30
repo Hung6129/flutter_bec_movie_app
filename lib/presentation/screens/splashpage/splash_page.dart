@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bec_movie_app/config/palettes.dart';
-import 'package:flutter_bec_movie_app/presentation/screens/homepage/home_provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class SplashPage extends StatefulWidget {
@@ -18,25 +17,20 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void getMainPage() async {
-    await Future.delayed(Duration(seconds: 4));
-    Navigator.pushReplacement<void, void>(
-      context,
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => HomeProvider(),
-      ),
-    );
+    await Future.delayed(Duration(seconds: 3));
+    Navigator.pushReplacementNamed(context, "/home");
   }
 
   // Specify your tween
   final tween = MovieTween()
     ..tween('x', Tween(begin: -100.0, end: 100.0),
-            duration: const Duration(seconds: 1))
+            duration: const Duration(milliseconds: 500))
         .thenTween('y', Tween(begin: -100.0, end: 100.0),
-            duration: const Duration(seconds: 1))
+            duration: const Duration(milliseconds: 500))
         .thenTween('x', Tween(begin: 100.0, end: -100.0),
-            duration: const Duration(seconds: 1))
+            duration: const Duration(milliseconds: 500))
         .thenTween('y', Tween(begin: 100.0, end: -100.0),
-            duration: const Duration(seconds: 1));
+            duration: const Duration(milliseconds: 500));
 
   @override
   Widget build(BuildContext context) {

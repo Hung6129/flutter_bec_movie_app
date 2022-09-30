@@ -6,6 +6,7 @@ import 'package:flutter_bec_movie_app/config/palettes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import '../../../config/text_style.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/heading_w_sub.dart';
 import '../../widgets/horizontal_list_items.dart';
@@ -46,8 +47,10 @@ class _TVShowsState extends State<TVShows> {
                     list: tvShow,
                     isTVShow: true,
                   );
-                } else {
+                } else if (state is TvShowError) {
                   return const AppText(text: "Something went wrong");
+                } else {
+                  return ShimmerListHorizontal();
                 }
               },
             ),
@@ -93,8 +96,10 @@ class _TVShowsState extends State<TVShows> {
                     list: tvShow,
                     isTVShow: true,
                   );
-                } else {
+                } else if (state is TvShowError) {
                   return const AppText(text: "Something went wrong");
+                } else {
+                  return ShimmerListHorizontal();
                 }
               },
             ),
@@ -177,7 +182,7 @@ class _TVShowsState extends State<TVShows> {
         backgroundColor: Palettes.p3.withOpacity(0.9),
         title: Text(
           'TV Shows',
-          style: Palettes.kHeading7,
+          style: TextStyles.defaultStyle.fontTitle.whiteTextColor,
         ),
         centerTitle: true,
         actions: [
